@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { locale } from "$i18n/i18n-svelte";
-  import Dot from "$lib/components/svg/Dot.svelte";
-  import ContactCta from "$lib/components/ContactCta.svelte";
   import type { Cta } from "$lib/types";
 
   type Props = { cta: Cta; fill?: string };
@@ -12,7 +9,7 @@
     switch (cta?.ctaType) {
       case "linkInternal":
         return {
-          href: `/${$locale}/${cta.linkInternal?.url?._ref}`,
+          href: `/${cta.linkInternal?.url?._ref}`,
           label: cta.linkInternal?.label,
         };
       case "linkExternal":

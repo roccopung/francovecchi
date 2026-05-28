@@ -3,3 +3,12 @@ packages:
   - "studio"
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@sanity/diff@5.28.0'
+  - '@sanity/mutator@5.28.0'
+  - '@sanity/presentation-comlink@2.1.0'
+  - '@sanity/schema@5.28.0'
+  - '@sanity/types@5.28.0'
+  - '@sanity/util@5.28.0'
+  - '@sanity/vision@5.28.0'
+  - sanity@5.28.0

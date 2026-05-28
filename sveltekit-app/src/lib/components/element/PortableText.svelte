@@ -1,9 +1,9 @@
 <script lang="ts">
-  //@ts-nocheck
+  import type { PortableTextBlock } from "@sanity/types";
   import { toHTML, uriLooksSafe } from "@portabletext/to-html";
 
   interface Props {
-    data: any;
+    data: PortableTextBlock[];
   }
 
   let { data }: Props = $props();
