@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Times";
+  src: url("/fonts/Times_regular.woff") format("woff");
+  font-weight: 400;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Times";
+  src: url("/fonts/Times_italic.woff") format("woff");
+  font-weight: 400;
+  font-display: block;
+  font-style: italic;
+}
+
+@theme {
+  --font-body: "Times", "Helvetica Neue", sans-serif;
+
+  --text-*: initial;
+
+  --text-base: 1.75rem;
+  --text-base--line-height: 1.25;
+  --text-m-base: 1.6rem;
+  --text-m-base--line-height: 1.25;
+
+  --color-*: initial;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-blue: #0000ee;
+
+  --spacing: 1rem;
+  --spacing-s: 0.8rem;
+  --spacing-m: 1.6rem;
+  --spacing-l: 2.4rem;
+
+  --default-transition-duration: 300ms;
+  --duration-fast: 150ms;
+
+  --radius-*: initial;
+  --radius-m: 2.4rem;
+  --radius-l: 4rem;
+}

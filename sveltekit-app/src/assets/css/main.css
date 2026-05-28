@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@import "./theme.css";
+@import "./utilities.css";
+@import "./cookie-banner.css";
+@source inline('grid-cols-{0..12}');
+
+html {
+  font-size: 10px;
+  font-family: var(--font-body);
+  color: var(--color-brown);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+  overscroll-behavior: none;
+}
+
+body {
+  background-color: var(--color-background);
+  font-variant-numeric: oldstyle-nums;
+  overscroll-behavior: none;
+}
+
+.button {
+  @apply p-1 leading-1;
+}
+
+a {
+  color: var(--color-blue);
+}
