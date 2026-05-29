@@ -5,7 +5,6 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 // plugins
 import { media } from "sanity-plugin-media";
-import { lottiePreview } from "sanity-plugin-lottie";
 import { schemaTypes } from "./schemas";
 import { structure } from "./structure";
 
@@ -34,7 +33,6 @@ export default defineConfig({
       },
     }),
     media(),
-    lottiePreview(),
     ...(process.env.NODE_ENV == "development" ? [visionTool()] : []),
   ],
   schema: {

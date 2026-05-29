@@ -69,7 +69,8 @@ export const about = defineType({
         }),
         defineField({
           name: "animation",
-          type: "lottie",
+          description: "Add a Lottie .json file",
+          type: "file",
         }),
       ],
     }),

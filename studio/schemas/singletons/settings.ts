@@ -17,13 +17,15 @@ export const settings = defineType({
   fields: [
     defineField({
       name: "animationTop",
-      type: "lottie",
+      type: "file",
+      description: "Add a Lottie .json file",
       group: "footer",
       fieldset: "footer",
     }),
     defineField({
       name: "animationBottom",
-      type: "lottie",
+      type: "file",
+      description: "Add a Lottie .json file",
       group: "footer",
       fieldset: "footer",
     }),
