@@ -13,6 +13,21 @@ export const structure = (S, context) =>
         .child(
           S.document().schemaType("about").title("About").documentId("about"),
         ),
+
+      S.documentTypeListItem("lookbook")
+        .title("Look Book")
+        .child(
+          S.document()
+            .schemaType("lookbook")
+            .title("Look Book")
+            .documentId("lookbook"),
+        ),
+      S.divider(),
+
+      S.documentTypeListItem("character").title("Characters"),
+      S.documentTypeListItem("project").title("Projects"),
+      S.documentTypeListItem("service").title("Services"),
+
       S.divider(),
       S.documentTypeListItem("settings")
         .title("Settings")

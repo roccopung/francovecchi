@@ -80,6 +80,9 @@ importers:
       sanity:
         specifier: ^5.28.0
         version: 5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3)
+      sanity-plugin-lottie:
+        specifier: ^1.0.6
+        version: 1.0.6(@sanity/icons@3.7.4(react@19.2.6))(@sanity/ui@3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)))(react@19.2.6)(sanity@5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3))(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
       sanity-plugin-media:
         specifier: ^4.3.0
         version: 4.3.0(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)(sanity@5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3))(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -1889,6 +1892,11 @@ packages:
 
   '@lezer/lr@1.4.10':
     resolution: {integrity: sha512-rnCpTIBafOx4mRp43xOxDJbFipJm/c0cia/V5TiGlhmMa+wsSdoGmUN3w5Bqrks/09Q/D4tNAmWaT8p6NRi77A==}
+
+  '@lottiefiles/react-lottie-player@3.6.0':
+    resolution: {integrity: sha512-WK5TriLJT93VF3w4IjSVyveiedraZCnDhKzCPhpbeLgQeMi6zufxa3dXNc4HmAFRXq+LULPAy+Idv1rAfkReMA==}
+    peerDependencies:
+      react: 16 - 19
 
   '@marijn/find-cluster-break@1.0.2':
     resolution: {integrity: sha512-l0h88YhZFyKdXIFNfSWpyjStDjGHwZ/U7iobcK1cQQD8sejsONdQtTVU+1wVN1PBw40PiiHB1vA5S7VTfQiP9g==}
@@ -4960,6 +4968,9 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
+  lottie-web@5.13.0:
+    resolution: {integrity: sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==}
+
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
@@ -5807,6 +5818,16 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  sanity-plugin-lottie@1.0.6:
+    resolution: {integrity: sha512-g7eAB0mCtrujqg35x1gjJbMd+bxZx/Z8QS7uoALEq0lipOfzNu84G0MPFBUHJWyfSRseKBjwQjv6ID2gKFcUMw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sanity/icons': ^3.7.0
+      '@sanity/ui': ^2.0.0
+      react: ^18 || ^19
+      sanity: ^3
+      styled-components: ^6.0.0
 
   sanity-plugin-media@4.3.0:
     resolution: {integrity: sha512-awL/jI/3WVGWL+PVqMRjOOG1Uflshys8Ry4FLAnZIdbN9yHSNEIQ1u78rB3BP75VKjNA0bIY5r4eP3rjKx9M1w==}
@@ -8505,6 +8526,11 @@ snapshots:
   '@lezer/lr@1.4.10':
     dependencies:
       '@lezer/common': 1.5.2
+
+  '@lottiefiles/react-lottie-player@3.6.0(react@19.2.6)':
+    dependencies:
+      lottie-web: 5.13.0
+      react: 19.2.6
 
   '@marijn/find-cluster-break@1.0.2': {}
 
@@ -12131,6 +12157,8 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
+  lottie-web@5.13.0: {}
+
   lru-cache@10.4.3: {}
 
   lru-cache@11.5.0: {}
@@ -13016,6 +13044,15 @@ snapshots:
       is-regex: 1.2.1
 
   safer-buffer@2.1.2: {}
+
+  sanity-plugin-lottie@1.0.6(@sanity/icons@3.7.4(react@19.2.6))(@sanity/ui@3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)))(react@19.2.6)(sanity@5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3))(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)):
+    dependencies:
+      '@lottiefiles/react-lottie-player': 3.6.0(react@19.2.6)
+      '@sanity/icons': 3.7.4(react@19.2.6)
+      '@sanity/ui': 3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
+      react: 19.2.6
+      sanity: 5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3)
+      styled-components: 6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
 
   sanity-plugin-media@4.3.0(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)(sanity@5.28.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.2(@noble/hashes@2.2.0)(@types/node@25.9.1)(lightningcss@1.32.0)(yaml@2.9.0))(@types/node@25.9.1)(@types/react@19.2.15)(immer@11.1.8)(jiti@2.7.0)(lightningcss@1.32.0)(prismjs@1.27.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(typescript@5.9.3))(styled-components@6.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)):
     dependencies:

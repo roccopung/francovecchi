@@ -16,7 +16,6 @@ export const cta = defineField({
           { title: "Internal Link", value: "linkInternal" },
           { title: "External Link", value: "linkExternal" },
           { title: "Email Link", value: "linkEmail" },
-          { title: "Popup", value: "popup" },
         ],
         layout: "radio",
         direction: "horizontal",

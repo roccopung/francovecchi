@@ -6,15 +6,33 @@ export const settings = defineType({
   title: "Settings",
   type: "document",
   icon: CogIcon,
+  groups: [{ title: "Footer", name: "footer" }],
+  fieldsets: [
+    {
+      name: "footer",
+      title: "Footer",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
+      name: "animationTop",
+      type: "lottie",
+      group: "footer",
+      fieldset: "footer",
+    }),
+    defineField({
+      name: "animationBottom",
+      type: "lottie",
+      group: "footer",
+      fieldset: "footer",
+    }),
+    defineField({
       name: "email",
-      title: "Email",
       type: "email",
     }),
     defineField({
       name: "phone",
-      title: "Phone",
       type: "string",
     }),
     defineField({

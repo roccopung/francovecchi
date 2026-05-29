@@ -1,0 +1,114 @@
+import { defineType, defineField } from "sanity";
+import { DashboardIcon } from "@sanity/icons";
+
+export const project = defineType({
+  name: "project",
+  type: "document",
+  icon: DashboardIcon,
+  groups: [
+    {
+      name: "overview-thumbnail",
+      title: "Overview Thumbnail",
+    },
+    {
+      name: "seo",
+      title: "SEO",
+    },
+  ],
+  fields: [
+    defineField({
+      name: "title",
+      type: "string",
+    }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+    }),
+    defineField({
+      name: "years",
+      type: "string",
+    }),
+    defineField({
+      name: "coverImages",
+      type: "object",
+      description: "Displayed in the Thumbnail Overview only",
+      group: "overview-thumbnail",
+      fields: [
+        defineField({
+          name: "one",
+          type: "elementImage",
+        }),
+        defineField({
+          name: "two",
+          type: "elementImage",
+        }),
+      ],
+    }),
+    defineField({
+      name: "cover",
+      type: "elementImage",
+      description: "Displayed in the Project page",
+    }),
+    defineField({
+      name: "shortSummary",
+      description: "Displayed in the Thumbnail Overview only",
+      type: "blockContent",
+      group: "overview-thumbnail",
+    }),
+    defineField({
+      name: "services",
+      type: "array",
+      group: "overview-thumbnail",
+      of: [{ type: "service" }],
+    }),
+    defineField({
+      name: "problem",
+      type: "blockContent",
+    }),
+    defineField({
+      name: "solution",
+      type: "blockContent",
+    }),
+    defineField({
+      name: "pageBuilder",
+      type: "pageBuilder",
+    }),
+    defineField({
+      name: "result",
+      type: "object",
+      fields: [
+        defineField({
+          name: "content",
+          type: "blockContent",
+        }),
+        defineField({
+          name: "media",
+          type: "media",
+        }),
+      ],
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "seo",
+    }),
+  ],
+  preview: {
+    select: {
+      title: "title",
+      cover: "cover",
+    },
+    prepare({ title, cover }) {
+      return {
+        title,
+        media: cover,
+      };
+    },
+  },
+});
