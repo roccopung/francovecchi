@@ -27,11 +27,13 @@ export const stackedGallery = defineType({
           preview: {
             select: {
               title: "image.alt",
+              subtitle: "columnSpan.input",
               media: "image",
             },
-            prepare({ title, media }) {
+            prepare({ title, subtitle, media }) {
               return {
                 title: title ? String(title) : "Image",
+                subtitle: subtitle ? String(subtitle) : "",
                 media: media,
               };
             },
@@ -39,7 +41,7 @@ export const stackedGallery = defineType({
         },
       ],
       options: {
-        layout: "grid",
+        layout: "list",
       },
     }),
   ],
