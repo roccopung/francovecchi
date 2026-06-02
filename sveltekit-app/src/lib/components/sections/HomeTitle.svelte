@@ -62,8 +62,10 @@
   <div
     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
   >
-    <h1 bind:this={franco} class="trimmed">Franco</h1>
-    <h1 bind:this={vecchi} class="trimmed ml-7">Vecchi</h1>
+    <h1 bind:this={franco} class="trimmed hidden md:block">Franco</h1>
+    <h1 bind:this={vecchi} class="trimmed ml-7 hidden md:block">Vecchi</h1>
+    <h1 class="trimmed md:hidden">Franco</h1>
+    <h1 class="trimmed ml-7 md:hidden">Vecchi</h1>
   </div>
 
   <div class="p-1 flex gap-2 typo-2xl-headings">
