@@ -6,6 +6,7 @@
   import { page } from "$app/state";
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
+  import Header from "$lib/components/Header.svelte";
   const { children, data }: LayoutProps = $props();
 
   // svelte-ignore state_referenced_locally -- previewEnabled only changes on full page reload
@@ -27,7 +28,7 @@
         </a>
       {/if}
 
-      <!-- <Menu /> -->
+      <Header />
       {@render children()}
     </QueryLoader>
   </VisualEditing>

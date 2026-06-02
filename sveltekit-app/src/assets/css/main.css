@@ -22,14 +22,6 @@ body {
   overscroll-behavior: none;
 }
 
-.button {
-  @apply p-1 leading-1;
-}
-
-a {
-  color: var(--color-blue);
-}
-
 /* STANDARD PREVIEW-SANITY STYLING */
 
 .preview-toggle {

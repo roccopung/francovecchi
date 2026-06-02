@@ -1,38 +1,93 @@
 @font-face {
-  font-family: "Times";
-  src: url("/fonts/Times_regular.woff") format("woff");
+  font-family: "DM Mono";
+  src: url("/fonts/DMMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: block;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Times";
-  src: url("/fonts/Times_italic.woff") format("woff");
-  font-weight: 400;
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Bold.woff2") format("woff2");
+  font-weight: 700;
   font-display: block;
-  font-style: italic;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FK Screamer Legacy";
+  src: url("/fonts/FKScreamerLegacy-Slanted.woff2") format("woff2");
+  font-weight: 700;
+  font-display: block;
+  font-style: normal;
 }
 
 @theme {
-  --font-body: "Times", "Helvetica Neue", sans-serif;
+  --font-mono: "DM Mono", "Helvetica Neue", sans-serif;
+  --font-sans: "DM Sans", "Helvetica Neue", sans-serif;
+  --font-slanted: "FK Screamer Legacy", "Helvetica Neue", sans-serif;
 
   --text-*: initial;
 
-  --text-base: 1.75rem;
-  --text-base--line-height: 1.25;
-  --text-m-base: 1.6rem;
-  --text-m-base--line-height: 1.25;
+  --text-xs: 1rem;
+  --text-xs--line-height: 1.6;
+
+  --text-s: 1.6rem;
+  --text-s--line-height: 1.4;
+  --text-s--letter-spacing: 0.02em;
+
+  --text-md: 2.4rem;
+  --text-md--line-height: 1.2;
+  --text-m-md: clamp(1.6rem, 2.151vw, 2.4rem);
+  --text-m-md--line-height: 1.2;
+
+  --text-l: 3.2rem;
+  --text-l--line-height: 1.2;
+  --text-m-l: clamp(2.2rem, 2.957vw, 3.2rem);
+  --text-m-l--line-height: 1.2;
+
+  --text-xl: 4rem;
+  --text-xl--line-height: 1;
+  --text-xl--letter-spacing: 0.02em;
+  --text-m-xl: 2.8rem;
+  --text-m-xl--line-height: 1;
+  --text-m-xl--letter-spacing: 0.02em;
+
+  --text-2xl-body: 7.2rem;
+  --text-2xl-body--line-height: 1;
+  --text-2xl-body--letter-spacing: -0.01em;
+  --text-m-2xl-body: 3rem;
+  --text-m-2xl-body--line-height: 1;
+  --text-m-2xl-body--letter-spacing: -0.01em;
+
+  --text-2xl-headings: 7.2rem;
+  --text-2xl-headings--line-height: 1;
+  --text-m-2xl-headings: clamp(3rem, 4.032vw, 7.2rem);
+  --text-m-2xl-headings--line-height: 1;
+
+  --text-3xl: 12rem;
+  --text-3xl--line-height: 1;
+  --text-m-3xl: clamp(4rem, 5.376vw, 12rem);
+  --text-m-3xl--line-height: 1;
+
+  --text-5xl: 20rem;
+  --text-5xl--line-height: 1;
+  --text-m-5xl: 10.4rem;
+  --text-m-5xl--line-height: 1;
+
+  --text-6xl: 18.519vw;
+  --text-6xl--letter-spacing: -0.01em;
+  --text-6xl--line-height: 0.9;
+  --text-m-6xl: clamp(8rem, 13.978vw, 16rem);
+  --text-m-6xl--line-height: 1;
 
   --color-*: initial;
   --color-white: #fff;
   --color-black: #000;
-  --color-blue: #0000ee;
+  --color-accent: #fff000;
+  --color-dark-gray: #2f2f2f;
 
-  --spacing: 1rem;
-  --spacing-s: 0.8rem;
-  --spacing-m: 1.6rem;
-  --spacing-l: 2.4rem;
+  --spacing: 0.8rem;
 
   --default-transition-duration: 300ms;
   --duration-fast: 150ms;
