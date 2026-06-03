@@ -10,16 +10,23 @@ export const service = defineType({
       name: "title",
       type: "string",
     }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+    }),
   ],
   preview: {
     select: {
-      title: "name",
-      cover: "cover",
+      title: "title",
     },
-    prepare({ title, cover }) {
+    prepare({ title }) {
       return {
         title,
-        media: cover,
       };
     },
   },

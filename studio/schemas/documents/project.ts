@@ -30,6 +30,11 @@ export const project = defineType({
       },
     }),
     defineField({
+      name: "isHighlighted",
+      description: "Is this project highlighted in the Case Studies page?",
+      type: "boolean",
+    }),
+    defineField({
       name: "years",
       type: "string",
     }),
@@ -64,7 +69,7 @@ export const project = defineType({
       name: "services",
       type: "array",
       group: "overview-thumbnail",
-      of: [{ type: "service" }],
+      of: [{ type: "reference", to: [{ type: "service" }] }],
     }),
     defineField({
       name: "problem",
@@ -89,6 +94,32 @@ export const project = defineType({
         defineField({
           name: "media",
           type: "media",
+        }),
+      ],
+    }),
+    defineField({
+      name: "credits",
+      type: "array",
+      of: [
+        defineField({
+          name: "credit",
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+            }),
+            defineField({
+              name: "name",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: {
+              title: "label",
+              subtitle: "name",
+            },
+          },
         }),
       ],
     }),

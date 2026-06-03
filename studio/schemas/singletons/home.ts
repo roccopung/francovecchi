@@ -21,6 +21,11 @@ export const home = defineType({
       type: "blockContent",
     }),
     defineField({
+      name: "featuredProjects",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "project" }] }],
+    }),
+    defineField({
       name: "aboutSection",
       type: "object",
       fields: [
@@ -64,6 +69,29 @@ export const home = defineType({
               type: "image",
             }),
           ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "endingBlock",
+      type: "object",
+      fields: [
+        defineField({
+          name: "animation",
+          description: "Add a Lottie .json file",
+          type: "file",
+        }),
+        defineField({
+          name: "title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          type: "blockContent",
+        }),
+        defineField({
+          name: "cta",
+          type: "cta",
         }),
       ],
     }),

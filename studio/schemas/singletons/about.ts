@@ -90,7 +90,7 @@ export const about = defineType({
       fields: [
         defineField({
           name: "heading",
-          type: "blockContent",
+          type: "string",
         }),
         defineField({
           name: "content",
@@ -114,7 +114,7 @@ export const about = defineType({
       fields: [
         defineField({
           name: "heading",
-          type: "blockContent",
+          type: "string",
         }),
         defineField({
           name: "content",

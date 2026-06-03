@@ -6,13 +6,6 @@ export const callFranco = defineType({
   type: "object",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      description:
-        "You can replicate the document title. If possible, keep the title shorter than 50–60 characters",
-    }),
-    defineField({
       name: "content",
       type: "blockContent",
     }),
