@@ -3,13 +3,13 @@
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
 
   // --- Tunables ---------------------------------------------------------
-  const POOL = 4; // max stars visible at once
+  const POOL = 3; // max stars visible at once
   const SVG_SIZE = 266; // intrinsic px size of HoverStar
   const SIZE_VW = 0.04; // default star size as a fraction of viewport width
   const MAX = 30; // peak size multiplier on the fastest flick
   const K = 6; // how strongly velocity grows the peak size
-  const SPEED_REF = 2.5; // px/ms that maps to "fast" (normalises speed)
-  const SPACING = 70; // px the cursor must travel before spawning
+  const SPEED_REF = 2; // px/ms that maps to "fast" (normalises speed)
+  const SPACING = 80; // px the cursor must travel before spawning
   const GROW = 0.3; // s to grow from minimum up to the velocity peak
   const LIFETIME = 0.3; // s before a spawned star fully fades
   const TILT = 20; // max degrees of directional tilt
