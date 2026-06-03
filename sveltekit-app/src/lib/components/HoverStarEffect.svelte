@@ -12,7 +12,7 @@
   const SPACING = 80; // px the cursor must travel before spawning
   const GROW = 0.3; // s to grow from minimum up to the velocity peak
   const LIFETIME = 0.3; // s before a spawned star fully fades
-  const TILT = 20; // max degrees of directional tilt
+  const TILT = 10; // max degrees of directional tilt
   const SMOOTH = 0.7; // speed smoothing factor (lerp)
 
   let stars: HTMLDivElement[] = $state([]);
@@ -76,7 +76,7 @@
       // peak size captured from the velocity at this instant: minimum at rest,
       // up to base * MAX on the fastest flick — so every star differs
       const peak = base * clamp(1 + K * norm, 1, MAX);
-      const rotation = Math.random() * 30 - 15 + dir * TILT * norm;
+      const rotation = TILT;
 
       gsap.killTweensOf(el);
       gsap.set(el, {
@@ -122,7 +122,7 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 40;
+    z-index: 2;
     overflow: hidden;
   }
 

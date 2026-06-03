@@ -2,17 +2,17 @@
   import Logo from "$lib/components/svg/Logo.svelte";
 </script>
 
-<nav class="fixed top-0 left-0 w-full p-1 h-8 font-mono uppercase">
+<nav class="fixed top-0 left-0 w-full p-1 h-8 font-mono uppercase z-30">
   <a href="/" rel="noreferrer" class="w-13 h-full flex"><Logo /></a>
   <ul class="flex gap-0.5 self-end">
-    <li class="py-1 px-3 bg-dark-gray text-accent rounded-full h-fit w-fit">
-      <a href="/">Case studies</a>
+    <li class="bg-dark-gray text-accent rounded-full flex items-center">
+      <a class="w-full h-full py-1 px-3" href="/">Case studies</a>
     </li>
-    <li class="py-1 px-3 bg-dark-gray text-accent rounded-full h-fit w-fit">
-      <a href="/">Lookbook</a>
+    <li class="bg-dark-gray text-accent rounded-full flex items-center">
+      <a class="w-full h-full py-1 px-3" href="/">Lookbook</a>
     </li>
-    <li class="py-1 px-3 bg-dark-gray text-accent rounded-full h-fit w-fit">
-      <a href="/">Info</a>
+    <li class="bg-dark-gray text-accent rounded-full flex items-center">
+      <a class="w-full h-full py-1 px-3" href="/">Info</a>
     </li>
   </ul>
   <a
