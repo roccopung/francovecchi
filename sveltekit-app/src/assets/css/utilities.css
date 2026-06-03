@@ -54,12 +54,8 @@
   @apply text-m-xl md:text-xl;
 }
 
-@utility typo-2xl-headings {
-  @apply text-m-2xl-headings md:text-2xl-headings;
-}
-
-@utility typo-2xl-body {
-  @apply text-m-2xl-body md:text-2xl-body;
+@utility typo-2xl {
+  @apply text-m-2xl md:text-2xl;
 }
 
 @utility typo-3xl {

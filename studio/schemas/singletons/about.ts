@@ -6,6 +6,19 @@ export const about = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "title",
+      type: "string",
+      readOnly: true,
+    }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      readOnly: true,
+      options: {
+        source: "title",
+      },
+    }),
+    defineField({
       name: "portrait",
       type: "elementImage",
     }),

@@ -16,6 +16,9 @@
   const SMOOTH = 0.7; // speed smoothing factor (lerp)
 
   let stars: HTMLDivElement[] = $state([]);
+  let starLayer: HTMLDivElement;
+  let scrollY = $state(0);
+  let viewportHeight = $state(0);
 
   onMount(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -96,10 +99,11 @@
 
     import("gsap").then((mod) => {
       gsap = mod.gsap;
-      window.addEventListener("pointermove", onMove);
+      const target = starLayer.parentElement ?? window;
+      target.addEventListener("pointermove", onMove as EventListener);
       window.addEventListener("resize", updateBase);
       cleanup = () => {
-        window.removeEventListener("pointermove", onMove);
+        target.removeEventListener("pointermove", onMove as EventListener);
         window.removeEventListener("resize", updateBase);
         stars.forEach((el) => el && gsap.killTweensOf(el));
       };
@@ -109,13 +113,17 @@
   });
 </script>
 
-<div class="star-layer" aria-hidden="true">
-  {#each Array(POOL) as _, i (i)}
-    <div class="star mix-blend-multiply" bind:this={stars[i]}>
-      <HoverStar />
-    </div>
-  {/each}
-</div>
+<svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
+
+{#if scrollY < viewportHeight * 0.8}
+  <div bind:this={starLayer} class="star-layer" aria-hidden="true">
+    {#each Array(POOL) as _, i (i)}
+      <div class="star mix-blend-multiply" bind:this={stars[i]}>
+        <HoverStar />
+      </div>
+    {/each}
+  </div>
+{/if}
 
 <style>
   .star-layer {

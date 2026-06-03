@@ -16,6 +16,7 @@ import { pageBuilder } from "./objects/pageBuilder";
 import { seo } from "./objects/seo";
 
 import { about } from "./singletons/about";
+import { caseStudies } from "./singletons/caseStudies";
 import { home } from "./singletons/home";
 import { lookbook } from "./singletons/lookbook";
 import { settings } from "./singletons/settings";
@@ -46,6 +47,7 @@ export const schemaTypes = [
 
   //singletons
   about,
+  caseStudies,
   home,
   lookbook,
   settings,

@@ -54,50 +54,66 @@
   let isPaused = $state(false);
 </script>
 
-{#if browser && src}
-  <media-controller
-    class="w-full h-full overflow-hidden"
-    style="aspect-ratio: {aspectRatio};"
-    autohide="-1"
+<media-controller
+  class="w-full h-full overflow-hidden"
+  style="aspect-ratio: {aspectRatio};"
+  autohide="-1"
+>
+  {#if posterSrc}
+    <media-poster-image
+      class="object-cover overflow-hidden z-10"
+      slot="poster"
+      src={posterSrc}
+    ></media-poster-image>
+    <div class="overlay pointer-events-none"></div>
+  {/if}
+
+  <media-play-button
+    class="z-20"
+    class:hidden={autoplay == true}
+    slot="centered-chrome"
+    notooltip
   >
-    <video
-      class="w-full h-full object-cover"
-      bind:this={player}
-      {src}
-      slot="media"
-      playsinline
-      autoplay={isAutoplay}
-      loop={isLoop}
-      muted={isMuted}
-      preload="metadata"
-      onloadeddata={(e) => {
-        aspectRatio = e.currentTarget.videoWidth / e.currentTarget.videoHeight;
-      }}
-    ></video>
-    {#if posterSrc}
-      <media-poster-image
-        class="object-cover overflow-hidden z-10"
-        slot="poster"
-        src={posterSrc}
-      ></media-poster-image>
-    {/if}
-  </media-controller>
-{/if}
+    <div
+      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-1 uppercase"
+      slot="play"
+    >
+      Play
+    </div>
+    <div
+      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-1 uppercase"
+      slot="pause"
+    >
+      Pause
+    </div>
+  </media-play-button>
+</media-controller>
 
 <style>
+  .overlay {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    opacity: 0.2;
+  }
   media-controller {
     --media-object-fit: cover;
+    display: block;
   }
 
   media-controller {
-    --media-object-fit: cover;
-    --media-font: "Roboto";
     --media-control-transition-out: opacity 150ms ease-in;
     --media-control-transition-in: opacity 150ms ease-in;
-    --media-background-color: none;
+    --media-background-color: transparent;
+    --media-control-background: transparent;
   }
 
   media-controller > * {
     opacity: 1;
+  }
+
+  media-play-button:not([mediapaused]) {
+    display: none;
   }
 </style>

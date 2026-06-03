@@ -42,6 +42,10 @@ export const home = defineType({
           type: "blockContent",
         }),
         defineField({
+          name: "cta",
+          type: "cta",
+        }),
+        defineField({
           name: "animation",
           description: "Add a Lottie .json file",
           type: "file",

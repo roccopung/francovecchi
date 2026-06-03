@@ -8,6 +8,22 @@
 
 @font-face {
   font-family: "DM Sans";
+  src: url("/fonts/DMSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DM Sans";
   src: url("/fonts/DMSans-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: block;
@@ -34,41 +50,34 @@
 
   --text-s: 1.6rem;
   --text-s--line-height: 1.4;
-  --text-s--letter-spacing: 0.02em;
 
-  --text-md: 2.4rem;
+  --text-md: clamp(1.6rem, 2.151vw, 2.4rem);
   --text-md--line-height: 1.2;
-  --text-m-md: clamp(1.6rem, 2.151vw, 2.4rem);
+  --text-m-md: 2.4rem;
   --text-m-md--line-height: 1.2;
 
-  --text-l: 3.2rem;
+  --text-l: clamp(2.2rem, 2.957vw, 3.2rem);
   --text-l--line-height: 1.2;
-  --text-m-l: clamp(2.2rem, 2.957vw, 3.2rem);
+  --text-m-l: 2.2rem;
   --text-m-l--line-height: 1.2;
 
-  --text-xl: 4rem;
+  --text-xl: clamp(2.8rem, 2.315vw, 4rem);
   --text-xl--line-height: 1;
   --text-xl--letter-spacing: 0.02em;
   --text-m-xl: 2.8rem;
   --text-m-xl--line-height: 1;
   --text-m-xl--letter-spacing: 0.02em;
 
-  --text-2xl-body: 7.2rem;
-  --text-2xl-body--line-height: 1;
-  --text-2xl-body--letter-spacing: -0.01em;
-  --text-m-2xl-body: 3rem;
-  --text-m-2xl-body--line-height: 1;
-  --text-m-2xl-body--letter-spacing: -0.01em;
+  --text-2xl: clamp(3rem, 4.167vw, 7.2rem);
+  --text-2xl--line-height: 1;
+  --text-2xl--letter-spacing: -0.01em;
+  --text-m-2xl: 3rem;
+  --text-m-2xl--line-height: 1;
+  --text-m-2xl--letter-spacing: -0.01em;
 
-  --text-2xl-headings: 7.2rem;
-  --text-2xl-headings--line-height: 1;
-  --text-m-2xl-headings: clamp(3rem, 4.032vw, 7.2rem);
-  --text-m-2xl-headings--line-height: 1;
-
-  --text-3xl: 12rem;
+  --text-3xl: clamp(4rem, 5.376vw, 12rem);
   --text-3xl--line-height: 1;
-  --text-m-3xl: clamp(4rem, 5.376vw, 12rem);
-  --text-m-3xl--line-height: 1;
+  --text-m-3xl: 4rem --text-m-3xl--line-height: 1;
 
   --text-5xl: 20rem;
   --text-5xl--line-height: 1;
