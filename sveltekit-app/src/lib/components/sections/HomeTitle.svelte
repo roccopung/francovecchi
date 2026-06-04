@@ -49,7 +49,7 @@
 >
   <div class="relative w-full h-full">
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 mt-[3%]"
     >
       <h1 bind:this={franco} class="trimmed hidden md:block opacity-0">
         Franco
