@@ -1,54 +1,46 @@
 <script lang="ts">
+  import type { gsap as GsapType } from "gsap";
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
-  import { gsap } from "gsap";
-  import { SplitText } from "gsap/SplitText";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
+  let ctx: GsapType.Context | undefined;
 
-  onMount(async () => {
-    await document.fonts.ready;
-    gsap.registerPlugin(SplitText);
+  onMount(() => {
+    // Wait for the custom font so SplitText measures glyphs correctly, then
+    // load GSAP on the client only — it must never run during SSR.
+    document.fonts.ready.then(async () => {
+      const { gsap } = await import("gsap");
+      const { SplitText } = await import("gsap/SplitText");
+      gsap.registerPlugin(SplitText);
 
-    gsap.set(franco, { opacity: 1 });
-    gsap.set(vecchi, { opacity: 1 });
+      ctx = gsap.context(() => {
+        gsap.set([franco, vecchi], { opacity: 1 });
 
-    const revealFranco = (el: HTMLElement, delay: number) =>
-      SplitText.create(el, {
-        type: "chars, words",
-        autoSplit: true,
-        onSplit: (self) => {
-          gsap.from(self.chars, {
-            duration: 0.3,
-            yPercent: -20,
-            scale: 0,
-            stagger: 0.05,
-            delay,
-            ease: "power4.out",
+        const reveal = (el: HTMLElement, yPercent: number) =>
+          SplitText.create(el, {
+            type: "chars, words",
+            charsClass: "ht-char",
+            autoSplit: true,
+            // Return the tween so autoSplit reverts it before each re-split.
+            onSplit: (self) =>
+              gsap.from(self.chars, {
+                duration: 0.3,
+                yPercent,
+                scale: 0,
+                stagger: 0.05,
+                ease: "power4.out",
+              }),
           });
-        },
-      });
 
-    const revealVecchi = (el: HTMLElement, delay: number) =>
-      SplitText.create(el, {
-        type: "chars, words",
-        autoSplit: true,
-        onSplit: (self) => {
-          gsap.from(self.chars, {
-            duration: 0.3,
-            yPercent: 20,
-            scale: 0,
-            stagger: 0.05,
-            delay,
-            ease: "power4.out",
-          });
-        },
+        reveal(franco, -20);
+        reveal(vecchi, 20);
       });
-
-    revealFranco(franco, 0);
-    revealVecchi(vecchi, 0);
+    });
   });
+
+  onDestroy(() => ctx?.revert());
 </script>
 
 <div
@@ -92,6 +84,14 @@
 <style>
   .trimmed {
     text-box: trim-both cap alphabetic;
+  }
+
+  /* Safari clips the ink of slanted glyphs at the edge of their inline-block
+     box. Padding gives the overhang room; the equal negative margin keeps
+     layout (advance width + line box) unchanged. */
+  :global(.ht-char) {
+    padding: 0.15em 0.2em;
+    margin: -0.15em -0.2em;
   }
 
   :global(a:hover) {

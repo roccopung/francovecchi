@@ -2,8 +2,6 @@
   import type { PortableTextBlock } from "@sanity/types";
   import type { Cta } from "$lib/types";
   import { onMount } from "svelte";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
   import Path from "$lib/components/svg/PathCallFranco.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
@@ -21,8 +19,9 @@
   let callFranco: HTMLElement | undefined = $state();
   let stars: HTMLElement[] | undefined = $state([]);
 
-  onMount(() => {
-    if (!gsap) return;
+  onMount(async () => {
+    const { gsap } = await import("gsap");
+    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
 
     for (let i = 0; i < stars.length; i++) {

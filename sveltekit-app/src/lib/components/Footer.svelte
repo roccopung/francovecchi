@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Cta from "$lib/components/element/Cta.svelte";
-
   type Social = {
     label: string;
     url: string;

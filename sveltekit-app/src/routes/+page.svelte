@@ -3,8 +3,6 @@
   import { useQuery } from "@sanity/sveltekit";
   import { urlFor } from "$lib/sanity/image";
   import { onMount } from "svelte";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import Image from "$lib/components/element/Image.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import HomeTitle from "$lib/components/sections/HomeTitle.svelte";
@@ -29,9 +27,11 @@
   let viewportWidth = $state(0);
   let keenEyeSection: HTMLElement | undefined = $state();
 
-  onMount(() => {
+  onMount(async () => {
     console.log(home);
     isMounted = true;
+    const { gsap } = await import("gsap");
+    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
     const tl = gsap.timeline();
 

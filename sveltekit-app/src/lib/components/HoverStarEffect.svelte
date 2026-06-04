@@ -1,7 +1,10 @@
 <script lang="ts">
+  import type { gsap as GsapType } from "gsap";
   import { onMount } from "svelte";
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
-  import { gsap } from "gsap";
+
+  // GSAP is browser-only; load it on mount so it never runs during SSR.
+  let gsap: GsapType | undefined = $state();
 
   // --- Tunables ---------------------------------------------------------
   const POOL = 20;
@@ -100,6 +103,7 @@
 
     updateBase();
     window.addEventListener("resize", updateBase);
+    import("gsap").then((m) => (gsap = m.gsap));
 
     return () => window.removeEventListener("resize", updateBase);
   });
