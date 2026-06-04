@@ -3,3 +3,9 @@ packages:
   - "studio"
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@sanity/mutator@5.30.0'
+  - '@sanity/schema@5.30.0'
+  - '@sanity/util@5.30.0'
+  - '@sanity/vision@5.30.0'
+  - sanity@5.30.0
