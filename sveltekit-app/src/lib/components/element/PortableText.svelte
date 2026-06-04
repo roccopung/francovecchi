@@ -41,9 +41,6 @@
 </div>
 
 <style lang="postcss">
-  :global(.rich-text p:not(:last-child)) {
-    margin-bottom: 1lh;
-  }
   :global(.rich-text a) {
     text-decoration: underline;
     text-decoration-color: var(--color-blue);

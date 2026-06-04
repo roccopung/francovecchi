@@ -24,3 +24,5 @@ export const homeQuery = defineQuery(`{
 `);
 
 export const aboutQuery = defineQuery(`*[_type == "about"][0]`);
+
+export const layoutQuery = defineQuery(`*[_type == "settings"][0]`);

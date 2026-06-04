@@ -3,6 +3,8 @@
   import { useQuery } from "@sanity/sveltekit";
   import { urlFor } from "$lib/sanity/image";
   import { onMount } from "svelte";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import Image from "$lib/components/element/Image.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import HomeTitle from "$lib/components/sections/HomeTitle.svelte";
@@ -14,6 +16,7 @@
   import Cta from "$lib/components/element/Cta.svelte";
   import LogosMarquee from "$lib/components/LogosMarquee.svelte";
   import KeenEye from "$lib/components/KeenEye.svelte";
+  import CallFranco from "$lib/components/CallFranco.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
@@ -21,12 +24,49 @@
   let query = $derived(useQuery(data));
   let home = $derived($query.data?.home);
   let characters = $derived(data.featuredCharacters ?? []);
+  let characterRefs = $state([]);
   let isMounted = $state(false);
+  let viewportWidth = $state(0);
+  let keenEyeSection: HTMLElement | undefined = $state();
 
   onMount(() => {
+    console.log(home);
     isMounted = true;
+    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline();
+
+    tl.to(".keen-eye", {
+      scrollTrigger: {
+        trigger: ".keen-eye",
+        start: "top 80%",
+        end: "+=100",
+        scrub: 1,
+      },
+      width: 120,
+    });
+
+    for (let i = 0; i < characterRefs.length; i++) {
+      const xPercents = [
+        (((viewportWidth / 8) * 0.5) / 2) * -1,
+        (((viewportWidth / 8) * 0.5) / 2) * -0.5,
+        (((viewportWidth / 8) * 0.5) / 2) * 0.5,
+        (((viewportWidth / 8) * 0.5) / 2) * 1,
+      ];
+      gsap.from(characterRefs[i], {
+        scrollTrigger: {
+          trigger: characterRefs[i],
+          start: "top 90%",
+          end: "+=100",
+          scrub: 1,
+        },
+        scale: 0.5,
+        xPercent: xPercents[i % 4],
+      });
+    }
   });
 </script>
+
+<svelte:window bind:innerWidth={viewportWidth} />
 
 <main class="min-h-[100dvh] w-full flex flex-col">
   <HomeTitle />
@@ -52,7 +92,7 @@
           <h4 class="typo-xl font-sans font-medium">
             <PortableText data={home?.aboutSection?.heading} />
           </h4>
-          <div class="flex gap-1 pt-8">
+          <div class="flex gap-1 pt-8 pb-3">
             <div class="typo-s font-sans">
               <PortableText data={home?.aboutSection?.paragraphOne} />
             </div>
@@ -61,14 +101,10 @@
               <PortableText data={home?.aboutSection?.paragraphTwo} />
             </div>
           </div>
-          <div
-            class="rounded-full py-1 px-3 border border-black w-fit typo-xs font-mono uppercase mt-3 bg-white text-black hover:bg-black hover:text-white"
-          >
-            <Cta cta={home?.aboutSection?.cta} />
-          </div>
+          <Cta cta={home?.aboutSection?.cta} />
         </div>
         <div class="h-20 place-self-end">
-          <img class="h-full" src="/temp/images/fire.png" />
+          <img class="h-full" src="/temp/images/fire.png" alt="fire" />
         </div>
       </div>
     </section>
@@ -86,27 +122,34 @@
       {/if}
     </section>
     {#if characters && characters.length > 0}
-      <section class="grid-4">
-        {#each characters as character}
-          <div class="aspect-[4/5] overflow-hidden rounded-s">
+      <section class="grid-4 overflow-hidden w-full">
+        {#each characters as character, i}
+          <div
+            bind:this={characterRefs[i]}
+            class="aspect-[4/5] overflow-hidden rounded-s"
+          >
             <Image image={character?.cover} />
           </div>
         {/each}
       </section>
     {/if}
   </div>
-  <section>
+  <section bind:this={keenEyeSection}>
     <div
       class="py-12 w-full overflow-hidden flex flex-col items-center bg-accent"
     >
-      <img class="max-w-30" src="/temp/images/keen-eye.png" alt="" />
-      <KeenEye data={home?.endingBlock?.title} />
+      <img class="w-[33vw] keen-eye" src="/temp/images/keen-eye.png" alt="" />
+      <div class="w-full overflow-hidden">
+        <KeenEye data={home?.endingBlock?.title} />
+      </div>
       <div
-        class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-4 pt-4"
+        class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-4 pt-4 pb-2"
       >
         <PortableText data={home?.endingBlock?.description} />
       </div>
+      <Cta fill="var(--color-white)" cta={home?.endingBlock?.cta} />
     </div>
   </section>
+  <CallFranco data={home?.callFranco} />
   <HoverStarEffect />
 </main>

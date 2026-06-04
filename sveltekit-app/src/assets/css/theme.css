@@ -90,6 +90,11 @@
   --text-m-6xl: clamp(8rem, 13.978vw, 16rem);
   --text-m-6xl--line-height: 1;
 
+  --text-call-franco: clamp(8rem, 25.231vw, 60rem);
+  --text-call-franco--line-height: 1;
+  --text-m-call-franco: 8rem;
+  --text-m-call-franco--line-height: 1;
+
   --color-*: initial;
   --color-white: #fff;
   --color-black: #000;

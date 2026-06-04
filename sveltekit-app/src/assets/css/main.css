@@ -20,6 +20,13 @@ body {
   background-color: var(--color-background);
   font-variant-numeric: oldstyle-nums;
   overscroll-behavior: none;
+  overflow-x: hidden;
+}
+
+section,
+footer,
+.sections {
+  position: relative;
 }
 
 /* STANDARD PREVIEW-SANITY STYLING */

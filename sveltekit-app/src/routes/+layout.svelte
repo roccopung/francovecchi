@@ -7,11 +7,17 @@
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
+  import Footer from "$lib/components/Footer.svelte";
 
   const { children, data }: LayoutProps = $props();
 
   // svelte-ignore state_referenced_locally -- previewEnabled only changes on full page reload
   const { previewEnabled } = data;
+  let settings: any = $derived(data?.settings?.data);
+
+  $effect(() => {
+    console.log(settings);
+  });
 </script>
 
 <PreviewMode enabled={previewEnabled}>
@@ -31,6 +37,7 @@
 
       <Header />
       {@render children()}
+      <Footer data={settings} />
     </QueryLoader>
   </VisualEditing>
 </PreviewMode>

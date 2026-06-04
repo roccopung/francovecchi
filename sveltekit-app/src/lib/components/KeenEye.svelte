@@ -12,6 +12,7 @@
   const options: MarqueeckOptions = {
     direction: "left",
     speed: 40,
+    onHover: "none",
   };
 </script>
 

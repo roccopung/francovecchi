@@ -43,4 +43,11 @@ export const settings = defineType({
       of: [{ type: "linkExternal" }],
     }),
   ],
+  preview: {
+    prepare: () => {
+      return {
+        title: "General Settings",
+      };
+    },
+  },
 });

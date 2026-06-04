@@ -1,17 +1,15 @@
 <script lang="ts">
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
   import { onMount } from "svelte";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
 
   onMount(async () => {
-    const { default: gsap } = await import("gsap");
-    const { SplitText } = await import("gsap/SplitText");
-    gsap.registerPlugin(SplitText);
-
-    // wait for the custom font so SplitText measures real glyph widths
     await document.fonts.ready;
+    gsap.registerPlugin(SplitText);
 
     gsap.set(franco, { opacity: 1 });
     gsap.set(vecchi, { opacity: 1 });
@@ -55,14 +53,18 @@
 
 <div
   data-hero
-  class="bg-accent fixed -z-1 h-[80dvh] w-full top-0 left-0 p-1 text-dark-gray"
+  class="bg-accent fixed h-[80dvh] w-full top-0 left-0 p-1 text-dark-gray"
 >
   <div class="relative w-full h-full">
     <div
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
     >
-      <h1 bind:this={franco} class="trimmed hidden md:block">Franco</h1>
-      <h1 bind:this={vecchi} class="trimmed ml-7 hidden md:block">Vecchi</h1>
+      <h1 bind:this={franco} class="trimmed hidden md:block opacity-0">
+        Franco
+      </h1>
+      <h1 bind:this={vecchi} class="trimmed ml-7 hidden md:block opacity-0">
+        Vecchi
+      </h1>
       <h1 class="trimmed md:hidden">Franco</h1>
       <h1 class="trimmed ml-7 md:hidden">Vecchi</h1>
     </div>
@@ -75,7 +77,7 @@
       <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />
     </div>
 
-    <div class="absolute bottom-0 right-0 p-1 w-fit">
+    <div class="absolute bottom-0 right-0 p-1 w-fit z-30">
       <a
         href="/"
         class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer"

@@ -4,17 +4,16 @@
   import { gsap } from "gsap";
 
   // --- Tunables ---------------------------------------------------------
-  const POOL = 3;
-  const SVG_SIZE = 266;
+  const POOL = 20;
   const SIZE_VW = 0.04;
-  const MAX = 70;
-  const K = 7;
-  const SPEED_REF = 4;
-  const SPACING = 80;
+  const MAX = 80;
+  const K = 6;
+  const SPEED_REF = 8;
+  const SPACING = 90;
   const GROW = 0.4;
   const LIFETIME = 0.3;
   const TILT = 10;
-  const SMOOTH = 0.7;
+  const SMOOTH = 1;
 
   let stars: HTMLDivElement[] = $state([]);
   let starLayer: HTMLDivElement | undefined = $state(undefined);
@@ -31,7 +30,7 @@
 
   const clamp = (v: number, min: number, max: number) =>
     Math.min(max, Math.max(min, v));
-  const updateBase = () => (base = (window.innerWidth * SIZE_VW) / SVG_SIZE);
+  const updateBase = () => (base = window.innerWidth * SIZE_VW);
 
   function onMove(e: PointerEvent) {
     const t = performance.now();
@@ -75,14 +74,25 @@
       y: pointer.y,
       xPercent: -50,
       yPercent: -50,
-      scale: base,
+      width: base,
+      height: base,
       rotation: TILT,
       opacity: 1,
     });
     gsap
       .timeline()
-      .to(el, { scale: peak, duration: GROW, ease: "back.out(1.5)" })
-      .to(el, { scale: 0, duration: LIFETIME, ease: "power3.inOut" });
+      .to(el, {
+        width: peak,
+        height: peak,
+        duration: GROW,
+        ease: "back.out(1.5)",
+      })
+      .to(el, {
+        width: 0,
+        height: 0,
+        duration: LIFETIME,
+        ease: "power4.inOut",
+      });
   }
 
   onMount(() => {
@@ -109,7 +119,7 @@
 
 <svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
 
-{#if scrollY < viewportHeight * 0.8}
+{#if scrollY < viewportHeight * 0.5}
   <div bind:this={starLayer} class="star-layer" aria-hidden="true">
     {#each Array(POOL) as _, i (i)}
       <div class="star mix-blend-multiply" bind:this={stars[i]}>
@@ -134,6 +144,6 @@
     left: 0;
     opacity: 0;
     transform-origin: center;
-    will-change: transform, opacity;
+    will-change: width, height, transform, opacity;
   }
 </style>

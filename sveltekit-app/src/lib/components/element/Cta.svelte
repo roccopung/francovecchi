@@ -1,9 +1,22 @@
 <script lang="ts">
   import type { Cta } from "$lib/types";
 
-  type Props = { cta: Cta; fill?: string };
+  type Props = {
+    cta: Cta;
+    fill?:
+      | "var(--color-accent)"
+      | "var(--color-white)"
+      | "var(--color-dark-gray)";
+  };
+
+  const fillClasses: Record<NonNullable<Props["fill"]>, string> = {
+    "var(--color-accent)": "bg-accent text-black hover:bg-dark-gray hover:text-accent",
+    "var(--color-white)": "bg-white text-black hover:bg-black hover:text-white",
+    "var(--color-dark-gray)": "bg-dark-gray text-accent hover:bg-white hover:text-black",
+  };
 
   let { cta, fill }: Props = $props();
+  let colorClass = $derived(fill ? (fillClasses[fill] ?? "") : "");
 
   function slugify(str: string): string {
     return str.replace(/([A-Z])/g, "-$1").toLowerCase();
@@ -37,7 +50,7 @@
   <!-- no cta configured -->
 {:else if cta.ctaType !== "popup"}
   <a
-    class="flex gap-1 items-center typo-sm typo-uppercase"
+    class="w-fit flex gap-1 items-center typo-xs uppercase font-mono rounded-full px-3 py-1 border-black border hover {colorClass}"
     href={link.href}
     target={link.target ?? "_self"}
     rel="noopener noreferrer"

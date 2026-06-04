@@ -70,6 +70,10 @@
   @apply text-m-6xl md:text-6xl;
 }
 
+@utility typo-call-franco {
+  @apply text-m-call-franco md:text-call-franco;
+}
+
 /* transitions */
 
 @utility transition-fast {
