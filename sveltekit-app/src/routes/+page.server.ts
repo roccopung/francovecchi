@@ -8,8 +8,14 @@ export const load: PageServerLoad = async ({ locals: { sanity } }) => {
   // We pass the data in a format that is easy for `useQuery` to consume in the
   // corresponding `+page.svelte` file, but you can return the data in any
   // format you like.
+  const characters = initial.data?.characters ?? [];
+  const featuredCharacters = [...characters]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
+
   return {
     query: homeQuery,
     options: { initial },
+    featuredCharacters,
   };
 };

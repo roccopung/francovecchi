@@ -61,12 +61,11 @@
 
 {#if hasAsset}
   <img
-    class="transition-fast
+    class="
 	{fit === 'contain'
       ? 'object-contain h-full min-w-full w-auto max-w-full'
       : 'object-cover h-full w-full'}
-	{height === 'full' ? 'h-full' : 'h-auto'}
-	{visible === true ? 'opacity-100' : 'opacity-0'}"
+	{height === 'full' ? 'h-full' : 'h-auto'}"
     loading={lazy ? "lazy" : "eager"}
     fetchpriority={lazy ? "low" : "high"}
     data-sizes="auto"
@@ -77,6 +76,5 @@
 "
     alt={src.alt || alt}
     src={imageUrl}
-    onload={() => (visible = true)}
   />
 {/if}

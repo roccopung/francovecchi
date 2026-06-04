@@ -5,11 +5,15 @@
 
   let { cta, fill }: Props = $props();
 
+  function slugify(str: string): string {
+    return str.replace(/([A-Z])/g, "-$1").toLowerCase();
+  }
+
   let link = $derived.by(() => {
     switch (cta?.ctaType) {
       case "linkInternal":
         return {
-          href: `/${cta.linkInternal?.url?._ref}`,
+          href: `/${cta.linkInternal?.url?._ref ? slugify(cta.linkInternal?.url?._ref) : "#"}`,
           label: cta.linkInternal?.label,
         };
       case "linkExternal":
@@ -33,12 +37,12 @@
   <!-- no cta configured -->
 {:else if cta.ctaType !== "popup"}
   <a
-    class="flex gap-1 items-center hover:opacity-50 transition-fast typo-sm typo-uppercase"
+    class="flex gap-1 items-center typo-sm typo-uppercase"
     href={link.href}
     target={link.target ?? "_self"}
     rel="noopener noreferrer"
   >
-    Link Label
+    {link?.label}
   </a>
 {:else}
   <button>Open Popup</button>

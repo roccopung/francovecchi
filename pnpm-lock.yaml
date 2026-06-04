@@ -99,6 +99,9 @@ importers:
 
   sveltekit-app:
     dependencies:
+      '@arisbh/marqueeck':
+        specifier: ^0.5.1
+        version: 0.5.1(svelte@5.56.1(@typescript-eslint/types@8.60.1))
       '@sanity/asset-utils':
         specifier: ^2.3.0
         version: 2.3.0
@@ -213,6 +216,11 @@ packages:
   '@architect/utils@5.0.2':
     resolution: {integrity: sha512-BNVXWpkXj6kDdIu6iu3Qh+Gbl1Ml0DKIDQ7s/VLaugvUBbvs+0cm7DA+N2xF6RtzBbnUm2NoyYaGvN5/0uYoEQ==}
     engines: {node: '>=20'}
+
+  '@arisbh/marqueeck@0.5.1':
+    resolution: {integrity: sha512-7sjBwIRvm+UdQgb8fOK44ssy+oMC5A/33/CC+E62OzMtW2i5OotE3xw0YY+tjqOI7y9LV1d44rHixhni0IEGOw==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
@@ -6862,6 +6870,10 @@ snapshots:
     dependencies:
       '@aws-lite/client': 0.21.10
       lambda-runtimes: 2.0.5
+
+  '@arisbh/marqueeck@0.5.1(svelte@5.56.1(@typescript-eslint/types@8.60.1))':
+    dependencies:
+      svelte: 5.56.1(@typescript-eslint/types@8.60.1)
 
   '@asamuzakjp/css-color@3.2.0':
     dependencies:
