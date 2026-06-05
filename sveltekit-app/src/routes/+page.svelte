@@ -1,7 +1,6 @@
 <script lang="ts">
   //@ts-nocheck
   import { useQuery } from "@sanity/sveltekit";
-  import { urlFor } from "$lib/sanity/image";
   import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
@@ -9,13 +8,13 @@
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
   import HoverStarEffect from "$lib/components/HoverStarEffect.svelte";
   import Headline from "$lib/components/Headline.svelte";
-  import Media from "$lib/components/Media.svelte";
+  import Media from "$lib/components/element/Media.svelte";
   import ProjectCard from "$lib/components/ProjectCard.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
-  import LogosMarquee from "$lib/components/LogosMarquee.svelte";
-  import CharactersMarquee from "$lib/components/CharactersMarquee.svelte";
-  import KeenEyeMarquee from "$lib/components/KeenEyeMarquee.svelte";
-  import CallFranco from "$lib/components/CallFranco.svelte";
+  import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
+  import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
+  import KeenEyeMarquee from "$lib/components/marquees/KeenEyeMarquee.svelte";
+  import CallFranco from "$lib/components/sections/CallFranco.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
@@ -29,7 +28,6 @@
   let keenEyeSection: HTMLElement | undefined = $state();
 
   onMount(async () => {
-    console.log(home);
     isMounted = true;
     const { gsap } = await import("gsap");
     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
@@ -73,7 +71,7 @@
   <HomeTitle />
   <section class="px-1 pb-1 mt-[80dvh] bg-accent">
     <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
-      <Media data={home?.cover} controls={true} />
+      <Media data={home?.cover} controls={true} muted={true} />
     </div>
     <Headline data={home?.heading} />
   </section>

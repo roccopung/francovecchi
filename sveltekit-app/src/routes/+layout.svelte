@@ -22,10 +22,6 @@
   afterNavigate(() => {
     menuState.open = false;
   });
-
-  $effect(() => {
-    console.log(caseStudies);
-  });
 </script>
 
 <PreviewMode enabled={previewEnabled}>

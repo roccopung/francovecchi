@@ -25,6 +25,20 @@ export const homeQuery = defineQuery(`{
 
 export const aboutQuery = defineQuery(`*[_type == "about"][0]`);
 
+export const caseStudiesQuery = defineQuery(
+  `*[_type == "project"]{
+  title,
+  slug
+  }`,
+);
+
+export const projectQuery = defineQuery(
+  `*[_type == "project" && slug.current == $slug][0] {
+  ...,
+  services[]->
+  }`,
+);
+
 export const layoutQuery = defineQuery(`{
   "settings": *[_type == "settings"][0],
   "caseStudies": *[_type == "project"]{

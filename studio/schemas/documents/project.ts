@@ -55,15 +55,20 @@ export const project = defineType({
       ],
     }),
     defineField({
+      name: "shortSummary",
+      description: "Displayed in the Thumbnail Overview only",
+      type: "blockContent",
+      group: "overview-thumbnail",
+    }),
+    defineField({
       name: "cover",
       type: "elementImage",
       description: "Displayed in the Project page",
     }),
     defineField({
-      name: "shortSummary",
-      description: "Displayed in the Thumbnail Overview only",
+      name: "description",
+      description: "Displayed in the Project page",
       type: "blockContent",
-      group: "overview-thumbnail",
     }),
     defineField({
       name: "services",

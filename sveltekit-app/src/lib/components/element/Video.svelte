@@ -10,6 +10,7 @@
 
   let {
     video,
+    controls = true,
     loop = false,
     muted = false,
     autoplay = true,
@@ -51,14 +52,11 @@
   let aspectRatio = $state(1.77777778);
   let isPlaying = $state(false);
   let isPaused = $state(false);
-
-  $effect(() => {
-    console.log(player);
-  });
 </script>
 
 <media-controller
   class="w-full h-full overflow-hidden"
+  class:pointer-events-none={controls == false}
   class:has-poster={posterSrc}
   style="aspect-ratio: {aspectRatio};"
   autohide="-1"

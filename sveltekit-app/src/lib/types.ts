@@ -47,3 +47,29 @@ export type Seo = {
   description?: string;
   image?: Image;
 };
+
+// Page Builder
+
+export type ItemImage = {
+  columnSpan: {
+    input: number;
+  };
+  image: ElementImage;
+};
+
+export type SectionStackedGallery = {
+  _type: "stackedGallery";
+  items: ItemImage[];
+};
+
+export type SectionInfo = {
+  _type: "info";
+  title: string;
+  content: PortableTextBlock[];
+};
+
+export type PageBuilderSection = SectionStackedGallery | SectionInfo;
+
+export type PageBuilder = {
+  sections: PageBuilderSection[];
+};

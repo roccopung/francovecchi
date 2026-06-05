@@ -34,10 +34,12 @@
     <li
       class="bg-dark-gray border border-dark-gray text-accent rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
-      <a class="w-full h-full py-1 px-3 hidden md:flex" href="/"
+      <a class="w-full h-full py-1 px-3 hidden md:flex" href="/case-studies"
         >Case studies {#if caseStudies > 0}({caseStudies}){/if}</a
       >
-      <a class="w-full h-full py-1 px-3 md:hidden" href="/">Case studies</a>
+      <a class="w-full h-full py-1 px-3 md:hidden" href="/case-studies"
+        >Case studies</a
+      >
     </li>
     <li
       class="bg-dark-gray border border-dark-gray text-accent rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
