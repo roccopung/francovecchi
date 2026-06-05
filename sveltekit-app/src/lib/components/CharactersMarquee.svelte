@@ -8,21 +8,22 @@
 
   let { data }: Props = $props();
 
+  let items = [...data, ...data];
+
   const options: MarqueeckOptions = {
-    direction: "left",
-    speed: 40,
+    direction: "right",
+    speed: 20,
+    gap: 0,
     onHover: "none",
   };
 </script>
 
 <Marqueeck {options}>
-  <div class="flex items-center gap-5 ml-5 md:gap-20 md:ml-20">
-    {#each data as item}
-      {#if item && item?.asset}
-        <div class="w-12 md:h-10 mix-blend-multiply">
-          <Image image={item} fit="contain" />
-        </div>
-      {/if}
-    {/each}
-  </div>
+  {#each items as item}
+    {#if item && item?.cover}
+      <div class="aspect-[4/5] h-40 overflow-hidden rounded-xs">
+        <Image image={item?.cover} />
+      </div>
+    {/if}
+  {/each}
 </Marqueeck>

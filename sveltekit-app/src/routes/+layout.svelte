@@ -4,19 +4,27 @@
   import { PreviewMode, QueryLoader, VisualEditing } from "@sanity/sveltekit";
   import type { LayoutProps } from "./$types";
   import { page } from "$app/state";
+  import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import { menuState } from "$lib/states.svelte";
 
   const { children, data }: LayoutProps = $props();
 
   // svelte-ignore state_referenced_locally -- previewEnabled only changes on full page reload
   const { previewEnabled } = data;
-  let settings: any = $derived(data?.settings?.data);
+  let layout: any = $derived(data?.layout?.data);
+  let settings: any = $derived(layout?.settings);
+  let caseStudies: number = $derived(layout?.caseStudies?.length ?? 0);
+
+  afterNavigate(() => {
+    menuState.open = false;
+  });
 
   $effect(() => {
-    console.log(settings);
+    console.log(caseStudies);
   });
 </script>
 
@@ -35,7 +43,7 @@
         </a>
       {/if}
 
-      <Header />
+      <Header {caseStudies} />
       {@render children()}
       <Footer data={settings} />
     </QueryLoader>

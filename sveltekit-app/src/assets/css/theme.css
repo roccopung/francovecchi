@@ -77,7 +77,8 @@
 
   --text-3xl: clamp(4rem, 5.376vw, 12rem);
   --text-3xl--line-height: 1;
-  --text-m-3xl: 4rem --text-m-3xl--line-height: 1;
+  --text-m-3xl: 4rem;
+  --text-m-3xl--line-height: 1;
 
   --text-5xl: 20rem;
   --text-5xl--line-height: 1;
@@ -107,6 +108,7 @@
   --duration-fast: 150ms;
 
   --radius-*: initial;
+  --radius-xs: 0.5rem;
   --radius-s: 1rem;
   --radius-m: 2.4rem;
   --radius-l: 4rem;

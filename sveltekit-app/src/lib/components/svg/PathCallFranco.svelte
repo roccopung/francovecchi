@@ -13,3 +13,9 @@
     stroke-width="1"
   />
 </svg>
+
+<style>
+  path {
+    vector-effect: non-scaling-stroke;
+  }
+</style>

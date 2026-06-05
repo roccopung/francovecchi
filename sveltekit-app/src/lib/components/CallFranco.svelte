@@ -40,35 +40,35 @@
 
 <section
   bind:this={callFranco}
-  class="relative py-9 bg-accent w-full oveflow-hidden text-dark-gray"
+  class="relative py-4 md:py-9 bg-accent w-full oveflow-hidden text-dark-gray"
 >
   <div
-    class="absolute top-1/2 -translate-y-1/2 w-full h-full pointer-events-none"
+    class="absolute top-1/2 -translate-y-1/2 w-full h-full pointer-events-none hidden md:block"
   >
     <Path />
   </div>
   <div
-    class="relative flex justify-between gap-1 font-slanted typo-call-franco uppercase"
+    class="relative flex justify-between gap-1 font-slanted typo-call-franco uppercase max-w-lg mx-auto md:max-w-none"
   >
     <span>Call</span>
     <span class="mr-[0.05lh]">Franco</span>
     <div
       bind:this={stars[0]}
-      class="absolute top-1/4 left-[28vw] opacity-0 pointer-events-none"
+      class="absolute top-1/4 left-1/2 -translate-x-9 md:translate-x-0 md:left-[28vw] opacity-0 pointer-events-none"
     >
-      <div class="rotate-10 w-[8vw]"><HoverStar /></div>
+      <div class="rotate-10 w-5 md:w-[8vw]"><HoverStar /></div>
     </div>
     <div
       bind:this={stars[1]}
-      class="absolute bottom-[12%] left-[32vw] opacity-0 pointer-events-none"
+      class="absolute bottom-[12%] left-1/2 -translate-x-8 md:translate-x-0 md:left-[32vw] opacity-0 pointer-events-none"
     >
-      <div class="rotate-10 w-[12vw]"><HoverStar /></div>
+      <div class="rotate-10 w-6 md:w-[12vw]"><HoverStar /></div>
     </div>
     <div
       bind:this={stars[2]}
-      class="absolute bottom-[16%] left-[34vw] opacity-0 pointer-events-none"
+      class="absolute bottom-[10%] md:bottom-[16%] left-1/2 -translate-x-7 md:translate-x-0 md:left-[34vw] opacity-0 pointer-events-none"
     >
-      <div class="rotate-10 w-[15vw]"><HoverStar /></div>
+      <div class="rotate-10 w-8 md:w-[15vw]"><HoverStar /></div>
     </div>
   </div>
 

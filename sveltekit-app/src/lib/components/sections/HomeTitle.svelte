@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { gsap as GsapType } from "gsap";
+  import type { gsap } from "gsap";
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
   import { onMount, onDestroy } from "svelte";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
-  let ctx: GsapType.Context | undefined;
+  let ctx: gsap.Context | undefined;
 
   onMount(() => {
     // Wait for the custom font so SplitText measures glyphs correctly, then
@@ -49,7 +49,7 @@
 >
   <div class="relative w-full h-full">
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 mt-[3%]"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
     >
       <h1 bind:this={franco} class="trimmed hidden md:block opacity-0">
         Franco

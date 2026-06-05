@@ -124,7 +124,11 @@
 <svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
 
 {#if scrollY < viewportHeight * 0.5}
-  <div bind:this={starLayer} class="star-layer" aria-hidden="true">
+  <div
+    bind:this={starLayer}
+    class="star-layer hidden md:block"
+    aria-hidden="true"
+  >
     {#each Array(POOL) as _, i (i)}
       <div class="star mix-blend-multiply" bind:this={stars[i]}>
         <HoverStar />

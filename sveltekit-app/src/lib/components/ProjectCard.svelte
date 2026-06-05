@@ -25,14 +25,16 @@
 {#key project.slug.current}
   {#if variant === "home"}
     <div
-      class="home-variant w-full border-1 border-black rounded-m overflow-hidden -mt-[1px]"
+      class="home-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px]"
     >
       <div class="overflow-hidden">
-        <div class="h-full w-full">
+        <div class="h-full w-full card-image">
           <Image image={project?.coverImages?.one} />
         </div>
       </div>
-      <div class="card-content p-3 bg-white">
+      <div
+        class="card-content flex flex-col gap-2 p-1 pt-2 md:pt-0 md:block md:p-3 bg-white"
+      >
         <div class="self-center flex flex-col gap-3">
           {#if project?.services}
             <div class="typo-xs font-mono uppercase">
@@ -51,7 +53,7 @@
         </div>
         <a
           href="/works/{project?.slug?.current}"
-          class="self-end py-2 px-3 border-1 border-black rounded-full w-fit hover:bg-accent transition-fast"
+          class="self-end py-1 px-3 border-1 border-black rounded-full w-fit hover:bg-accent transition-fast"
           onmouseenter={() => (zoom = true)}
           onmouseleave={() => (zoom = false)}
         >
@@ -64,12 +66,25 @@
 
 <style>
   .home-variant {
-    display: grid;
-    grid-template-columns: 1.33fr 1fr;
-    aspect-ratio: 2.3;
+    display: flex;
+    flex-direction: column;
+    .card-image {
+      aspect-ratio: 16/9;
+    }
   }
   .card-content {
     display: grid;
     grid-template-rows: 1fr auto;
+  }
+
+  @media (min-width: 768px) {
+    .home-variant {
+      display: grid;
+      grid-template-columns: 1.33fr 1fr;
+      aspect-ratio: 2.3;
+      .card-image {
+        aspect-ratio: unset;
+      }
+    }
   }
 </style>

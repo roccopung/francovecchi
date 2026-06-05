@@ -12,7 +12,6 @@
     video,
     loop = false,
     muted = false,
-    fullscreen = true,
     autoplay = true,
     ratio = "",
   } = $props();
@@ -52,13 +51,29 @@
   let aspectRatio = $state(1.77777778);
   let isPlaying = $state(false);
   let isPaused = $state(false);
+
+  $effect(() => {
+    console.log(player);
+  });
 </script>
 
 <media-controller
   class="w-full h-full overflow-hidden"
+  class:has-poster={posterSrc}
   style="aspect-ratio: {aspectRatio};"
   autohide="-1"
 >
+  <video
+    class="w-full h-full object-cover"
+    bind:this={player}
+    {src}
+    slot="media"
+    playsinline
+    autoplay={isAutoplay}
+    loop={isLoop}
+    muted={isMuted}
+  ></video>
+
   {#if posterSrc}
     <media-poster-image
       class="object-cover overflow-hidden z-10"
@@ -106,14 +121,20 @@
     --media-control-transition-out: opacity 150ms ease-in;
     --media-control-transition-in: opacity 150ms ease-in;
     --media-background-color: transparent;
-    --media-control-background: transparent;
+    --media-control-background: none;
+    --media-control-hover-background: none;
   }
 
-  media-controller > * {
+  media-controller.has-poster:not([mediahasplayed]) video {
+    opacity: 0;
+  }
+
+  media-controller.has-poster[mediahasplayed] video {
     opacity: 1;
   }
 
   media-play-button:not([mediapaused]) {
     display: none;
+    background: none;
   }
 </style>
