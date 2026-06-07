@@ -83,7 +83,7 @@
       <a
         class="uppercase transition-opacity transition-fast"
         class:opacity-0={!menuState.open}
-        href="/">Case studies</a
+        href="/case-studies">Case studies</a
       >
     </li>
     <li>
