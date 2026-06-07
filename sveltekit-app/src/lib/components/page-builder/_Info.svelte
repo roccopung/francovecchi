@@ -7,10 +7,6 @@
   };
 
   let { section }: Props = $props();
-
-  $effect(() => {
-    console.log(section);
-  });
 </script>
 
 <section class="px-0.5">

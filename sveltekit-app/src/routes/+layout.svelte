@@ -4,7 +4,7 @@
   import { PreviewMode, QueryLoader, VisualEditing } from "@sanity/sveltekit";
   import type { LayoutProps } from "./$types";
   import { page } from "$app/state";
-  import { afterNavigate } from "$app/navigation";
+  import { afterNavigate, onNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
@@ -21,6 +21,16 @@
 
   afterNavigate(() => {
     menuState.open = false;
+  });
+
+  onNavigate((navigation) => {
+    if (!document.startViewTransition) return;
+    return new Promise((resolve) => {
+      document.startViewTransition(async () => {
+        resolve();
+        await navigation.complete;
+      });
+    });
   });
 </script>
 

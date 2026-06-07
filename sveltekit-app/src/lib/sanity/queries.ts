@@ -33,9 +33,23 @@ export const caseStudiesQuery = defineQuery(
 );
 
 export const projectQuery = defineQuery(
-  `*[_type == "project" && slug.current == $slug][0] {
+  `*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {
   ...,
-  services[]->
+  services[]->,
+  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{
+  "orderRank": ^.orderRank,
+    title,
+    slug,
+    cover
+  },
+  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{
+    title,
+    slug,
+    cover
+  },
+  "projectIndexes": *[_type == "project"] | order(orderRank asc) {
+    slug
+  }
   }`,
 );
 

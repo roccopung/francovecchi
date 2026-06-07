@@ -22,10 +22,6 @@
 
   let video = $derived(data?.video);
   let image = $derived(data?.image);
-
-  $effect(() => {
-    console.log(data);
-  });
 </script>
 
 {#if image?.asset || (video?.url && !(image?.asset && video?.url))}

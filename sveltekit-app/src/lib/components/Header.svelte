@@ -26,7 +26,7 @@
   <a
     href="/"
     rel="noreferrer"
-    class="h-full flex transition-fast {scrollY > 10 ? 'w-7' : 'w-13'}"
+    class="h-full flex transition-fast {scrollY > 10 ? 'w-7' : 'w-7'}"
     ><Logo /></a
   >
 

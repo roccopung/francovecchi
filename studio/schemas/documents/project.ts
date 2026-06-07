@@ -1,5 +1,9 @@
 import { defineType, defineField } from "sanity";
 import { DashboardIcon } from "@sanity/icons";
+import {
+  orderRankField,
+  orderRankOrdering,
+} from "@sanity/orderable-document-list";
 
 export const project = defineType({
   name: "project",
@@ -15,7 +19,12 @@ export const project = defineType({
       title: "SEO",
     },
   ],
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({
+      type: "project",
+      newItemPosition: "before",
+    }),
     defineField({
       name: "title",
       type: "string",

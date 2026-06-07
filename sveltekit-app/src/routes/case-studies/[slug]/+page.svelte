@@ -7,22 +7,35 @@
   import PortableText from "$lib/components/element/PortableText.svelte";
   import Dot from "$lib/components/svg/Dot.svelte";
   import PageBuilder from "$lib/components/PageBuilder.svelte";
+  import Media from "$lib/components/element/Media.svelte";
+  import Cta from "$lib/components/element/Cta.svelte";
+  import NextProject from "$lib/components/NextProject.svelte";
+  import { page } from "$app/state";
 
   let { data } = $props();
   let query = $derived(useQuery(data));
   let project = $derived($query.data);
+  let writeToCta = $state({
+    ctaType: "linkEmail",
+    linkEmail: {
+      url: "hello@francovecchi.com",
+      label: "Write an email",
+    },
+  });
 </script>
 
 <main class="min-h-[100svh] bg-accent">
-  <div class="h-[100svh] w-full relative">
-    <Image image={project?.cover} />
-    <div
-      class="absolute bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 min-w-1/2"
-    >
-      <div class="typo-xs font-mono uppercase">({project?.years})</div>
-      <h1 class="typo-3xl font-slanted">{project?.title}</h1>
+  {#key project?.slug?.current}
+    <div class="h-[100svh] w-full relative">
+      <Image image={project?.cover} />
+      <div
+        class="absolute bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 min-w-[50vw]"
+      >
+        <div class="typo-xs font-mono uppercase">({project?.years})</div>
+        <h1 class="typo-3xl font-slanted">{project?.title}</h1>
+      </div>
     </div>
-  </div>
+  {/key}
   <div class="bg-white">
     <div class="p-1">
       <section class="p-1 py-4 rounded-m border border-black bg-white">
@@ -61,5 +74,64 @@
     </div>
 
     <PageBuilder sections={project?.pageBuilder?.sections} />
+
+    {#if project?.result}
+      <section class="p-1 pb-0 bg-white">
+        <div class="border border-black rounded-m flex flex-col gap-1 pt-3">
+          <Headline data="The result" />
+          <div class="typo-l font-sans font-medium px-1">
+            <PortableText data={project?.result?.content} />
+          </div>
+          <div class="overflow-hidden rounded-m mt-1">
+            <Media data={project?.result?.media} />
+          </div>
+        </div>
+      </section>
+    {/if}
+
+    {#if project?.credits}
+      <section class="p-1 bg-white">
+        <div
+          class="border border-black rounded-m flex flex-col gap-1 pt-3 pb-4"
+        >
+          <Headline data="Credits" />
+          <div class="typo-s font-sans grid-2 pt-2">
+            {#each project?.credits as credit}
+              <div class="flex flex-col">
+                <div class="typo-s font-sans font-bold px-1 uppercase">
+                  {credit.label}
+                </div>
+                <div class="typo-s font-sans px-1">{credit.name}</div>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </section>
+    {/if}
+
+    <div class="p-1 bg-white">
+      <div
+        class="border border-black rounded-m flex flex-col gap-1 pt-3 pb-4 text-center flex flex-col items-center"
+      >
+        <div class="font-sans font-medium typo-l">
+          For work and commissions, write to:<br /><a
+            target="_blank"
+            href="mailto:hello@francovecchi.com"
+            rel="noopener noreferrer">hello@francovecchi.com</a
+          >
+        </div>
+        <Cta cta={writeToCta} />
+      </div>
+    </div>
   </div>
 </main>
+
+{#if project?.next || project?.firstProject}
+  {#key page?.params?.slug}
+    <NextProject
+      next={project?.next}
+      firstProject={project?.firstProject}
+      projectIndexes={project?.projectIndexes}
+    />
+  {/key}
+{/if}
