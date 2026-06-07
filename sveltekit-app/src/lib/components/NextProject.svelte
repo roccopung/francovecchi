@@ -115,7 +115,7 @@
           end: "bottom bottom",
           scrub: 2,
         },
-        width: viewportWidth / 2,
+        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 15,
       });
     });
 
@@ -148,7 +148,7 @@
           end: "bottom bottom",
           scrub: 2,
         },
-        width: viewportWidth / 2,
+        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 15,
       });
       _gsap.set([episodeEl, titleEl], { opacity: 1 });
 

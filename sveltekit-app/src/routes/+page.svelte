@@ -67,9 +67,9 @@
 
 <svelte:window bind:innerWidth={viewportWidth} />
 
-<main class="min-h-[100dvh] w-full flex flex-col">
+<main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
-  <section class="px-1 pb-1 mt-[80dvh] bg-accent">
+  <section class="px-1 pb-1 mt-[80svh] bg-accent">
     <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
       <Media data={home?.cover} controls={true} muted={true} />
     </div>
@@ -107,11 +107,11 @@
         </div>
       </div>
     </section>
-    <section class="text-center py-4 md:py-1 flex flex-col items-center">
+    <section class="text-center py-4 md:py-1 flex flex-col items-center w-full">
       <h3 class="typo-xl font-sans font-medium">
         {home?.clientsSection?.title}
       </h3>
-      <div class="typo-l font-sans font-medium max-w-4xl p-1">
+      <div class="typo-l font-sans font-medium w-full max-w-4xl p-1">
         <PortableText data={home?.clientsSection?.subtitle} />
       </div>
       {#if home?.clientsSection?.logos?.length > 0}
@@ -132,7 +132,7 @@
         {/each}
       </section>
 
-      <section class="md:hidden">
+      <section class="overflow-hidden md:hidden">
         <CharactersMarquee data={characters} />
       </section>
     {/if}

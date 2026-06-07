@@ -20,7 +20,7 @@
 {#if page.route.id !== "/case-studies/[slug]"}
   <footer class="bg-accent p-1">
     <div
-      class="bg-white rounded-m border border-black h-full sm:h-[calc(100dvh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
+      class="bg-white rounded-m border border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
     >
       <div
         class="top grid typo-2xl font-slanted uppercase w-full px-1 text-dark-gray"

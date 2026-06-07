@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="links h-[100dvh] w-full flex flex-col gap-2 items-center justify-center bg-accent"
+  class="links h-[100svh] w-full flex flex-col gap-2 items-center justify-center bg-accent"
 >
   {#if caseStudies}
     <ul class="flex flex-col gap-2 font-sans typo-xl list-disc">

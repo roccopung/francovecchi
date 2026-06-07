@@ -45,7 +45,7 @@
 
 <div
   data-hero
-  class="bg-accent fixed h-[80dvh] w-full top-0 left-0 p-1 text-dark-gray"
+  class="bg-accent fixed h-[80svh] w-full top-0 left-0 p-1 text-dark-gray"
 >
   <div class="relative w-full h-full">
     <div

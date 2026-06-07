@@ -24,12 +24,12 @@
   });
 </script>
 
-<main class="min-h-[100svh] bg-accent">
+<main class="min-h-[100svh] bg-accent w-full">
   {#key project?.slug?.current}
     <div class="h-[100svh] w-full relative">
       <Image image={project?.cover} />
       <div
-        class="absolute bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 min-w-[50vw]"
+        class="absolute bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 min-w-[50vw] w-[calc(100vw-1.5rem)] md:w-auto"
       >
         <div class="typo-xs font-mono uppercase">({project?.years})</div>
         <h1 class="typo-3xl font-slanted">{project?.title}</h1>
@@ -46,10 +46,12 @@
 
         {#if project?.services && project?.services.length > 0}
           <h4 class="font-bold font-sans typo-md pt-4 pb-0.5">Services</h4>
-          <div class="font-sans font-bold typo-md flex gap-0.5">
+          <div
+            class="font-sans font-bold typo-md flex gap-0.5 flex-col md:flex-row flex-wrap"
+          >
             {#each project?.services as service}
               <div
-                class="flex gap-1 items-center bg-accent px-2 py-1 rounded-full border border-black"
+                class="flex gap-1 items-center bg-accent px-2 py-1 rounded-full border border-black w-fit"
               >
                 <div class="h-[0.3lh] aspect-square">
                   <Dot />
