@@ -106,8 +106,9 @@
         class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer mt-1 transition-opacity transition-fast"
         class:opacity-0={!menuState.open}
       >
-        <span><ArrowEnter /></span>
-        <span>Write an email</span>
+        <!-- <span><ArrowEnter /></span> -->
+        <!-- <span>Write an email</span> -->
+        Write an email
       </a>
     </li>
   </ul>
