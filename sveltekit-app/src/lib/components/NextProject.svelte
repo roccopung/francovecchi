@@ -9,15 +9,13 @@
       cover: ElementImage;
       slug: any;
       title: string;
-      orderRank: number;
     };
-    firstProject: {
+    firstProject?: {
       cover: ElementImage;
       slug: any;
       title: string;
-      orderRank: number;
     };
-    projectIndexes: any;
+    projectIndexes?: any;
   };
   let { next, firstProject, projectIndexes }: Props = $props();
   let displayedProject = $derived(next ?? firstProject);
@@ -29,7 +27,7 @@
   let viewportHeight: number = $state(0);
   let currentIndex = $derived(
     projectIndexes?.findIndex(
-      (index) => index.slug.current === displayedProject?.slug.current,
+      (index: any) => index?.slug?.current === displayedProject?.slug.current,
     ),
   );
   let key = $state(0);

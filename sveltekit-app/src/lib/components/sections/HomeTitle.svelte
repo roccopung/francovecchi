@@ -72,9 +72,9 @@
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30">
       <a
         href="/"
-        class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer"
+        class="border-1 border-black rounded-full py-1 px-2 md:px-3 flex items-start gap-1 typo-xs uppercase md:normal-case md:typo-s font-mono hover:bg-black hover:text-accent cursor-pointer"
       >
-        <span><ArrowEnter /></span>
+        <span class="hidden md:flex"><ArrowEnter /></span>
         <span>Write an email</span>
       </a>
     </div>

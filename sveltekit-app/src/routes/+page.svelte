@@ -1,5 +1,5 @@
 <script lang="ts">
-  //@ts-nocheck
+  import type { HomePage } from "$lib/types.ts";
   import { useQuery } from "@sanity/sveltekit";
   import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
@@ -18,11 +18,11 @@
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
-  let { data } = $props();
-  let query = $derived(useQuery(data));
+  let { data }: any = $props();
+  let query = $derived(useQuery<{ home: HomePage }>(data));
   let home = $derived($query.data?.home);
   let characters = $derived(data.featuredCharacters ?? []);
-  let characterRefs = $state([]);
+  let characterRefs: HTMLElement[] = $state([]);
   let isMounted = $state(false);
   let viewportWidth = $state(0);
   let keenEyeSection: HTMLElement | undefined = $state();
@@ -70,13 +70,15 @@
 <main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
   <section class="px-1 pb-1 mt-[80svh] bg-accent">
-    <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
-      <Media data={home?.cover} controls={true} muted={true} />
-    </div>
-    <Headline data={home?.heading} />
+    {#if home?.cover}
+      <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
+        <Media data={home?.cover} controls={true} muted={true} />
+      </div>
+    {/if}
+    {#if home?.heading}<Headline data={home?.heading} />{/if}
   </section>
   <div class="sections flex flex-col gap-1 bg-white pt-1">
-    {#if home?.featuredProjects?.length > 0}
+    {#if home?.featuredProjects && home?.featuredProjects.length > 0}
       <section class="px-1 flex flex-col gap-1 md:gap-0">
         {#each home?.featuredProjects as project}
           <ProjectCard {project} />
@@ -88,19 +90,27 @@
         class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border border-black rounded-s md:rounded-m"
       >
         <div class="flex flex-col gap-4 md:block">
-          <h4 class="typo-xl font-sans font-medium">
-            <PortableText data={home?.aboutSection?.heading} />
-          </h4>
+          {#if home?.aboutSection?.heading}
+            <h4 class="typo-xl font-sans font-medium">
+              <PortableText data={home?.aboutSection?.heading} />
+            </h4>
+          {/if}
           <div class="flex flex-col md:flex-row gap-4 md:gap-1 md:pt-8 md:pb-3">
-            <div class="typo-s font-sans">
-              <PortableText data={home?.aboutSection?.paragraphOne} />
-            </div>
+            {#if home?.aboutSection?.paragraphOne}
+              <div class="typo-s font-sans">
+                <PortableText data={home?.aboutSection?.paragraphOne} />
+              </div>
+            {/if}
             <div class="border-[0.5px] border-black hidden md:block"></div>
-            <div class="typo-s font-sans">
-              <PortableText data={home?.aboutSection?.paragraphTwo} />
-            </div>
+            {#if home?.aboutSection?.paragraphTwo}
+              <div class="typo-s font-sans">
+                <PortableText data={home?.aboutSection?.paragraphTwo} />
+              </div>
+            {/if}
           </div>
-          <Cta cta={home?.aboutSection?.cta} />
+          {#if home?.aboutSection?.cta}
+            <Cta cta={home?.aboutSection?.cta} />
+          {/if}
         </div>
         <div class="h-20 md:place-self-end">
           <img class="h-full" src="/temp/images/fire.png" alt="fire" />
@@ -111,10 +121,13 @@
       <h3 class="typo-xl font-sans font-medium">
         {home?.clientsSection?.title}
       </h3>
-      <div class="typo-l font-sans font-medium w-full max-w-4xl p-1">
-        <PortableText data={home?.clientsSection?.subtitle} />
-      </div>
-      {#if home?.clientsSection?.logos?.length > 0}
+      {#if home?.clientsSection?.subtitle}
+        <div class="typo-l font-sans font-medium w-full max-w-4xl p-1">
+          <PortableText data={home?.clientsSection?.subtitle} />
+        </div>
+      {/if}
+
+      {#if home?.clientsSection && home?.clientsSection.logos?.length > 0}
         <div class="overflow-hidden w-full">
           <LogosMarquee data={home?.clientsSection?.logos} />
         </div>
@@ -146,17 +159,25 @@
         src="/temp/images/keen-eye.png"
         alt=""
       />
-      <div class="w-full overflow-hidden">
-        <KeenEyeMarquee data={home?.endingBlock?.title} />
-      </div>
-      <div
-        class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
-      >
-        <PortableText data={home?.endingBlock?.description} />
-      </div>
-      <Cta fill="var(--color-white)" cta={home?.endingBlock?.cta} />
+      {#if home?.endingBlock?.animation}
+        <div class="w-full overflow-hidden">
+          <KeenEyeMarquee data={home?.endingBlock?.title} />
+        </div>
+      {/if}
+      {#if home?.endingBlock?.animation}
+        <div
+          class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
+        >
+          <PortableText data={home?.endingBlock?.description} />
+        </div>
+      {/if}
+      {#if home?.endingBlock?.cta}
+        <Cta fill="var(--color-white)" cta={home?.endingBlock?.cta} />
+      {/if}
     </div>
   </section>
-  <CallFranco data={home?.callFranco} />
+  {#if home?.callFranco}
+    <CallFranco data={home?.callFranco} />
+  {/if}
   <HoverStarEffect />
 </main>

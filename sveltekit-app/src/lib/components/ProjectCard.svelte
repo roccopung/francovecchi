@@ -12,7 +12,7 @@
         two?: ElementImage;
       };
       services?: any[];
-      shortSummary: PortableTextBlock[];
+      shortSummary?: PortableTextBlock[];
       title?: string;
       slug?: any;
     };

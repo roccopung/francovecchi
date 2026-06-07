@@ -32,6 +32,8 @@ export const caseStudiesQuery = defineQuery(
   }`,
 );
 
+export const lookbookQuery = defineQuery(`*[_type == "lookbook"][0]`);
+
 export const projectQuery = defineQuery(
   `*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {
   ...,

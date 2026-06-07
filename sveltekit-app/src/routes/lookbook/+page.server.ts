@@ -1,12 +1,11 @@
-import { caseStudiesQuery } from "$lib/sanity/queries";
+import { lookbookQuery } from "$lib/sanity/queries";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ locals: { sanity } }) => {
   const { loadQuery } = sanity;
-  const initial = await loadQuery(caseStudiesQuery);
+  const initial = await loadQuery(lookbookQuery);
 
   return {
-    query: caseStudiesQuery,
     options: { initial },
   };
 };

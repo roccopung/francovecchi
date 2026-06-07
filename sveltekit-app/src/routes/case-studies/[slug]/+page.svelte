@@ -1,5 +1,5 @@
 <script lang="ts">
-  //@ts-nocheck
+  import type { Project, Cta } from "$lib/types";
   import { useQuery } from "@sanity/sveltekit";
   import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
@@ -8,12 +8,12 @@
   import Dot from "$lib/components/svg/Dot.svelte";
   import PageBuilder from "$lib/components/PageBuilder.svelte";
   import Media from "$lib/components/element/Media.svelte";
-  import Cta from "$lib/components/element/Cta.svelte";
+  import CtaEl from "$lib/components/element/Cta.svelte";
   import NextProject from "$lib/components/NextProject.svelte";
   import { page } from "$app/state";
 
-  let { data } = $props();
-  let query = $derived(useQuery(data));
+  let { data }: any = $props();
+  let query = $derived(useQuery<Project>(data));
   let project = $derived($query.data);
   let writeToCta = $state({
     ctaType: "linkEmail",
@@ -21,7 +21,7 @@
       url: "hello@francovecchi.com",
       label: "Write an email",
     },
-  });
+  }) as Cta;
 </script>
 
 <main class="min-h-[100svh] bg-accent w-full">
@@ -39,10 +39,14 @@
   <div class="bg-white">
     <div class="p-1">
       <section class="p-1 py-4 rounded-m border border-black bg-white">
-        <Headline data={project?.title} />
-        <div class="font-sans font-medium typo-l pt-1 max-w-[85rem]">
-          <PortableText data={project?.description} />
-        </div>
+        {#if project?.title}
+          <Headline data={project?.title} />
+        {/if}
+        {#if project?.description}
+          <div class="font-sans font-medium typo-l pt-1 max-w-[85rem]">
+            <PortableText data={project?.description} />
+          </div>
+        {/if}
 
         {#if project?.services && project?.services.length > 0}
           <h4 class="font-bold font-sans typo-md pt-4 pb-0.5">Services</h4>
@@ -63,19 +67,25 @@
         {/if}
 
         <div class="max-w-[85rem] grid-2 gap-2 pt-4">
-          <div class="font-sans typo-s">
-            <div class="typo-md font-bold font-sans pb-0.5">Problem</div>
-            <PortableText data={project?.problem} />
-          </div>
-          <div class="font-sans typo-s">
-            <div class="typo-md font-bold font-sans pb-0.5">Solution</div>
-            <PortableText data={project?.solution} />
-          </div>
+          {#if project?.problem}
+            <div class="font-sans typo-s">
+              <div class="typo-md font-bold font-sans pb-0.5">Problem</div>
+              <PortableText data={project?.problem} />
+            </div>
+          {/if}
+          {#if project?.solution}
+            <div class="font-sans typo-s">
+              <div class="typo-md font-bold font-sans pb-0.5">Solution</div>
+              <PortableText data={project?.solution} />
+            </div>
+          {/if}
         </div>
       </section>
     </div>
 
-    <PageBuilder sections={project?.pageBuilder?.sections} />
+    {#if project?.pageBuilder?.sections}
+      <PageBuilder sections={project?.pageBuilder?.sections} />
+    {/if}
 
     {#if project?.result}
       <section class="p-1 pb-0 bg-white">
@@ -122,7 +132,7 @@
             rel="noopener noreferrer">hello@francovecchi.com</a
           >
         </div>
-        <Cta cta={writeToCta} />
+        <CtaEl cta={writeToCta} />
       </div>
     </div>
   </div>

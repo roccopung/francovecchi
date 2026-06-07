@@ -44,12 +44,12 @@
     <li
       class="bg-dark-gray border border-dark-gray text-accent rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
-      <a class="w-full h-full py-1 px-3" href="/">Lookbook</a>
+      <a class="w-full h-full py-1 px-3" href="/lookbook">Lookbook</a>
     </li>
     <li
       class="bg-dark-gray border border-dark-gray text-accent rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
-      <a class="w-full h-full py-1 px-3" href="/">Info</a>
+      <a class="w-full h-full py-1 px-3" href="/info">Info</a>
     </li>
   </ul>
   <a
@@ -90,14 +90,14 @@
       <a
         class="uppercase transition-opacity transition-fast"
         class:opacity-0={!menuState.open}
-        href="/">Lookbook</a
+        href="/lookbook">Lookbook</a
       >
     </li>
     <li>
       <a
         class="uppercase transition-opacity transition-fast"
         class:opacity-0={!menuState.open}
-        href="/">Info</a
+        href="/info">Info</a
       >
     </li>
     <li>

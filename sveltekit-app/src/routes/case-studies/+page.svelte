@@ -1,8 +1,8 @@
 <script lang="ts">
+  import type { Project } from "$lib/types";
   import { useQuery } from "@sanity/sveltekit";
-  import { onMount } from "svelte";
-  let { data } = $props();
-  let query = $derived(useQuery(data));
+  let { data }: any = $props();
+  let query = $derived(useQuery<Project[]>(data));
   let caseStudies = $derived($query.data);
 </script>
 
