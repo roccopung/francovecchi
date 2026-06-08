@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { ProjectQueryResult, Cta } from "$lib/sanity.types";
   import { useQuery } from "@sanity/sveltekit";
-  import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
   import Headline from "$lib/components/Headline.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
@@ -32,18 +31,18 @@
         class="absolute bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 min-w-[50vw] w-[calc(100vw-1.5rem)] md:w-auto"
       >
         <div class="typo-xs font-mono uppercase">({project?.years})</div>
-        <h1 class="typo-3xl font-slanted">{project?.title}</h1>
+        <h1 class="typo-3xl font-slanted pl-1">{project?.title}</h1>
       </div>
     </div>
   {/key}
   <div class="bg-white">
     <div class="p-1">
       <section class="p-1 py-4 rounded-m border border-black bg-white">
-        {#if project?.title}
-          <Headline data={project?.title} />
+        {#if project?.tagline}
+          <Headline data={project?.tagline} />
         {/if}
         {#if project?.description}
-          <div class="font-sans font-medium typo-l pt-1 max-w-[85rem]">
+          <div class="font-sans font-medium typo-l pt-1 md:max-w-3/4">
             <PortableText data={project?.description} />
           </div>
         {/if}
@@ -66,7 +65,7 @@
           </div>
         {/if}
 
-        <div class="max-w-[85rem] grid-2 gap-2 pt-4">
+        <div class="md:max-w-3/4 grid-2 gap-2 pt-4">
           {#if project?.problem}
             <div class="font-sans typo-s">
               <div class="typo-md font-bold font-sans pb-0.5">Problem</div>

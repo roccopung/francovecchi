@@ -5,8 +5,16 @@
   import { goto } from "$app/navigation";
 
   type Props = {
-    next?: { cover: ElementImage | null; slug: { current?: string | null } | null; title: string | null } | null;
-    firstProject?: { cover: ElementImage | null; slug: { current?: string | null } | null; title: string | null } | null;
+    next?: {
+      cover: ElementImage | null;
+      slug: { current?: string | null } | null;
+      title: string | null;
+    } | null;
+    firstProject?: {
+      cover: ElementImage | null;
+      slug: { current?: string | null } | null;
+      title: string | null;
+    } | null;
     projectIndexes?: any;
   };
   let { next, firstProject, projectIndexes }: Props = $props();
@@ -182,12 +190,12 @@
 <div
   onclick={() => goToNextProject()}
   bind:this={sectionNext}
-  class="text-left w-full h-50"
+  class="text-left w-full h-50 group cursor-pointer"
 >
   <div class="wrapper relative w-full h-50 overflow-hidden">
     <div
       bind:this={labelWrapper}
-      class="label absolute z-[11] bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3"
+      class="label absolute z-[11] bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 group-hover:bg-accent transition-colors transition-fast"
     >
       <div
         class="typo-xs font-mono uppercase flex gap-1 items-center"
@@ -198,7 +206,7 @@
         >
         <span>(Next episode)</span>
       </div>
-      <h1 class="typo-3xl font-slanted label-title" bind:this={labelTitle}>
+      <h1 class="typo-3xl font-slanted label-title pl-1" bind:this={labelTitle}>
         {displayedProject?.title}
       </h1>
     </div>

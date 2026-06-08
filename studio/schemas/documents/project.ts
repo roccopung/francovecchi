@@ -75,6 +75,12 @@ export const project = defineType({
       description: "Displayed in the Project page",
     }),
     defineField({
+      name: "tagline",
+      title: "Tagline",
+      description: "Displayed in the Project page",
+      type: "blockContent",
+    }),
+    defineField({
       name: "description",
       description: "Displayed in the Project page",
       type: "blockContent",

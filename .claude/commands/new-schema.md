@@ -112,6 +112,29 @@ export const [name] = defineType({
 
 ---
 
+## After all schemas are created — run TypeGen
+
+Once all schemas for this session are created and registered, regenerate Sanity types:
+
+```bash
+cd studio && npx sanity schema extract && npx sanity typegen generate
+```
+
+Output lands at `sveltekit-app/src/lib/sanity.types.ts` (auto-detected by all components via `$lib`). **Never edit this file manually.**
+
+Clean up the build artifact:
+```bash
+rm studio/schema.json
+```
+
+Ensure `schema.json` is in `studio/.gitignore`:
+```
+# TypeGen artifacts
+schema.json
+```
+
+---
+
 ## Conventions to follow
 - Type name = filename (camelCase)
 - Named export matches type name: `export const [name] = defineType(...)`

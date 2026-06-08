@@ -426,6 +426,7 @@ export type Project = {
   };
   shortSummary?: BlockContent;
   cover?: ElementImage;
+  tagline?: BlockContent;
   description?: BlockContent;
   services?: Array<
     {
@@ -798,6 +799,7 @@ export type ProjectQueryResult = {
   };
   shortSummary?: BlockContent;
   cover?: ElementImage;
+  tagline?: BlockContent;
   description?: BlockContent;
   services: Array<{
     _id: string;

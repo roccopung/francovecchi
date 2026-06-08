@@ -13,7 +13,7 @@
     loop = false,
     muted = false,
     autoplay = true,
-    ratio,
+    ratio = null,
   } = $props();
 
   let viewportWidth = $state(768);
@@ -163,16 +163,16 @@
     --media-control-hover-background: none;
   }
 
-  media-controller.has-poster:not([mediahasplayed]) video {
-    opacity: 0;
-  }
-
-  media-controller.has-poster[mediahasplayed] video {
-    opacity: 1;
-  }
-
   media-play-button:not([mediapaused]) {
     display: none;
     background: none;
+  }
+
+  :global(media-controller.has-poster:not([mediahasplayed]) video) {
+    opacity: 0;
+  }
+
+  :global(media-controller.has-poster[mediahasplayed] video) {
+    opacity: 1;
   }
 </style>
