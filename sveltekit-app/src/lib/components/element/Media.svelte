@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ElementImage, ElementVideo } from "$lib/types";
+  import type { ElementImage, ElementVideo } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import Video from "$lib/components/element/Video.svelte";
 

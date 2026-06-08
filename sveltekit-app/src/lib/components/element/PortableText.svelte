@@ -3,21 +3,27 @@
   import { toHTML, uriLooksSafe } from "@portabletext/to-html";
 
   interface Props {
-    data: PortableTextBlock[];
+    data?: PortableTextBlock[] | null;
   }
 
   let { data }: Props = $props();
 
   let components = $derived({
-    listItem: ({ children }: { children: string }) =>
+    listItem: ({ children }: { children?: string }) =>
       `<li class="list-checkbox"><div class="tick"></div><span>${children}</span></li>`,
 
     block: {
-      normal: ({ children }: { children: string }) => `<p>${children}</p>`,
+      normal: ({ children }: { children?: string }) => `<p>${children}</p>`,
     },
 
     marks: {
-      linkExternal: ({ children, value }: { children: string; value: any }) => {
+      linkExternal: ({
+        children,
+        value,
+      }: {
+        children: string;
+        value?: any;
+      }) => {
         const href = value.url || "";
         if (uriLooksSafe(href)) {
           const rel = href.startsWith("/") ? "" : ' rel="noreferrer noopener"';
@@ -25,7 +31,7 @@
         }
         return children;
       },
-      linkEmail: ({ children, value }: { children: string; value: any }) => {
+      linkEmail: ({ children, value }: { children: string; value?: any }) => {
         const href = value.url || "";
         if (uriLooksSafe(href)) {
           return `<a class="cursor-pointer" href="mailto:${href}" rel="noreferrer noopener">${children}</a>`;
@@ -37,7 +43,7 @@
 </script>
 
 <div class="rich-text">
-  {@html toHTML(data, { components })}
+  {@html toHTML(data ?? [], { components })}
 </div>
 
 <style lang="postcss">

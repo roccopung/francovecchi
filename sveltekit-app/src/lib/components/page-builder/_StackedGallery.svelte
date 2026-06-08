@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { SectionStackedGallery } from "$lib/types.ts";
+  import type { StackedGallery } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
 
   type Props = {
-    section: SectionStackedGallery;
+    section: StackedGallery;
   };
 
   let { section }: Props = $props();
@@ -16,11 +16,11 @@
         {#if item?.columnSpan?.input && item?.image?.asset}
           <div
             class="
-          {item?.columnSpan?.input == 12
+          {item?.columnSpan?.input == '12'
               ? 'col-span-12'
-              : item?.columnSpan?.input == 6
+              : item?.columnSpan?.input == '6'
                 ? 'col-span-6'
-                : item?.columnSpan?.input == 4
+                : item?.columnSpan?.input == '4'
                   ? 'col-span-4'
                   : 'col-span-12'}"
           >

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Cta } from "$lib/types";
+  import type { Cta } from "$lib/sanity.types";
 
   type Props = {
-    cta: Cta;
+    cta?: Cta;
     fill?:
       | "var(--color-accent)"
       | "var(--color-white)"
@@ -10,9 +10,11 @@
   };
 
   const fillClasses: Record<NonNullable<Props["fill"]>, string> = {
-    "var(--color-accent)": "bg-accent text-black hover:bg-dark-gray hover:text-accent",
+    "var(--color-accent)":
+      "bg-accent text-black hover:bg-dark-gray hover:text-accent",
     "var(--color-white)": "bg-white text-black hover:bg-black hover:text-white",
-    "var(--color-dark-gray)": "bg-dark-gray text-accent hover:bg-white hover:text-black",
+    "var(--color-dark-gray)":
+      "bg-dark-gray text-accent hover:bg-white hover:text-black",
   };
 
   let { cta, fill }: Props = $props();
@@ -46,9 +48,7 @@
   });
 </script>
 
-{#if !cta}
-  <!-- no cta configured -->
-{:else if cta.ctaType !== "popup"}
+{#if cta?.ctaType}
   <a
     class="w-fit flex gap-1 items-center typo-xs uppercase font-mono rounded-full px-3 py-1 border-black border hover {colorClass}"
     href={link.href}
@@ -57,6 +57,4 @@
   >
     {link?.label}
   </a>
-{:else}
-  <button>Open Popup</button>
 {/if}

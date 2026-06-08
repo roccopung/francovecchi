@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Project, Cta } from "$lib/types";
+  import type { ProjectQueryResult, Cta } from "$lib/sanity.types";
   import { useQuery } from "@sanity/sveltekit";
   import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
@@ -13,7 +13,7 @@
   import { page } from "$app/state";
 
   let { data }: any = $props();
-  let query = $derived(useQuery<Project>(data));
+  let query = $derived(useQuery<ProjectQueryResult>(data));
   let project = $derived($query.data);
   let writeToCta = $state({
     ctaType: "linkEmail",
@@ -94,9 +94,11 @@
           <div class="typo-l font-sans font-medium px-1">
             <PortableText data={project?.result?.content} />
           </div>
-          <div class="overflow-hidden rounded-m mt-1">
-            <Media data={project?.result?.media} />
-          </div>
+          {#if project?.result?.media}
+            <div class="overflow-hidden rounded-m mt-1">
+              <Media data={project.result.media} />
+            </div>
+          {/if}
         </div>
       </section>
     {/if}

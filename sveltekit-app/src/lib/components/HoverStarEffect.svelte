@@ -1,10 +1,9 @@
 <script lang="ts">
-  import type { gsap as GsapType } from "gsap";
   import { onMount } from "svelte";
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
 
   // GSAP is browser-only; load it on mount so it never runs during SSR.
-  let gsap: GsapType | undefined = $state();
+  let gsap: any = $state();
 
   // --- Tunables ---------------------------------------------------------
   const POOL = 20;

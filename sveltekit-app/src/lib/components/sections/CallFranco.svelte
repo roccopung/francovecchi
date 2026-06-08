@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type { PortableTextBlock } from "@sanity/types";
-  import type { Cta } from "$lib/types";
+  import type { CallFranco } from "$lib/sanity.types";
   import { onMount } from "svelte";
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
   import Path from "$lib/components/svg/PathCallFranco.svelte";
@@ -8,10 +7,7 @@
   import CTA from "$lib/components/element/Cta.svelte";
 
   type Props = {
-    data: {
-      content: PortableTextBlock[];
-      cta: Cta;
-    };
+    data: CallFranco;
   };
 
   let { data }: Props = $props();

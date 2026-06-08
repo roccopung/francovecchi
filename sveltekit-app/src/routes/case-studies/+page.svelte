@@ -1,8 +1,9 @@
 <script lang="ts">
-  import type { Project } from "$lib/types";
+  import type { CaseStudiesQueryResult } from "$lib/sanity.types";
+  import type { PageData } from "./$types";
   import { useQuery } from "@sanity/sveltekit";
-  let { data }: any = $props();
-  let query = $derived(useQuery<Project[]>(data));
+  let { data }: { data: PageData } = $props();
+  let query = $derived(useQuery<CaseStudiesQueryResult>(data));
   let caseStudies = $derived($query.data);
 </script>
 
@@ -12,7 +13,7 @@
   {#if caseStudies}
     <ul class="flex flex-col gap-2 font-sans typo-xl list-disc">
       {#each caseStudies as study}
-        <li><a href="/case-studies/{study.slug.current}">{study.title}</a></li>
+        <li><a href="/case-studies/{study.slug?.current}">{study.title}</a></li>
       {/each}
     </ul>
   {/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ElementImage } from "$lib/types";
+  import type { ElementImage } from "$lib/sanity.types";
   import type { PortableTextBlock } from "@sanity/types";
   import Image from "$lib/components/element/Image.svelte";
   import ArrowRight from "$lib/components/svg/ArrowRight.svelte";
@@ -7,13 +7,10 @@
 
   type Props = {
     project: {
-      coverImages?: {
-        one?: ElementImage;
-        two?: ElementImage;
-      };
-      services?: any[];
-      shortSummary?: PortableTextBlock[];
-      title?: string;
+      coverImages?: { one?: ElementImage; two?: ElementImage } | null;
+      services?: any[] | null;
+      shortSummary?: PortableTextBlock[] | null;
+      title?: string | null;
       slug?: any;
     };
     variant?: "home" | "case-study";

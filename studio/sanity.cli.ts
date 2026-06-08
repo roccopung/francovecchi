@@ -15,6 +15,10 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
-  studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || "", // Visit https://www.sanity.io/docs/environment-variables to leanr more about using environment variables for local & production.
+  studioHost: process.env.SANITY_STUDIO_STUDIO_HOST || "",
   deployment: { autoUpdates: true, appId: "s0mtoxpejffh1rly4mhtgyhf" },
+  typegen: {
+    path: "../sveltekit-app/src/**/*.{ts,svelte}",
+    generates: "../sveltekit-app/src/lib/sanity.types.ts",
+  },
 });

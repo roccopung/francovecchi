@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { SectionInfo } from "$lib/types.ts";
+  import type { Info } from "$lib/sanity.types";
   import PortableText from "$lib/components/element/PortableText.svelte";
 
   type Props = {
-    section: SectionInfo;
+    section: Info;
   };
 
   let { section }: Props = $props();

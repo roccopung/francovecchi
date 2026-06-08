@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { HomePage } from "$lib/types.ts";
+  import type { HomeQueryResult } from "$lib/sanity.types";
+  import type { PageData } from "./$types";
   import { useQuery } from "@sanity/sveltekit";
   import { onMount } from "svelte";
   import Image from "$lib/components/element/Image.svelte";
@@ -18,17 +19,14 @@
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
-  let { data }: any = $props();
-  let query = $derived(useQuery<{ home: HomePage }>(data));
+  let { data }: { data: PageData } = $props();
+  let query = $derived(useQuery<HomeQueryResult>(data));
   let home = $derived($query.data?.home);
   let characters = $derived(data.featuredCharacters ?? []);
   let characterRefs: HTMLElement[] = $state([]);
-  let isMounted = $state(false);
   let viewportWidth = $state(0);
-  let keenEyeSection: HTMLElement | undefined = $state();
 
   onMount(async () => {
-    isMounted = true;
     const { gsap } = await import("gsap");
     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
@@ -127,7 +125,7 @@
         </div>
       {/if}
 
-      {#if home?.clientsSection && home?.clientsSection.logos?.length > 0}
+      {#if home?.clientsSection && (home?.clientsSection.logos?.length ?? 0) > 0}
         <div class="overflow-hidden w-full">
           <LogosMarquee data={home?.clientsSection?.logos} />
         </div>
@@ -150,7 +148,7 @@
       </section>
     {/if}
   </div>
-  <section bind:this={keenEyeSection}>
+  <section>
     <div
       class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-accent"
     >
@@ -159,12 +157,12 @@
         src="/temp/images/keen-eye.png"
         alt=""
       />
-      {#if home?.endingBlock?.animation}
+      {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />
         </div>
       {/if}
-      {#if home?.endingBlock?.animation}
+      {#if home?.endingBlock?.description}
         <div
           class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
         >

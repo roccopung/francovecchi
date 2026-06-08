@@ -4,7 +4,7 @@
   import PortableText from "$lib/components/element/PortableText.svelte";
   import SEO from "$lib/components/seo/SEO.svelte";
   let { data } = $props();
-  let query = useQuery(data);
+  let query = $derived(useQuery(data));
   let page = $derived($query.data);
 </script>
 

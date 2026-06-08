@@ -4,7 +4,7 @@
   import Marqueeck from "@arisbh/marqueeck";
 
   type Props = {
-    data: string;
+    data?: string;
   };
 
   let { data }: Props = $props();

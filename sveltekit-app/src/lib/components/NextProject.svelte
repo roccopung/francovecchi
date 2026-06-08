@@ -1,20 +1,12 @@
 <script lang="ts">
-  import type { ElementImage } from "$lib/types";
+  import type { ElementImage } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
 
   type Props = {
-    next?: {
-      cover: ElementImage;
-      slug: any;
-      title: string;
-    };
-    firstProject?: {
-      cover: ElementImage;
-      slug: any;
-      title: string;
-    };
+    next?: { cover: ElementImage | null; slug: { current?: string | null } | null; title: string | null } | null;
+    firstProject?: { cover: ElementImage | null; slug: { current?: string | null } | null; title: string | null } | null;
     projectIndexes?: any;
   };
   let { next, firstProject, projectIndexes }: Props = $props();
@@ -27,7 +19,7 @@
   let viewportHeight: number = $state(0);
   let currentIndex = $derived(
     projectIndexes?.findIndex(
-      (index: any) => index?.slug?.current === displayedProject?.slug.current,
+      (index: any) => index?.slug?.current === displayedProject?.slug?.current,
     ),
   );
   let key = $state(0);
@@ -53,11 +45,11 @@
           ) {
             // Use view transition
             document.startViewTransition(() => {
-              goto(`/case-studies/${displayedProject?.slug.current}`);
+              goto(`/case-studies/${displayedProject?.slug?.current}`);
             });
           } else {
             // Fallback: direct navigation without view transition
-            goto(`/case-studies/${displayedProject?.slug.current}`);
+            goto(`/case-studies/${displayedProject?.slug?.current}`);
           }
         },
       })

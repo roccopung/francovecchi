@@ -8,7 +8,7 @@
 
   let { data }: Props = $props();
 
-  let items = [...data, ...data];
+  let items = $derived([...data, ...data]);
 
   const options: MarqueeckOptions = {
     direction: "right",

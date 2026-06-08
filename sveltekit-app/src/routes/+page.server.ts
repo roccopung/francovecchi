@@ -1,13 +1,11 @@
 import { homeQuery } from "$lib/sanity/queries";
+import type { HomeQueryResult } from "$lib/sanity.types";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ locals: { sanity } }) => {
   const { loadQuery } = sanity;
-  const initial = await loadQuery(homeQuery);
+  const initial = await loadQuery<HomeQueryResult>(homeQuery);
 
-  // We pass the data in a format that is easy for `useQuery` to consume in the
-  // corresponding `+page.svelte` file, but you can return the data in any
-  // format you like.
   const characters = initial.data?.characters ?? [];
   const featuredCharacters = [...characters]
     .sort(() => Math.random() - 0.5)

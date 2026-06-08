@@ -3,7 +3,7 @@
   import Image from "$lib/components/element/Image.svelte";
   import Marqueeck from "@arisbh/marqueeck";
   type Props = {
-    data: any[];
+    data: any[] | null;
   };
 
   let { data }: Props = $props();
