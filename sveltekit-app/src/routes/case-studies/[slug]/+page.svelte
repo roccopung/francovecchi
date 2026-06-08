@@ -123,7 +123,7 @@
       </section>
     {/if}
 
-    <div class="p-1 bg-white">
+    <div class="p-1 pt-0 bg-white">
       <div
         class="border border-black rounded-m flex flex-col gap-1 pt-3 pb-4 text-center flex flex-col items-center"
       >
