@@ -2,6 +2,7 @@
   import type { ElementImage, ElementVideo } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import Video from "$lib/components/element/Video.svelte";
+  import { page } from "$app/state";
 
   type Props = {
     data: {

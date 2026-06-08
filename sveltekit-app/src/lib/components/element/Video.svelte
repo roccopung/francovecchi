@@ -1,12 +1,11 @@
 <script lang="ts">
-  // @ts-nocheck
   import "media-chrome";
+  import "youtube-video-element";
+  import "vimeo-video-element";
   import { urlFor } from "$lib/sanity/image";
   import { getImageDimensions } from "@sanity/asset-utils";
-  import { innerWidth, innerHeight } from "svelte/reactivity/window";
-  import { onMount } from "svelte";
-  import { page } from "$app/state";
   import { browser } from "$app/environment";
+  import { onMount } from "svelte";
 
   let {
     video,
@@ -14,10 +13,11 @@
     loop = false,
     muted = false,
     autoplay = true,
-    ratio = "",
+    ratio,
   } = $props();
 
-  // let componentsLoaded = $state(false);
+  let viewportWidth = $state(768);
+
   let isAutoplay = $derived(
     video?.autoplay === true || autoplay === true ? true : false,
   );
@@ -32,8 +32,22 @@
 
   let src = $derived(video?.url);
 
+  let srcType = $derived.by(() => {
+    if (!src) return null;
+
+    if (src.includes("youtube.com") || src.includes("youtu.be")) {
+      return "youtube";
+    } else if (src.includes("vimeo.com")) {
+      return "vimeo";
+    } else if (src.includes("video.m3u8")) {
+      return "hls";
+    } else {
+      return "default";
+    }
+  });
+
   let posterAsset = $derived(
-    innerWidth < 768 && video?.poster?.mobileImage
+    viewportWidth < 768 && video?.poster?.mobileImage
       ? video?.poster?.mobileImage.asset
       : video?.poster?.asset,
   );
@@ -48,29 +62,55 @@
       : null,
   );
 
-  let player = $state(null);
-  let aspectRatio = $state(1.77777778);
-  let isPlaying = $state(false);
-  let isPaused = $state(false);
+  let player: HTMLVideoElement | undefined = $state();
+  let controller: Element | undefined = $state();
+  let aspectRatio = $derived(ratio ?? 1.77777778);
+
+  onMount(() => {
+    if (controller && player && browser) {
+      player.muted = isMuted;
+      player.autoplay = isAutoplay;
+      player.loop = isLoop;
+    }
+  });
 </script>
 
+<svelte:window bind:innerWidth={viewportWidth} />
+
 <media-controller
+  bind:this={controller}
   class="w-full h-full overflow-hidden"
-  class:pointer-events-none={controls == false}
   class:has-poster={posterSrc}
   style="aspect-ratio: {aspectRatio};"
   autohide="-1"
 >
-  <video
-    class="w-full h-full object-cover"
-    bind:this={player}
-    {src}
-    slot="media"
-    playsinline
-    autoplay={isAutoplay}
-    loop={isLoop}
-    muted={isMuted}
-  ></video>
+  {#if srcType === "vimeo"}
+    <vimeo-video
+      class="w-full h-full object-cover"
+      bind:this={player}
+      {src}
+      slot="media"
+      playsinline
+    ></vimeo-video>
+  {:else if srcType === "youtube"}
+    <youtube-video
+      class="w-full h-full object-cover"
+      bind:this={player}
+      {src}
+      slot="media"
+      playsinline
+    ></youtube-video>
+  {:else if srcType === "default"}
+    <!-- svelte-ignore a11y_media_has_caption -->
+    <video
+      class="w-full h-full object-cover"
+      class:pointer-events-none={controls == false}
+      bind:this={player}
+      {src}
+      slot="media"
+      playsinline
+    ></video>
+  {/if}
 
   {#if posterSrc}
     <media-poster-image

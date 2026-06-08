@@ -70,7 +70,7 @@
   <section class="px-1 pb-1 mt-[80svh] bg-accent">
     {#if home?.cover}
       <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
-        <Media data={home?.cover} controls={true} muted={true} />
+        <Media data={home?.cover} controls={true} muted={false} />
       </div>
     {/if}
     {#if home?.heading}<Headline data={home?.heading} />{/if}
