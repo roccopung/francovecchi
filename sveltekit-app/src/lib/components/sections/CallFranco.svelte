@@ -69,7 +69,7 @@
   </div>
 
   <div
-    class="max-w-2xl text-center font-sans typo-l font-medium flex flex-col items-center gap-1 mx-auto"
+    class="max-w-3xl xl:max-w-1/2 text-center font-sans typo-l font-medium flex flex-col items-center gap-1 mx-auto"
   >
     <PortableText data={data?.content} />
     <CTA fill="var(--color-accent)" cta={data?.cta} />

@@ -63,7 +63,7 @@
 <nav
   class="fixed top-0 left-0 w-full p-1 font-mono z-30 bg-accent outline-accent outline-1 transition-all duration-300 {menuState.open ===
     true || scrollY > 10
-    ? 'outline-black rounded-b-s rounded-b-s'
+    ? 'outline-black rounded-b-s rounded-b-s open'
     : ''} md:hidden"
 >
   <div class="flex justify-between">
@@ -75,36 +75,41 @@
   </div>
 
   <ul
-    class="bg-accent flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden list-mobile typo-3xl font-slanted"
+    class="menu-dropdown bg-accent flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
+    class:open={menuState.open}
     class:h-35={menuState.open}
     class:py-4={menuState.open}
   >
     <li>
       <a
-        class="uppercase transition-opacity transition-fast"
-        class:opacity-0={!menuState.open}
+        class="uppercase transition-opacity transition-fast delay-0 {!menuState.open
+          ? 'delay-700 opacity-0'
+          : ''}"
         href="/case-studies">Case studies</a
       >
     </li>
     <li>
       <a
-        class="uppercase transition-opacity transition-fast"
-        class:opacity-0={!menuState.open}
+        class="uppercase transition-opacity transition-fast delay-0 {!menuState.open
+          ? 'delay-700 opacity-0'
+          : ''}"
         href="/lookbook">Lookbook</a
       >
     </li>
     <li>
       <a
-        class="uppercase transition-opacity transition-fast"
-        class:opacity-0={!menuState.open}
+        class="uppercase transition-opacity transition-fast delay-0 {!menuState.open
+          ? 'delay-700 opacity-0'
+          : ''}"
         href="/info">Info</a
       >
     </li>
     <li>
       <a
         href="/"
-        class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer mt-1 transition-opacity transition-fast"
-        class:opacity-0={!menuState.open}
+        class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer mt-1 transition-opacity transition-fast delay-0 {!menuState.open
+          ? 'delay-700 opacity-0'
+          : ''}"
       >
         <!-- <span><ArrowEnter /></span> -->
         <!-- <span>Write an email</span> -->
@@ -116,11 +121,17 @@
 
 <style>
   nav {
-    transition-timing-function: cubic-bezier(0.51, 0.19, 0.1, 1);
+    &.open {
+      transition: all 300ms ease-in;
+    }
+    transition: all 300ms 1000ms ease-in;
   }
 
-  .list-mobile {
-    transition: all 400ms cubic-bezier(0.51, 0.19, 0.1, 1);
+  .menu-dropdown {
+    transition: all 400ms 500ms cubic-bezier(0.51, 0.19, 0.1, 1);
+    &.open {
+      transition: all 400ms cubic-bezier(0.51, 0.19, 0.1, 1);
+    }
   }
   @media (min-width: 768px) {
     nav {
