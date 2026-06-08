@@ -1,7 +1,7 @@
 <script lang="ts">
-  import "media-chrome";
-  import "youtube-video-element";
-  import "vimeo-video-element";
+  // import "media-chrome";
+  // import "youtube-video-element";
+  // import "vimeo-video-element";
   import { urlFor } from "$lib/sanity/image";
   import { getImageDimensions } from "@sanity/asset-utils";
   import { browser } from "$app/environment";
@@ -71,6 +71,16 @@
       player.muted = isMuted;
       player.autoplay = isAutoplay;
       player.loop = isLoop;
+    }
+  });
+
+  onMount(async () => {
+    if (browser) {
+      await Promise.all([
+        import("media-chrome"),
+        import("youtube-video-element"),
+        import("vimeo-video-element"),
+      ]);
     }
   });
 </script>
