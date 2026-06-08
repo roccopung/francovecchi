@@ -10,7 +10,7 @@
 
 <div class="relative flex typo-2xl font-sans uppercase pt-1">
   <div class="absolute aspect-square h-[1lh] flex p-[0.15lh]"><Dot /></div>
-  <h2 class="indent-5 font-bold">
+  <h2 class="indent-[1lh] font-bold">
     {#if typeof data === "string"}{data}
     {:else}<PortableText {data} />{/if}
   </h2>
