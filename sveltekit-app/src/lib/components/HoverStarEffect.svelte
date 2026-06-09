@@ -112,9 +112,11 @@
 
     const target = starLayer.parentElement ?? window;
     target.addEventListener("pointermove", onMove as EventListener);
+    if (target instanceof HTMLElement) target.style.cursor = "none";
 
     return () => {
       target.removeEventListener("pointermove", onMove as EventListener);
+      if (target instanceof HTMLElement) target.style.cursor = "";
       stars.forEach((el) => el && gsap!.killTweensOf(el));
     };
   });
@@ -122,7 +124,7 @@
 
 <svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
 
-{#if scrollY < viewportHeight * 0.5}
+{#if scrollY < viewportHeight * 0.15}
   <div
     bind:this={starLayer}
     class="star-layer hidden md:block"
@@ -141,7 +143,7 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 200;
     overflow: hidden;
   }
 

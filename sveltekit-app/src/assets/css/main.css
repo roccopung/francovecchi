@@ -73,3 +73,7 @@ footer,
 .preview-toggle:hover span:last-child {
   display: block;
 }
+
+.trimmed {
+  text-box: trim-both cap alphabetic;
+}

@@ -23,7 +23,7 @@ export const homeQuery = defineQuery(`{
 }
 `);
 
-export const aboutQuery = defineQuery(`*[_type == "about"][0]`);
+export const infoQuery = defineQuery(`*[_type == "about"][0]`);
 
 export const caseStudiesQuery = defineQuery(
   `*[_type == "project"]{

@@ -1,15 +1,29 @@
 <script lang="ts">
-  import type { gsap } from "gsap";
-  import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
+  //@ts-nocheck
+  import Cta from "$lib/components/element/Cta.svelte";
   import { onMount, onDestroy } from "svelte";
+  import { browser } from "$app/environment";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
   let ctx: gsap.Context | undefined;
+  let scrollOpacity = $state(1);
+  let scrollY = $state(0);
+  let viewportHeight = $state(0);
+
+  let cta = {
+    ctaType: "linkEmail",
+    linkEmail: {
+      url: "mailto:hello@francovecchi.com",
+      label: "Write an email",
+    },
+  };
+
+  const handleScroll = () => {
+    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.8)).toFixed(3);
+  };
 
   onMount(() => {
-    // Wait for the custom font so SplitText measures glyphs correctly, then
-    // load GSAP on the client only — it must never run during SSR.
     document.fonts.ready.then(async () => {
       const { gsap } = await import("gsap");
       const { SplitText } = await import("gsap/SplitText");
@@ -38,16 +52,27 @@
         reveal(vecchi, 20);
       });
     });
+    handleScroll();
+    if (browser) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
   });
 
-  onDestroy(() => ctx?.revert());
+  onDestroy(() => {
+    ctx?.revert();
+    if (browser) {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  });
 </script>
+
+<svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
 
 <div
   data-hero
   class="bg-accent fixed h-[80svh] w-full top-0 left-0 p-1 text-dark-gray"
 >
-  <div class="relative w-full h-full">
+  <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
     <div
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
     >
@@ -70,22 +95,19 @@
     </div>
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30">
-      <a
-        href="/"
-        class="border-1 border-black rounded-full py-1 px-2 md:px-3 flex items-start gap-1 typo-xs uppercase md:normal-case md:typo-s font-mono hover:bg-black hover:text-accent cursor-pointer"
-      >
-        <span class="hidden md:flex"><ArrowEnter /></span>
-        <span>Write an email</span>
-      </a>
+      <Cta
+        {cta}
+        font="sans"
+        typo="s"
+        uppercase={false}
+        arrow={true}
+        fill="var(--color-accent)"
+      />
     </div>
   </div>
 </div>
 
 <style>
-  .trimmed {
-    text-box: trim-both cap alphabetic;
-  }
-
   /* Safari clips the ink of slanted glyphs at the edge of their inline-block
      box. Padding gives the overhang room; the equal negative margin keeps
      layout (advance width + line box) unchanged. */

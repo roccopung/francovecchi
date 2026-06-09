@@ -1,5 +1,11 @@
 <script lang="ts">
-  //@ts-nocheck
+  type Props = {
+    data?: any;
+    pageTitle?: string;
+    noindex?: boolean;
+    pageDescription?: string;
+    isHomepage?: boolean;
+  };
 
   let {
     data,
