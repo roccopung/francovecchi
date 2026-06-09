@@ -11,6 +11,7 @@
     height?: string;
     width?: number;
     ratio?: number;
+    visible?: boolean;
   }
 
   let {
@@ -22,10 +23,10 @@
     height = "auto",
     width,
     ratio = $bindable(),
+    visible = $bindable(false),
   }: Props = $props();
 
   let innerWidth = $state(1280);
-  let visible = $state(false);
 
   let src = $derived(
     innerWidth < 768 && image?.mobileImage ? image?.mobileImage : image,
@@ -61,7 +62,7 @@
 
 {#if hasAsset}
   <img
-    class="
+    class=" transition-fast
 	{fit === 'contain'
       ? 'object-contain h-full min-w-full w-auto max-w-full'
       : 'object-cover h-full w-full'}
@@ -76,5 +77,6 @@
 "
     alt={src.alt || alt}
     src={imageUrl}
+    onload={() => (visible = true)}
   />
 {/if}

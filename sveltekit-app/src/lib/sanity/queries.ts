@@ -6,7 +6,7 @@ export const homeQuery = defineQuery(`{
     featuredProjects[]->{
       title,
       slug,
-      coverImages,
+      cover,
       services[]->{
       title
       },
@@ -28,7 +28,12 @@ export const aboutQuery = defineQuery(`*[_type == "about"][0]`);
 export const caseStudiesQuery = defineQuery(
   `*[_type == "project"]{
   title,
-  slug
+  slug,
+  coverImages,
+  services[]->{
+  title
+  },
+  shortSummary
   }`,
 );
 

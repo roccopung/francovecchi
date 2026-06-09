@@ -1,7 +1,4 @@
 <script lang="ts">
-  // import "media-chrome";
-  // import "youtube-video-element";
-  // import "vimeo-video-element";
   import { urlFor } from "$lib/sanity/image";
   import { getImageDimensions } from "@sanity/asset-utils";
   import { browser } from "$app/environment";

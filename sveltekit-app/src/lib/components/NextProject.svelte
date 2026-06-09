@@ -30,7 +30,6 @@
       (index: any) => index?.slug?.current === displayedProject?.slug?.current,
     ),
   );
-  let key = $state(0);
 
   let _gsap: any;
   let _SplitText: any;
@@ -85,8 +84,8 @@
     _ScrollTrigger = ScrollTrigger;
     gsap.registerPlugin(SplitText, ScrollTrigger);
 
-    mountCtx = gsap.context(() => {
-      gsap.to(".dark-layer", {
+    mountCtx = _gsap.context(() => {
+      _gsap.to(".dark-layer", {
         scrollTrigger: {
           trigger: sectionNext,
           start: "top 90%",
@@ -96,7 +95,7 @@
         opacity: 0.3,
       });
 
-      gsap.to(".cover", {
+      _gsap.to(".cover", {
         scrollTrigger: {
           trigger: sectionNext,
           start: "top 90%",
@@ -106,12 +105,12 @@
         scale: 1,
       });
 
-      gsap.to(".label", {
+      _gsap.to(".label", {
         scrollTrigger: {
           trigger: sectionNext,
           start: "top bottom",
           end: "bottom bottom",
-          scrub: 2,
+          scrub: 1,
         },
         width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 15,
       });
@@ -179,7 +178,6 @@
   });
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <svelte:window
   bind:innerHeight={viewportHeight}
   bind:innerWidth={viewportWidth}

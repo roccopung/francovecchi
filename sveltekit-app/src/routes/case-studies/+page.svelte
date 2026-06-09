@@ -2,19 +2,36 @@
   import type { CaseStudiesQueryResult } from "$lib/sanity.types";
   import type { PageData } from "./$types";
   import { useQuery } from "@sanity/sveltekit";
+  import ProjectCard from "$lib/components/ProjectCard.svelte";
+  import SeeMore from "$lib/components/SeeMore.svelte";
+
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<CaseStudiesQueryResult>(data));
   let caseStudies = $derived($query.data);
+  let initialProjectsNumber = $state(2);
+  let itemsToLoad = $derived(initialProjectsNumber);
+  let filteredCaseStudies = $derived.by(() => {
+    if (!caseStudies) return [];
+    else return caseStudies.slice(0, itemsToLoad);
+  });
 </script>
 
-<div
-  class="links h-[100svh] w-full flex flex-col gap-2 items-center justify-center bg-accent"
+<main
+  class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-accent"
 >
-  {#if caseStudies}
-    <ul class="flex flex-col gap-2 font-sans typo-xl list-disc">
-      {#each caseStudies as study}
-        <li><a href="/case-studies/{study.slug?.current}">{study.title}</a></li>
+  <h1 class="typo-6xl font-slanted uppercase mt-8">Case studies</h1>
+  {#if filteredCaseStudies}
+    <ul class="flex flex-col gap-0 font-sans typo-xl list-disc p-1">
+      {#each filteredCaseStudies as study, index}
+        <ProjectCard
+          project={study}
+          variant="case-study"
+          index={index + 1}
+          delay={true}
+        />
       {/each}
     </ul>
   {/if}
-</div>
+</main>
+
+<SeeMore itemsToLoad={initialProjectsNumber} bind:itemsLoaded={itemsToLoad} />

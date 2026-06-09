@@ -120,7 +120,9 @@
         {home?.clientsSection?.title}
       </h3>
       {#if home?.clientsSection?.subtitle}
-        <div class="typo-l font-sans font-medium w-full max-w-4xl p-1">
+        <div
+          class="typo-l font-sans font-medium w-full max-w-4xl md:max-w-3/4 p-1"
+        >
           <PortableText data={home?.clientsSection?.subtitle} />
         </div>
       {/if}
@@ -164,7 +166,7 @@
       {/if}
       {#if home?.endingBlock?.description}
         <div
-          class="typo-xl font-medium font-sans text-center lg:max-w-[60vw] text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
+          class="typo-xl font-medium font-sans text-center lg:max-w-3/4 text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
         >
           <PortableText data={home?.endingBlock?.description} />
         </div>

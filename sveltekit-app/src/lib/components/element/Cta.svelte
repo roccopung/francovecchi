@@ -17,7 +17,7 @@
       "bg-dark-gray text-accent hover:bg-white hover:text-black",
   };
 
-  let { cta, fill }: Props = $props();
+  let { cta, fill = "var(--color-white)" }: Props = $props();
   let colorClass = $derived(fill ? (fillClasses[fill] ?? "") : "");
 
   function slugify(str: string): string {
