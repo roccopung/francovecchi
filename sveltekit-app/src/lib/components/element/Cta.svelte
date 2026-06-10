@@ -14,6 +14,8 @@
     arrow?: boolean;
   };
 
+  type LinkResult = { href?: string; label?: string; target?: string };
+
   let {
     cta,
     fill = "var(--color-white)",
@@ -42,28 +44,32 @@
     return str.replace(/([A-Z])/g, "-$1").toLowerCase();
   }
 
-  let link = $derived.by(() => {
-    switch (cta?.ctaType) {
+  function buildLink(c: NonNullable<Cta>): LinkResult {
+    const ref = c.linkInternal?.url?._ref;
+    switch (c.ctaType) {
       case "linkInternal":
         return {
-          href: `/${cta.linkInternal?.url?._ref ? slugify(cta.linkInternal?.url?._ref) : "#"}`,
-          label: cta.linkInternal?.label,
+          href: `/${ref ? slugify(ref) : "#"}`,
+          label: c.linkInternal?.label,
         };
       case "linkExternal":
         return {
-          href: cta.linkExternal?.url,
-          label: cta.linkExternal?.label,
+          href: c.linkExternal?.url,
+          label: c.linkExternal?.label,
           target: "_blank",
         };
       case "linkEmail":
         return {
-          href: `mailto:${cta.linkEmail?.url}`,
-          label: cta.linkEmail?.label,
+          href: `mailto:${c.linkEmail?.url}`,
+          label: c.linkEmail?.label,
+          target: "_blank",
         };
       default:
         return {};
     }
-  });
+  }
+
+  let link = $derived(cta ? buildLink(cta) : {});
 </script>
 
 {#if cta?.ctaType}

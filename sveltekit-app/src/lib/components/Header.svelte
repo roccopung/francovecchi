@@ -54,7 +54,7 @@
   </ul>
   <a
     class="py-1 px-3 bg-dark-gray border border-dark-gray text-accent rounded-full w-fit h-fit place-self-end hover:bg-white hover:text-black hidden md:block"
-    href="/">Write!</a
+    href="mailto:hello@francovecchi.com">Write!</a
   >
 </nav>
 
@@ -106,7 +106,7 @@
     </li>
     <li>
       <a
-        href="/"
+        href="mailto:hello@francovecchi.com"
         class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-accent cursor-pointer mt-1 transition-opacity transition-fast delay-0 {!menuState.open
           ? 'delay-700 opacity-0'
           : ''}"

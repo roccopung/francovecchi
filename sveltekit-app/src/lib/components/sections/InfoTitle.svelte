@@ -24,7 +24,7 @@
   let cta = {
     ctaType: "linkEmail",
     linkEmail: {
-      url: "mailto:hello@francovecchi.com",
+      url: "hello@francovecchi.com",
       label: "Write an email",
     },
   };
