@@ -1,18 +1,22 @@
 <script lang="ts">
-  import type { ElementImage } from "$lib/sanity.types";
-  import type { PortableTextBlock } from "@sanity/types";
+  import type { ElementImage, BlockContent, Slug } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import ArrowRight from "$lib/components/svg/ArrowRight.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
 
   type Props = {
     project: {
-      cover?: ElementImage;
-      coverImages?: { one?: ElementImage; two?: ElementImage } | null;
-      services?: any[] | null;
-      shortSummary?: PortableTextBlock[] | null;
-      title?: string | null;
-      slug?: any;
+      title: string | null;
+      slug: Slug | null;
+      cover: ElementImage | null;
+      coverImages: {
+        one?: ElementImage;
+        two?: ElementImage;
+      } | null;
+      services: Array<{
+        title: string | null;
+      }> | null;
+      shortSummary: BlockContent | null;
     };
     variant?: "home" | "case-study";
     index?: number;
@@ -24,7 +28,7 @@
   let coverTwoVisible = $state(false);
 </script>
 
-{#key project.slug.current}
+{#key project?.slug?.current}
   {#if variant === "home"}
     <div
       class="home-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px]"
@@ -55,9 +59,9 @@
         </div>
         <a
           href="/case-studies/{project?.slug?.current}"
-          class="self-end py-1 px-3 border-1 border-black rounded-full w-fit hover:bg-accent transition-fast"
+          class="self-end py-1 px-3 border-1 border-black rounded-full hover:bg-accent w-fit transition-fast"
         >
-          <ArrowRight />
+          <div class="w-3"><ArrowRight /></div>
         </a>
       </div>
     </div>
@@ -67,7 +71,7 @@
     -->
 
     <div
-      class="case-studies-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px] min-h-70 transition-fast"
+      class="case-studies-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px] md:min-h-70 transition-fast"
       style="opacity: {coverOneVisible && coverTwoVisible ? 1 : 0};"
     >
       <div class="case-studies-content p-1 pt-0 bg-white">
@@ -96,12 +100,12 @@
           href="/case-studies/{project?.slug?.current}"
           class="self-end py-1 px-3 border-1 border-black rounded-full w-fit hover:bg-accent transition-fast"
         >
-          <ArrowRight />
+          <div class="w-3"><ArrowRight /></div>
         </a>
       </div>
       <div class="grid-2">
         <div class="overflow-hidden">
-          <div class="h-full w-full card-image">
+          <div class="h-full w-full card-image aspect-square md:aspect-auto">
             <Image
               image={project?.coverImages?.one}
               bind:visible={coverOneVisible}
@@ -109,7 +113,7 @@
           </div>
         </div>
         <div class="overflow-hidden">
-          <div class="h-full w-full card-image">
+          <div class="h-full w-full card-image aspect-square md:aspect-auto">
             <Image
               image={project?.coverImages?.two}
               bind:visible={coverTwoVisible}

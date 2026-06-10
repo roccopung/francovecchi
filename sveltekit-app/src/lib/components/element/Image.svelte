@@ -23,7 +23,7 @@
     height = "auto",
     width,
     ratio = $bindable(),
-    visible = $bindable(false),
+    visible = $bindable(),
   }: Props = $props();
 
   let innerWidth = $state(1280);

@@ -613,7 +613,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: homeQuery
-// Query: {  "home": *[_type == "home"][0] {    ...,    featuredProjects[]->{      title,      slug,      coverImages,      services[]->{      title      },      shortSummary    },    clientsSection {      ...,      logos[]{      asset->      }    }  },  "characters": *[_type == "character"]}
+// Query: {  "home": *[_type == "home"][0] {    ...,    featuredProjects[]->{      title,      slug,      cover,      coverImages,      services[]->{      title      },      shortSummary    },    clientsSection {      ...,      logos[]{      asset->      }    }  },  "characters": *[_type == "character"]}
 export type HomeQueryResult = {
   home: {
     _id: string;
@@ -631,6 +631,7 @@ export type HomeQueryResult = {
     featuredProjects: Array<{
       title: string | null;
       slug: Slug | null;
+      cover: ElementImage | null;
       coverImages: {
         one?: ElementImage;
         two?: ElementImage;
@@ -703,65 +704,85 @@ export type HomeQueryResult = {
 };
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
-// Variable: aboutQuery
-// Query: *[_type == "about"][0]
-export type AboutQueryResult = {
-  _id: string;
-  _type: "about";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  portrait?: ElementImage;
-  intro?: {
-    heading?: BlockContent;
-    content?: BlockContent;
-    earlyCareer?: BlockContent;
-    workExperience?: BlockContent;
-    cta?: Cta;
-  };
-  collaborations?: {
-    heading?: BlockContent;
-    content?: BlockContent;
-    brands?: Array<string>;
-    agencies?: Array<string>;
-    animation?: {
-      asset?: SanityFileAssetReference;
-      media?: unknown;
-      _type: "file";
-    };
-  };
-  hobbies?: Array<string>;
-  skillsSection?: {
-    heading?: string;
-    content?: BlockContent;
-    skills?: Array<
-      {
-        _key: string;
-      } & Info
-    >;
-  };
-  reviewsSection?: {
-    heading?: string;
-    content?: BlockContent;
-    reviews?: Array<{
-      author?: string;
-      companyRole?: string;
+// Variable: infoQuery
+// Query: {  "info": *[_type == "about"][0],  "characters": *[_type == "character"]  }
+export type InfoQueryResult = {
+  info: {
+    _id: string;
+    _type: "about";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    slug?: Slug;
+    portrait?: ElementImage;
+    intro?: {
+      heading?: BlockContent;
       content?: BlockContent;
-      _type: "review";
-      _key: string;
-    }>;
-  };
-  callFranco?: CallFranco;
-} | null;
+      earlyCareer?: BlockContent;
+      workExperience?: BlockContent;
+      cta?: Cta;
+    };
+    collaborations?: {
+      heading?: BlockContent;
+      content?: BlockContent;
+      brands?: Array<string>;
+      agencies?: Array<string>;
+      animation?: {
+        asset?: SanityFileAssetReference;
+        media?: unknown;
+        _type: "file";
+      };
+    };
+    hobbies?: Array<string>;
+    skillsSection?: {
+      heading?: string;
+      content?: BlockContent;
+      skills?: Array<
+        {
+          _key: string;
+        } & Info
+      >;
+    };
+    reviewsSection?: {
+      heading?: string;
+      content?: BlockContent;
+      reviews?: Array<{
+        author?: string;
+        companyRole?: string;
+        content?: BlockContent;
+        _type: "review";
+        _key: string;
+      }>;
+    };
+    callFranco?: CallFranco;
+  } | null;
+  characters: Array<{
+    _id: string;
+    _type: "character";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    cover?: ElementImage;
+  }>;
+};
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: caseStudiesQuery
-// Query: *[_type == "project"]{  title,  slug  }
+// Query: *[_type == "project"]{  title,  slug,  cover,  coverImages,  services[]->{  title  },  shortSummary  }
 export type CaseStudiesQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
+  cover: ElementImage | null;
+  coverImages: {
+    one?: ElementImage;
+    two?: ElementImage;
+  } | null;
+  services: Array<{
+    title: string | null;
+  }> | null;
+  shortSummary: BlockContent | null;
 }>;
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
@@ -877,9 +898,9 @@ export type LayoutQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n  "home": *[_type == "home"][0] {\n    ...,\n    featuredProjects[]->{\n      title,\n      slug,\n      coverImages,\n      services[]->{\n      title\n      },\n      shortSummary\n    },\n    clientsSection {\n      ...,\n      logos[]{\n      asset->\n      }\n    }\n  },\n  "characters": *[_type == "character"]\n}\n': HomeQueryResult;
-    '*[_type == "about"][0]': AboutQueryResult;
-    '*[_type == "project"]{\n  title,\n  slug\n  }': CaseStudiesQueryResult;
+    '{\n  "home": *[_type == "home"][0] {\n    ...,\n    featuredProjects[]->{\n      title,\n      slug,\n      cover,\n      coverImages,\n      services[]->{\n      title\n      },\n      shortSummary\n    },\n    clientsSection {\n      ...,\n      logos[]{\n      asset->\n      }\n    }\n  },\n  "characters": *[_type == "character"]\n}\n': HomeQueryResult;
+    '{\n  "info": *[_type == "about"][0],\n  "characters": *[_type == "character"]\n  }': InfoQueryResult;
+    '*[_type == "project"]{\n  title,\n  slug,\n  cover,\n  coverImages,\n  services[]->{\n  title\n  },\n  shortSummary\n  }': CaseStudiesQueryResult;
     '*[_type == "lookbook"][0]': LookbookQueryResult;
     '*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {\n  ...,\n  services[]->,\n  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{\n  "orderRank": ^.orderRank,\n    title,\n    slug,\n    cover\n  },\n  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{\n    title,\n    slug,\n    cover\n  },\n  "projectIndexes": *[_type == "project"] | order(orderRank asc) {\n    slug\n  }\n  }': ProjectQueryResult;
     '{\n  "settings": *[_type == "settings"][0],\n  "caseStudies": *[_type == "project"]{\n  slug\n  }\n}': LayoutQueryResult;

@@ -78,7 +78,9 @@
     rel="noopener noreferrer"
   >
     {#if arrow}
-      <span class="arrow hidden md:flex"><ArrowEnter fill={arrowFill} /></span>
+      <span class="arrow hidden h-[1lh] aspect-square md:flex"
+        ><ArrowEnter fill={arrowFill} /></span
+      >
     {/if}
     <span>{link?.label}</span>
   </a>

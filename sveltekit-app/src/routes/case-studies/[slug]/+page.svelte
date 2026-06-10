@@ -105,16 +105,16 @@
     {#if project?.credits}
       <section class="p-1 bg-white">
         <div
-          class="border border-black rounded-m flex flex-col gap-1 pt-3 pb-4"
+          class="border border-black rounded-m flex flex-col gap-1 pt-3 pb-4 px-1"
         >
           <Headline data="Credits" />
           <div class="typo-s font-sans grid-2 pt-2">
             {#each project?.credits as credit}
               <div class="flex flex-col">
-                <div class="typo-s font-sans font-bold px-1 uppercase">
+                <div class="typo-s font-sans font-bold uppercase">
                   {credit.label}
                 </div>
-                <div class="typo-s font-sans px-1">{credit.name}</div>
+                <div class="typo-s font-sans">{credit.name}</div>
               </div>
             {/each}
           </div>

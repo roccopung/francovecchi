@@ -43,12 +43,7 @@
 </script>
 
 <div class="title typo-6xl font-slanted uppercase flex flex-col gap-2 trimmed">
-  <div bind:this={fra} class="trimmed hidden md:block opacity-0">Fra</div>
-  <div bind:this={fran} class="trimmed ml-7 hidden md:block opacity-0">
-    Fran
-  </div>
-  <div bind:this={nco} class="trimmed ml-20 hidden md:block opacity-0">Nco</div>
-
-  <div class="trimmed md:hidden">Franco</div>
-  <div class="trimmed ml-7 md:hidden">Vecchi</div>
+  <div bind:this={fra} class="trimmed opacity-0">Fra</div>
+  <div bind:this={fran} class="trimmed ml-2 md:ml-7 opacity-0">Fran</div>
+  <div bind:this={nco} class="trimmed ml-4 md:ml-20 opacity-0">Nco</div>
 </div>

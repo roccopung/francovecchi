@@ -6,6 +6,7 @@
   import Image from "$lib/components/element/Image.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
   import { onMount, onDestroy } from "svelte";
+  import { browser } from "$app/environment";
 
   type Props = {
     portrait?: ElementImage;
@@ -16,6 +17,7 @@
   let portraitWrapperElResized: boolean = $state(false);
   let portraitEl: HTMLElement | undefined = $state();
   let viewportHeight: number = $state(0);
+  let viewportWidth: number = $state(0);
   let scrollOpacity = $state(1);
   let scrollY = $state(0);
 
@@ -28,15 +30,19 @@
   };
 
   const handleScroll = () => {
-    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.8)).toFixed(3);
+    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.6)).toFixed(3);
   };
 
   onMount(async () => {
     const { gsap } = await import("gsap");
     if (portraitWrapperEl && portraitEl) {
       gsap.to(portraitWrapperEl, {
-        height: viewportHeight * 0.5,
-        width: viewportHeight * 0.5 * (4 / 5),
+        height:
+          viewportWidth > 768 ? viewportHeight * 0.5 : viewportHeight * 0.4,
+        width:
+          viewportWidth > 768
+            ? viewportHeight * 0.5 * (4 / 5)
+            : viewportHeight * 0.4 * (4 / 5),
         duration: 0.8,
         ease: "power4.inOut",
         onComplete: () => {
@@ -51,44 +57,62 @@
       });
     }
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    if (browser) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
   });
 
   $effect(() => {
     portraitWrapperEl;
     if (portraitWrapperElResized && portraitWrapperEl) {
-      portraitWrapperEl.style.height = viewportHeight * 0.5 + "px";
-      portraitWrapperEl.style.width = viewportHeight * 0.5 * (4 / 5) + "px";
+      portraitWrapperEl.style.height =
+        viewportWidth > 768
+          ? viewportHeight * 0.5 + "px"
+          : viewportHeight * 0.4 + "px";
+      portraitWrapperEl.style.width =
+        viewportWidth > 768
+          ? viewportHeight * 0.5 * (4 / 5) + "px"
+          : viewportHeight * 0.4 * (4 / 5) + "px";
     }
   });
 
   onDestroy(() => {
-    window.removeEventListener("scroll", handleScroll);
+    if (browser) {
+      window.removeEventListener("scroll", handleScroll);
+    }
   });
 </script>
 
-<svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
+<svelte:window
+  bind:innerHeight={viewportHeight}
+  bind:innerWidth={viewportWidth}
+  bind:scrollY
+/>
 
 <div
   data-hero
-  class="bg-accent fixed h-[80svh] w-full top-0 left-0 p-1 text-dark-gray"
+  class="bg-accent fixed h-[80svh] w-full top-0 left-0 text-dark-gray"
 >
   <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
-    <div class="absolute top-1/2 left-2 -translate-y-1/2">
+    <div
+      class="absolute top-1/2 left-0 md:left-2 -translate-y-1/2 pointer-events-none"
+    >
       <InfoTitleAnimation />
     </div>
-    <div class="absolute top-1/2 right-1 -translate-y-1/2">
+    <div
+      class="absolute top-1/2 right-0 md:right-1 -translate-y-1/2 pointer-events-none"
+    >
       <InfoTitleAnimation />
     </div>
 
     {#if portrait}
       <div
         bind:this={portraitWrapperEl}
-        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0 w-0 overflow-hidden border border-black opacity-0"
+        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0 w-0 overflow-hidden border border-black opacity-0 pointer-events-none"
       >
         <div
           bind:this={portraitEl}
-          class="absolute h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
+          class="absolute h-[40vh] md:h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
         >
           <Image image={portrait} fit="cover" />
         </div>

@@ -21,7 +21,9 @@
 >
   <h1 class="typo-6xl font-slanted uppercase mt-8">Case studies</h1>
   {#if filteredCaseStudies}
-    <ul class="flex flex-col gap-0 font-sans typo-xl list-disc p-1">
+    <ul
+      class="flex flex-col gap-0 font-sans typo-xl list-disc p-1 pb-0 bg-white"
+    >
       {#each filteredCaseStudies as study, index}
         <ProjectCard
           project={study}

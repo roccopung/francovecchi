@@ -6,9 +6,9 @@
 </script>
 
 <svg
-  class="arrow-enter"
-  width="18"
-  height="18"
+  class="arrow-enter w-full aspect-square"
+  width="100%"
+  height="100%"
   viewBox="0 0 18 18"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"

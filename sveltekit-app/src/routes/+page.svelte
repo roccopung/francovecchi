@@ -3,19 +3,17 @@
   import type { PageData } from "./$types";
   import { useQuery } from "@sanity/sveltekit";
   import { onMount } from "svelte";
-  import Image from "$lib/components/element/Image.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import HomeTitle from "$lib/components/sections/HomeTitle.svelte";
-  import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
   import HoverStarEffect from "$lib/components/HoverStarEffect.svelte";
   import Headline from "$lib/components/Headline.svelte";
   import Media from "$lib/components/element/Media.svelte";
   import ProjectCard from "$lib/components/ProjectCard.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
   import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
-  import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
   import KeenEyeMarquee from "$lib/components/marquees/KeenEyeMarquee.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
+  import Characters from "$lib/components/sections/Characters.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
@@ -134,20 +132,7 @@
       {/if}
     </section>
     {#if characters && characters.length > 0}
-      <section class="hidden md:grid-4 overflow-hidden w-full">
-        {#each characters as character, i}
-          <div
-            bind:this={characterRefs[i]}
-            class="aspect-[4/5] overflow-hidden rounded-xs md:rounded-s"
-          >
-            <Image image={character?.cover} />
-          </div>
-        {/each}
-      </section>
-
-      <section class="overflow-hidden md:hidden">
-        <CharactersMarquee data={characters} />
-      </section>
+      <Characters {characters} />
     {/if}
   </div>
   <section>

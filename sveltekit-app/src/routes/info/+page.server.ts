@@ -1,10 +1,10 @@
 import { infoQuery } from "$lib/sanity/queries";
 import type { PageServerLoad } from "./$types";
-import type { AboutQueryResult } from "$lib/sanity.types";
+import type { InfoQueryResult } from "$lib/sanity.types";
 
 export const load: PageServerLoad = async ({ locals: { sanity } }) => {
   const { loadQuery } = sanity;
-  const initial = await loadQuery<AboutQueryResult>(infoQuery);
+  const initial = await loadQuery<InfoQueryResult>(infoQuery);
 
   return {
     query: infoQuery,

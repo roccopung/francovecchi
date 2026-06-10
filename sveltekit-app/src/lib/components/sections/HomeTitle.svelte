@@ -20,7 +20,7 @@
   };
 
   const handleScroll = () => {
-    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.8)).toFixed(3);
+    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.6)).toFixed(3);
   };
 
   onMount(() => {
@@ -74,7 +74,8 @@
 >
   <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
+pointer-events-none"
     >
       <h1 bind:this={franco} class="trimmed hidden md:block opacity-0">
         Franco
