@@ -48,6 +48,11 @@
     const ref = c.linkInternal?.url?._ref;
     switch (c.ctaType) {
       case "linkInternal":
+        if (ref && slugify(ref) === "about")
+          return {
+            href: "/info",
+            label: c.linkInternal?.label,
+          };
         return {
           href: `/${ref ? slugify(ref) : "#"}`,
           label: c.linkInternal?.label,
