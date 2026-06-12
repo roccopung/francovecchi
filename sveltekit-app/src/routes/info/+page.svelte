@@ -24,7 +24,7 @@
 
 <main class="w-full flex flex-col">
   <InfoTitle portrait={infoPage?.portrait} />
-  <div class="bg-white h-full w-full mt-[80svh] z-10">
+  <div class="bg-white h-full w-full mt-[100svh] z-10">
     <section class="px-1 py-4 flex flex-col gap-3">
       {#if infoPage?.intro?.heading}
         <Headline data={infoPage?.intro?.heading} />
