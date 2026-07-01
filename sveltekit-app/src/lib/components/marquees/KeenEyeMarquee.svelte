@@ -1,25 +1,23 @@
 <script lang="ts">
-  import type { MarqueeckOptions } from "@arisbh/marqueeck";
-  import Image from "$lib/components/element/Image.svelte";
-  import Marqueeck from "@arisbh/marqueeck";
+  import Marquee from "svelte-fast-marquee";
+  import { inView } from "$lib/actions/inView";
 
   type Props = {
     data?: string;
   };
 
   let { data }: Props = $props();
-
-  const options: MarqueeckOptions = {
-    direction: "left",
-    speed: 40,
-    onHover: "none",
-  };
+  let isVisible = $state(false);
 </script>
 
-<Marqueeck {options}>
-  <div
-    class="flex items-center gap-8 ml-8 typo-5xl font-slanted uppercase text-dark-gray"
+<div use:inView={(v) => (isVisible = v)}>
+  <Marquee
+    play={isVisible}
+    speed={isVisible ? 40 : 0}
+    gap="10rem"
+    autoFill
+    class="typo-5xl font-slanted uppercase text-white overflow-hidden w-fit"
   >
     {data}
-  </div>
-</Marqueeck>
+  </Marquee>
+</div>

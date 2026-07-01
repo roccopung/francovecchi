@@ -30,16 +30,19 @@
 
 {#key project?.slug?.current}
   {#if variant === "home"}
-    <div
-      class="home-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px]"
+    <a
+      href="/case-studies/{project?.slug?.current}"
+      class="home-variant w-full outline-1 outline-black rounded-s md:rounded-m overflow-hidden -mt-[1px] group pointer-events-none md:pointer-events-auto"
     >
       <div class="overflow-hidden">
-        <div class="h-full w-full card-image">
+        <div
+          class="h-full w-full card-image group-hover:scale-105 transition-fast"
+        >
           <Image image={project?.cover} />
         </div>
       </div>
       <div
-        class="home-variant-content flex flex-col gap-2 p-1 pt-2 md:pt-0 md:p-3 bg-white"
+        class="home-variant-content flex flex-col gap-2 p-1 pt-2 md:pt-2 md:p-3 bg-white"
       >
         <div class="self-center flex flex-col gap-3">
           {#if project?.services}
@@ -53,25 +56,21 @@
           <h3 class="typo-2xl uppercase font-sans font-bold">
             {project?.title}
           </h3>
-          <div class="typo-s font-sans">
-            <PortableText data={project?.shortSummary} />
-          </div>
         </div>
-        <a
-          href="/case-studies/{project?.slug?.current}"
-          class="self-end py-1 px-3 border-1 border-black rounded-full hover:bg-accent w-fit transition-fast"
+        <div
+          class="self-end py-1 px-3 border-1 border-black rounded-full group-hover:bg-yellow w-fit transition-fast md:hidden pointer-events-auto"
         >
           <div class="w-3"><ArrowRight /></div>
-        </a>
+        </div>
       </div>
-    </div>
+    </a>
   {:else}
     <!--
     VARIANT CASE-STUDY
     -->
 
     <div
-      class="case-studies-variant w-full border-1 border-black rounded-s md:rounded-m overflow-hidden -mt-[1px] md:min-h-70 transition-fast"
+      class="case-studies-variant w-full border-1 outline-black rounded-s md:rounded-m overflow-hidden -mt-[1px] md:min-h-70 transition-fast"
       style="opacity: {coverOneVisible && coverTwoVisible ? 1 : 0};"
     >
       <div class="case-studies-content p-1 pt-0 bg-white">
@@ -144,15 +143,6 @@
   }
 
   @media (min-width: 768px) {
-    .home-variant {
-      display: grid;
-      grid-template-columns: 1.33fr 1fr;
-      aspect-ratio: 2.3;
-      .card-image {
-        aspect-ratio: unset;
-      }
-    }
-
     .case-studies-variant {
       display: grid;
       grid-template-columns: 1fr 2fr;

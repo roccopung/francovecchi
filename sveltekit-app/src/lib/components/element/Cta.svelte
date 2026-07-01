@@ -7,7 +7,8 @@
     fill?:
       | "var(--color-accent)"
       | "var(--color-white)"
-      | "var(--color-dark-gray)";
+      | "var(--color-dark-gray)"
+      | "var(--color-black)";
     font?: "mono" | "sans";
     typo?: "xs" | "s";
     uppercase?: boolean;
@@ -28,14 +29,18 @@
   const fillClasses: Record<NonNullable<Props["fill"]>, string> = {
     "var(--color-accent)":
       "bg-accent text-black hover:bg-dark-gray hover:text-accent",
-    "var(--color-white)": "bg-white text-black hover:bg-black hover:text-white",
+    "var(--color-white)":
+      "bg-white text-black hover:bg-black hover:text-white hover:border-1 hover:border-white",
     "var(--color-dark-gray)":
-      "bg-dark-gray text-accent hover:bg-white hover:text-black",
+      "bg-dark-gray text-white hover:bg-white hover:text-black",
+    "var(--color-black)":
+      "bg-black text-white hover:bg-white hover:text-black border-white",
   };
 
   let colorClass = $derived(fill ? (fillClasses[fill] ?? "") : "");
   let arrowFill = $derived.by(() => {
-    if (fill === "var(--color-dark-gray)") return "var(--color-accent)";
+    if (fill === "var(--color-dark-gray)") return "var(--color-white)";
+    if (fill === "var(--color-black)") return "var(--color-white)";
     if (fill === "var(--color-accent)") return "var(--color-black)";
     if (fill === "var(--color-white)") return "var(--color-black)";
   });
@@ -102,9 +107,13 @@
     fill: var(--color-white);
   }
   :global(.cta.bg-accent:hover .arrow svg path) {
-    fill: var(--color-accent);
+    fill: var(--color-white);
   }
   :global(.cta.bg-dark-gray:hover .arrow svg path) {
+    fill: var(--color-black);
+  }
+
+  :global(.cta.bg-black:hover .arrow svg path) {
     fill: var(--color-black);
   }
 </style>

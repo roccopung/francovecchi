@@ -1,29 +1,32 @@
 <script lang="ts">
-  import type { MarqueeckOptions } from "@arisbh/marqueeck";
   import Image from "$lib/components/element/Image.svelte";
-  import Marqueeck from "@arisbh/marqueeck";
+  import Marquee from "svelte-fast-marquee";
+  import { inView } from "$lib/actions/inView";
+
   type Props = {
     data: any[];
   };
 
   let { data }: Props = $props();
+  let isVisible = $state(false);
 
   let items = $derived([...data, ...data]);
-
-  const options: MarqueeckOptions = {
-    direction: "right",
-    speed: 20,
-    gap: 0,
-    onHover: "none",
-  };
 </script>
 
-<Marqueeck {options}>
-  {#each items as item}
-    {#if item && item?.cover}
-      <div class="aspect-[4/5] h-40 overflow-hidden rounded-xs">
-        <Image image={item?.cover} />
-      </div>
-    {/if}
-  {/each}
-</Marqueeck>
+<div use:inView={(v) => (isVisible = v)}>
+  <Marquee play={isVisible} speed={isVisible ? 30 : 0} gap="0" autoFill>
+    {#each items as item}
+      {#if item && item?.cover}
+        <div class="image-container aspect-[7/8] h-40 overflow-hidden -mx-5">
+          <Image image={item?.cover} />
+        </div>
+      {/if}
+    {/each}
+  </Marquee>
+</div>
+
+<style>
+  .image-container {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  }
+</style>

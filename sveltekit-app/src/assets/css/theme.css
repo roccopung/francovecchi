@@ -99,8 +99,10 @@
   --color-*: initial;
   --color-white: #fff;
   --color-black: #000;
-  --color-accent: #fff000;
+  --color-accent: #fc3852;
+  --color-yellow: #fff000;
   --color-dark-gray: #2f2f2f;
+  --color-gray: #f8f8f8;
 
   --spacing: 0.8rem;
 

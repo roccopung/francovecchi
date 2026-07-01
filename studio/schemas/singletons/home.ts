@@ -17,8 +17,13 @@ export const home = defineType({
       type: "media",
     }),
     defineField({
-      name: "heading",
-      type: "blockContent",
+      name: "keywords",
+      type: "array",
+      of: [
+        {
+          type: "string",
+        },
+      ],
     }),
     defineField({
       name: "featuredProjects",
@@ -66,6 +71,16 @@ export const home = defineType({
         }),
         defineField({
           name: "logos",
+          type: "array",
+          of: [
+            defineField({
+              name: "logo",
+              type: "image",
+            }),
+          ],
+        }),
+        defineField({
+          name: "logosTwo",
           type: "array",
           of: [
             defineField({

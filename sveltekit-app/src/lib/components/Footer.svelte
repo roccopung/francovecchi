@@ -18,35 +18,28 @@
 </script>
 
 {#if page.route.id !== "/case-studies/[slug]"}
-  <footer class="bg-accent p-1">
+  <footer class="bg-black p-1">
     <div
       class="bg-white rounded-m border border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
     >
-      <div
-        class="top grid typo-2xl font-slanted uppercase w-full px-1 text-dark-gray"
-      >
+      <div class="relative h-full w-full">
         <div
-          class="order-1 justify-self-center sm:justify-self-auto sm:order-0"
+          class="flex justify-between typo-2xl font-slanted uppercase w-full pb-4 md:pb-0 px-1 text-dark-gray"
         >
-          Work with me
-        </div>
-        <img
-          class="h-[1lh] aspect-auto p-0.5 self-center order-0 justify-self-center sm:justify-self-auto sm:order-1"
-          src="/temp/images/astrocat.png"
-          alt=""
-        />
-        <div class="justify-self-center sm:justify-self-end order-2">
-          You won't regret it
-        </div>
-      </div>
+          <div
+            class="order-1 justify-self-center sm:justify-self-auto sm:order-0"
+          >
+            Work with me
+          </div>
 
-      <div class="center h-full relative h-full w-full">
+          <div class="justify-self-center sm:justify-self-end order-2">
+            You won't regret it
+          </div>
+        </div>
         <div
-          class="h-full border-l border-black border-[0.5px] w-[1px] mx-auto hidden sm:block"
+          class="absolute top-0 left-1/2 h-full border-l border-black border-[0.5px] w-[1px] mx-auto hidden sm:block"
         ></div>
-        <div
-          class="sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:left-0 w-full central-grid grid"
-        >
+        <div class="sm:absolute sm:top-1/2 sm:left-0 w-full central-grid grid">
           <div class="flex flex-col items-center justify-center gap-4">
             <div class="flex flex-col gap-0.5 items-center">
               <div class="font-sans font-bold typo-md">Write</div>
@@ -115,12 +108,6 @@
 {/if}
 
 <style>
-  .top {
-    grid-template-columns: auto;
-    grid-template-rows: 1fr 1fr 1fr;
-    row-gap: 1rem;
-  }
-
   .bottom {
     grid-template-columns: auto;
     grid-template-rows: auto auto 1fr;
@@ -132,7 +119,6 @@
   }
 
   @media (min-width: 640px) {
-    .top,
     .bottom {
       grid-template-rows: auto;
       grid-template-columns: 1fr auto 1fr;

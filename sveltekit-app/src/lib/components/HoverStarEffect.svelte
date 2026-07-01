@@ -6,16 +6,16 @@
   let gsap: any = $state();
 
   // --- Tunables ---------------------------------------------------------
-  const POOL = 20;
-  const SIZE_VW = 0.04;
-  const MAX = 80;
-  const K = 6;
-  const SPEED_REF = 8;
-  const SPACING = 90;
-  const GROW = 0.4;
-  const LIFETIME = 0.3;
-  const TILT = 10;
-  const SMOOTH = 1;
+  let POOL = $state(3);
+  let SIZE_VW = $state(0.02);
+  let MAX = $state(20);
+  let K = $state(30);
+  let SPEED_REF = $state(40);
+  let SPACING = $state(90);
+  let GROW = $state(0.3);
+  let LIFETIME = $state(0.5);
+  let TILT = $state(20);
+  let SMOOTH = $state(1);
 
   let stars: HTMLDivElement[] = $state([]);
   let starLayer: HTMLDivElement | undefined = $state(undefined);
@@ -63,6 +63,7 @@
 
   function spawn() {
     if (!gsap) return;
+    poolIndex = poolIndex % POOL;
     const el = stars[poolIndex];
     if (!el) return;
     poolIndex = (poolIndex + 1) % POOL;
@@ -112,17 +113,49 @@
 
     const target = starLayer.parentElement ?? window;
     target.addEventListener("pointermove", onMove as EventListener);
-    if (target instanceof HTMLElement) target.style.cursor = "none";
+    // if (target instanceof HTMLElement) target.style.cursor = "none";
 
     return () => {
       target.removeEventListener("pointermove", onMove as EventListener);
-      if (target instanceof HTMLElement) target.style.cursor = "";
+      // if (target instanceof HTMLElement) target.style.cursor = "";
       stars.forEach((el) => el && gsap!.killTweensOf(el));
     };
   });
 </script>
 
 <svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
+
+<div
+  class="panel absolute top-6 right-2 z-0 bg-black/20 p-1 flex flex-col gap-1 typo-base font-mono"
+>
+  <label class="flex gap-2"
+    >POOL <input type="number" min="1" bind:value={POOL} /></label
+  >
+  <label class="flex gap-2"
+    >SIZE_VW <input type="number" step="0.01" bind:value={SIZE_VW} /></label
+  >
+  <label class="flex gap-2">MAX <input type="number" bind:value={MAX} /></label>
+  <label class="flex gap-2">K <input type="number" bind:value={K} /></label>
+  <label class="flex gap-2"
+    >SPEED_REF <input type="number" bind:value={SPEED_REF} /></label
+  >
+  <label class="flex gap-2"
+    >SPACING <input type="number" bind:value={SPACING} /></label
+  >
+  <label class="flex gap-2"
+    >GROW <input type="number" step="0.01" bind:value={GROW} /></label
+  >
+  <label class="flex gap-2"
+    ><span>LIFETIME</span>
+    <input type="number" step="0.01" bind:value={LIFETIME} /></label
+  >
+  <label class="flex gap-2"
+    >TILT <input type="number" bind:value={TILT} /></label
+  >
+  <label class="flex gap-2"
+    >SMOOTH <input type="number" step="0.01" bind:value={SMOOTH} /></label
+  >
+</div>
 
 {#if scrollY < viewportHeight * 0.15}
   <div
@@ -131,7 +164,7 @@
     aria-hidden="true"
   >
     {#each Array(POOL) as _, i (i)}
-      <div class="star mix-blend-multiply" bind:this={stars[i]}>
+      <div class="star" bind:this={stars[i]}>
         <HoverStar />
       </div>
     {/each}
@@ -154,5 +187,11 @@
     opacity: 0;
     transform-origin: center;
     will-change: width, height, transform, opacity;
+  }
+
+  input {
+    width: fit-content;
+    width: 5.5rem;
+    border-bottom: 1px solid black;
   }
 </style>

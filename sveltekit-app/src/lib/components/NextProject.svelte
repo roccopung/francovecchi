@@ -193,7 +193,7 @@
   <div class="wrapper relative w-full h-50 overflow-hidden">
     <div
       bind:this={labelWrapper}
-      class="label absolute z-[11] bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 group-hover:bg-accent transition-colors transition-fast"
+      class="label absolute z-[11] bottom-0 left-0 m-1 bg-white rounded-s border border-black p-1 flex flex-col gap-3 group-hover:bg-accent group-hover:text-white transition-colors transition-fast"
     >
       <div
         class="typo-xs font-mono uppercase flex gap-1 items-center"

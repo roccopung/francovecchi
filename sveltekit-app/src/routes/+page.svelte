@@ -13,7 +13,10 @@
   import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
   import KeenEyeMarquee from "$lib/components/marquees/KeenEyeMarquee.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
-  import Characters from "$lib/components/sections/Characters.svelte";
+  import KeenEyeIcon from "$lib/components/svg/KeenEyeIcon.svelte";
+  import ShearMarquee from "$lib/components/marquees/ShearMarquee.svelte";
+  import KeywordsMarquee from "$lib/components/marquees/KeywordsMarquee.svelte";
+  import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
@@ -24,40 +27,49 @@
   let characterRefs: HTMLElement[] = $state([]);
   let viewportWidth = $state(0);
 
-  onMount(async () => {
-    const { gsap } = await import("gsap");
-    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-    gsap.registerPlugin(ScrollTrigger);
-    const tl = gsap.timeline();
+  onMount(() => {
+    let ctx: gsap.Context | undefined;
 
-    tl.to(".keen-eye", {
-      scrollTrigger: {
-        trigger: ".keen-eye",
-        start: "top 80%",
-        end: "+=100",
-        scrub: 1,
-      },
-      width: 120,
-    });
+    (async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-    for (let i = 0; i < characterRefs.length; i++) {
-      const xPercents = [
-        (((viewportWidth / 8) * 0.5) / 2) * -1,
-        (((viewportWidth / 8) * 0.5) / 2) * -0.5,
-        (((viewportWidth / 8) * 0.5) / 2) * 0.5,
-        (((viewportWidth / 8) * 0.5) / 2) * 1,
-      ];
-      gsap.from(characterRefs[i], {
-        scrollTrigger: {
-          trigger: characterRefs[i],
-          start: "top 90%",
-          end: "+=100",
-          scrub: 1,
-        },
-        scale: 0.5,
-        xPercent: xPercents[i % 4],
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline();
+
+        tl.to(".keen-eye", {
+          scrollTrigger: {
+            trigger: ".keen-eye",
+            start: "top 80%",
+            end: "+=100",
+            scrub: 1,
+          },
+          width: 120,
+        });
+
+        for (let i = 0; i < characterRefs.length; i++) {
+          const xPercents = [
+            (((viewportWidth / 8) * 0.5) / 2) * -1,
+            (((viewportWidth / 8) * 0.5) / 2) * -0.5,
+            (((viewportWidth / 8) * 0.5) / 2) * 0.5,
+            (((viewportWidth / 8) * 0.5) / 2) * 1,
+          ];
+          gsap.from(characterRefs[i], {
+            scrollTrigger: {
+              trigger: characterRefs[i],
+              start: "top 90%",
+              end: "+=100",
+              scrub: 1,
+            },
+            scale: 0.5,
+            xPercent: xPercents[i % 4],
+          });
+        }
       });
-    }
+    })();
+
+    return () => ctx?.revert();
   });
 </script>
 
@@ -65,7 +77,7 @@
 
 <main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
-  <section class="px-1 pb-1 mt-[80svh] bg-accent">
+  <section class="px-1 pb-1 mt-[80svh] bg-white">
     {#if home?.cover}
       <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
@@ -73,14 +85,34 @@
     {/if}
     {#if home?.heading}<Headline data={home?.heading} />{/if}
   </section>
+  {#if home?.keywords}
+    <section class="px-1 bg-white">
+      <KeywordsMarquee data={home?.keywords} />
+    </section>
+  {/if}
   <div class="sections flex flex-col gap-1 bg-white pt-1">
     {#if home?.featuredProjects && home?.featuredProjects.length > 0}
-      <section class="px-1 flex flex-col gap-1 md:gap-0">
+      <section class="px-1 flex flex-col gap-1 md:gap-0 md:grid-2">
         {#each home?.featuredProjects as project}
           <ProjectCard {project} />
         {/each}
       </section>
     {/if}
+    <div class="w-full bg-white p-1">
+      <div
+        class="border border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
+      >
+        <div class="py-15 flex flex-col gap-0.5 items-center">
+          <button
+            class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border border-black bg-white cursor-pointer hover:bg-black hover:text-white"
+            >Explore the archive</button
+          >
+        </div>
+        <div class="absolute left-0 pointer-events-none">
+          <ShearMarquee />
+        </div>
+      </div>
+    </div>
     <section class="px-1">
       <div
         class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border border-black rounded-s md:rounded-m"
@@ -130,20 +162,27 @@
           <LogosMarquee data={home?.clientsSection?.logos} />
         </div>
       {/if}
+
+      {#if home?.clientsSection && (home?.clientsSection.logosTwo?.length ?? 0) > 0}
+        <div class="overflow-hidden w-full">
+          <LogosMarquee
+            direction="right"
+            data={home?.clientsSection?.logosTwo}
+          />
+        </div>
+      {/if}
     </section>
     {#if characters && characters.length > 0}
-      <Characters {characters} />
+      <section class="overflow-hidden">
+        <CharactersMarquee data={characters} />
+      </section>
     {/if}
   </div>
   <section>
     <div
-      class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-accent"
+      class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-black"
     >
-      <img
-        class="w-30 md:w-[33vw] keen-eye"
-        src="/temp/images/keen-eye.png"
-        alt=""
-      />
+      <div class="w-30 md:w-[33vw] keen-eye"><KeenEyeIcon /></div>
       {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />
@@ -151,7 +190,7 @@
       {/if}
       {#if home?.endingBlock?.description}
         <div
-          class="typo-xl font-medium font-sans text-center lg:max-w-3/4 text-dark-gray px-1 pt-2 md:px-4 md:pt-4 pb-2"
+          class="typo-xl font-medium font-sans text-center lg:max-w-3/4 text-white px-1 pt-2 md:px-4 md:pt-4 pb-2"
         >
           <PortableText data={home?.endingBlock?.description} />
         </div>

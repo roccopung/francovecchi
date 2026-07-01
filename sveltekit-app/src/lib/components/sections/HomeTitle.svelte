@@ -68,23 +68,26 @@
 
 <svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
 
-<div
-  data-hero
-  class="bg-accent fixed h-[80svh] w-full top-0 left-0 p-1 text-dark-gray"
->
+<div data-hero class="bg-white fixed h-[80svh] w-full top-0 left-0 p-1">
   <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
     <div
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
 pointer-events-none"
     >
-      <h1 bind:this={franco} class="trimmed hidden md:block opacity-0">
+      <h1
+        bind:this={franco}
+        class="trimmed hidden md:block opacity-0 text-accent"
+      >
         Franco
       </h1>
-      <h1 bind:this={vecchi} class="trimmed ml-7 hidden md:block opacity-0">
+      <h1
+        bind:this={vecchi}
+        class="trimmed ml-7 hidden md:block opacity-0 text-accent"
+      >
         Vecchi
       </h1>
-      <h1 class="trimmed md:hidden">Franco</h1>
-      <h1 class="trimmed ml-7 md:hidden">Vecchi</h1>
+      <h1 class="trimmed text-accent md:hidden">Franco</h1>
+      <h1 class="trimmed text-accent ml-7 md:hidden">Vecchi</h1>
     </div>
 
     <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
@@ -92,18 +95,10 @@ pointer-events-none"
         <div class="trimmed -mr-0.5">Pushing</div>
         <div class="trimmed">keyrames</div>
       </div>
-      <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />
     </div>
 
-    <div class="absolute bottom-0 right-0 p-1 w-fit z-30">
-      <Cta
-        {cta}
-        font="sans"
-        typo="s"
-        uppercase={false}
-        arrow={true}
-        fill="var(--color-accent)"
-      />
+    <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
+      <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />
     </div>
   </div>
 </div>
