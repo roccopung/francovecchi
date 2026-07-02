@@ -36,4 +36,6 @@
   {/if}
 </main>
 
-<SeeMore itemsToLoad={initialProjectsNumber} bind:itemsLoaded={itemsToLoad} />
+<div class="py-1">
+  <SeeMore itemsToLoad={initialProjectsNumber} bind:itemsLoaded={itemsToLoad} />
+</div>

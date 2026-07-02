@@ -19,7 +19,7 @@
 <!-- DESKTOP NAV -->
 
 <nav
-  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full p-1 font-mono uppercase z-30 border-black
+  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full px-1.5 md:px-2 py-1 font-mono uppercase z-30 border-black
   {page?.route?.id !== '/' ? 'bg-white' : ''}
   {scrollY > 10 ? 'border-b-2 bg-white' : ''}"
 >
@@ -61,7 +61,7 @@
 <!-- MOBILE NAV -->
 
 <nav
-  class="mobile-nav fixed top-0 left-0 w-full p-1 font-mono z-30 bg-accent outline-black outline-2 transition-all duration-300 {menuState.open ===
+  class="mobile-nav fixed top-0 left-0 w-full px-1.5 md:px-2 py-1 font-mono z-30 bg-accent outline-black outline-2 transition-all duration-300 {menuState.open ===
     true || scrollY > 10
     ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"

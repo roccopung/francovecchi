@@ -35,8 +35,8 @@
       </div>
     </div>
   {/key}
-  <div class="bg-white">
-    <div class="p-1.5 md:p-2">
+  <div class="bg-white flex flex-col gap-1 pt-1">
+    <div class="px-1.5 md:px-2">
       <section
         class="p-1.5 md:p-2 py-4 rounded-m border-2 border-black bg-white text-center"
       >
@@ -74,7 +74,7 @@
     {/if}
 
     {#if project?.result}
-      <section class="p-1.5 md:p-2 pb-0 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
+      <section class="px-1.5 md:px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
         <div
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-center justify-center items-center"
         >
@@ -92,9 +92,7 @@
     {/if}
 
     {#if project?.credits}
-      <section
-        class="px-1.5 md:px-2 py-1 bg-white 3xl:max-w-[70vw] 3xl:mx-auto"
-      >
+      <section class="px-1.5 md:px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
         <div
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 px-1 items-center justify-center text-center"
         >
@@ -113,7 +111,7 @@
       </section>
     {/if}
 
-    <div class="px-1.5 pb-1.5 md:pb-2 md:px-2 bg-white">
+    <div class="px-1.5 pb-1 md:px-2 bg-white">
       <div
         class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 text-center flex flex-col items-center"
       >

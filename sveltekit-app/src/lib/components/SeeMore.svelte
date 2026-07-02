@@ -1,5 +1,6 @@
 <script lang="ts">
   import PathCallFranco from "$lib/components/svg/PathCallFranco.svelte";
+  import ShearMarquee from "$lib/components/marquees/ShearMarquee.svelte";
 
   type Props = {
     itemsToLoad: number;
@@ -9,7 +10,7 @@
   let { itemsToLoad = 1, itemsLoaded = $bindable(1) }: Props = $props();
 </script>
 
-<div class="w-full bg-white p-1.5 md:p-2">
+<div class="w-full bg-white px-1.5 md:px-2">
   <div
     class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
   >
@@ -20,10 +21,8 @@
         >See more</button
       >
     </div>
-    <div
-      class="absolute left-0 w-[150vw] md:w-[200vw] -translate-y-5 -translate-x-2/5 md:-translate-y-10 pointer-events-none"
-    >
-      <PathCallFranco />
+    <div class="absolute left-0 pointer-events-none">
+      <ShearMarquee />
     </div>
   </div>
 </div>

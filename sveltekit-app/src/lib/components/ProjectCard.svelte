@@ -97,7 +97,7 @@
           </div>
         </div>
         <div
-          class="self-end py-1 px-3 border-2 border-black rounded-full w-fit hover:bg-accent transition-fast pointer-events-auto group-hover:bg-accent"
+          class="self-end mt-3 mb-2 py-1 px-3 border-2 border-black rounded-full w-fit hover:bg-accent transition-fast pointer-events-auto group-hover:bg-accent"
         >
           <div class="w-3"><ArrowRight /></div>
         </div>
