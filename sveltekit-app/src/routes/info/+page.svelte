@@ -7,7 +7,7 @@
   import Headline from "$lib/components/Headline.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
-  import Characters from "$lib/components/sections/Characters.svelte";
+  import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
   import HobbiesMarquee from "$lib/components/marquees/HobbiesMarquee.svelte";
   import Accordion from "$lib/components/element/Accordion.svelte";
   import Reviews from "$lib/components/Reviews.svelte";
@@ -109,8 +109,10 @@
         </div>
       </section>
     {/if}
-    {#if characters}
-      <Characters {characters} />
+    {#if characters && characters.length > 0}
+      <section class="overflow-hidden">
+        <CharactersMarquee data={characters} />
+      </section>
     {/if}
     {#if infoPage?.hobbies}
       <div class="w-full overflow-hidden">
