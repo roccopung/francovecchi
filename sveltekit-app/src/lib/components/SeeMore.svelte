@@ -9,7 +9,7 @@
   let { itemsToLoad = 1, itemsLoaded = $bindable(1) }: Props = $props();
 </script>
 
-<div class="w-full bg-white p-1">
+<div class="w-full bg-white p-1.5 md:p-2">
   <div
     class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
   >

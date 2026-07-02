@@ -2,14 +2,15 @@
   //@ts-nocheck
   import Cta from "$lib/components/element/Cta.svelte";
   import { onMount, onDestroy } from "svelte";
-  import { browser } from "$app/environment";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
   let ctx: gsap.Context | undefined;
-  let scrollOpacity = $state(1);
   let scrollY = $state(0);
   let viewportHeight = $state(0);
+  let scrollOpacity = $derived(
+    Math.max(0, 1 - scrollY / (viewportHeight / 1.6)),
+  );
 
   let cta = {
     ctaType: "linkEmail",
@@ -19,57 +20,69 @@
     },
   };
 
-  const handleScroll = () => {
-    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.6)).toFixed(3);
+  const animateTitle = (
+    gsap: typeof import("gsap"),
+    SplitText: typeof import("gsap/SplitText"),
+  ) => {
+    ctx = gsap.context(() => {
+      gsap.set([franco, vecchi], { opacity: 1 });
+
+      // `dir`: -1 slides the word off to the left, +1 off to the right.
+      const reveal = (el: HTMLElement, yPercent: number, dir: number) =>
+        SplitText.create(el, {
+          type: "chars, words",
+          charsClass: "ht-char",
+          autoSplit: true,
+          onSplit: (self) => {
+            // One-time entrance reveal on mount.
+            gsap.from(self.chars, {
+              duration: 0.3,
+              yPercent,
+              scale: 0,
+              stagger: 0.05,
+              ease: "power4.out",
+            });
+
+            return gsap.to(self.words, {
+              scrollTrigger: {
+                start: 0,
+                scrub: 0.5,
+              },
+              x: () => dir * window.innerWidth,
+              stagger: { from: dir < 0 ? "start" : "end" },
+              ease: "none",
+            });
+          },
+        });
+
+      reveal(franco, -20, -6);
+      reveal(vecchi, 20, 5);
+    });
   };
 
   onMount(() => {
     document.fonts.ready.then(async () => {
       const { gsap } = await import("gsap");
       const { SplitText } = await import("gsap/SplitText");
-      gsap.registerPlugin(SplitText);
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(SplitText, ScrollTrigger);
 
-      ctx = gsap.context(() => {
-        gsap.set([franco, vecchi], { opacity: 1 });
+      animateTitle(gsap, SplitText);
 
-        const reveal = (el: HTMLElement, yPercent: number) =>
-          SplitText.create(el, {
-            type: "chars, words",
-            charsClass: "ht-char",
-            autoSplit: true,
-            // Return the tween so autoSplit reverts it before each re-split.
-            onSplit: (self) =>
-              gsap.from(self.chars, {
-                duration: 0.3,
-                yPercent,
-                scale: 0,
-                stagger: 0.05,
-                ease: "power4.out",
-              }),
-          });
-
-        reveal(franco, -20);
-        reveal(vecchi, 20);
-      });
+      // Recalculate trigger positions once fonts/layout have settled.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => ScrollTrigger.refresh()),
+      );
     });
-    handleScroll();
-    if (browser) {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-    }
   });
 
-  onDestroy(() => {
-    ctx?.revert();
-    if (browser) {
-      window.removeEventListener("scroll", handleScroll);
-    }
-  });
+  onDestroy(() => ctx?.revert());
 </script>
 
 <svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
 
 <div data-hero class="bg-white fixed h-[80svh] w-full top-0 left-0 p-1">
-  <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
+  <div class="relative w-full h-full">
     <div
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
 pointer-events-none"

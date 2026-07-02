@@ -47,25 +47,6 @@
           },
           width: 120,
         });
-
-        for (let i = 0; i < characterRefs.length; i++) {
-          const xPercents = [
-            (((viewportWidth / 8) * 0.5) / 2) * -1,
-            (((viewportWidth / 8) * 0.5) / 2) * -0.5,
-            (((viewportWidth / 8) * 0.5) / 2) * 0.5,
-            (((viewportWidth / 8) * 0.5) / 2) * 1,
-          ];
-          gsap.from(characterRefs[i], {
-            scrollTrigger: {
-              trigger: characterRefs[i],
-              start: "top 90%",
-              end: "+=100",
-              scrub: 1,
-            },
-            scale: 0.5,
-            xPercent: xPercents[i % 4],
-          });
-        }
       });
     })();
 
@@ -77,7 +58,7 @@
 
 <main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
-  <section class="px-1 pb-1 mt-[80svh] bg-white">
+  <section class="px-1.5 md:px-2 pb-1 mt-[80svh] bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-s md:rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
@@ -92,13 +73,13 @@
   {/if}
   <div class="sections flex flex-col gap-1 bg-white pt-1">
     {#if home?.featuredProjects && home?.featuredProjects.length > 0}
-      <section class="px-1 flex flex-col gap-1 md:gap-0 md:grid-2">
+      <section class="px-1.5 md:px-2 flex flex-col gap-1 md:gap-0 md:grid-2">
         {#each home?.featuredProjects as project}
           <ProjectCard {project} />
         {/each}
       </section>
     {/if}
-    <div class="w-full bg-white p-1">
+    <div class="w-full bg-white px-1.5 md:px-2">
       <div
         class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
       >
@@ -113,7 +94,7 @@
         </div>
       </div>
     </div>
-    <section class="px-1">
+    <section class="px-1.5 md:px-2">
       <div
         class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border-2 border-black rounded-s md:rounded-m"
       >

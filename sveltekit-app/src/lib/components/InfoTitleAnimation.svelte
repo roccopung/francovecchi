@@ -7,35 +7,60 @@
   let nco: HTMLElement;
   let ctx: gsap.Context | undefined;
 
+  const animateTitle = (
+    gsap: typeof import("gsap"),
+    SplitText: typeof import("gsap/SplitText"),
+  ) => {
+    ctx = gsap.context(() => {
+      gsap.set([fra, fran, nco], { opacity: 1 });
+
+      // `dir`: -1 slides the word off to the left, +1 off to the right.
+      const reveal = (el: HTMLElement, yPercent: number, dir: number) =>
+        SplitText.create(el, {
+          type: "chars, words",
+          charsClass: "ht-char",
+          autoSplit: true,
+          onSplit: (self) => {
+            // One-time entrance reveal on mount.
+            gsap.from(self.chars, {
+              duration: 0.3,
+              yPercent,
+              scale: 0,
+              stagger: 0.05,
+              ease: "power4.out",
+            });
+
+            return gsap.to(self.words, {
+              scrollTrigger: {
+                start: 0,
+                scrub: 0.5,
+              },
+              x: () => dir * window.innerWidth,
+              stagger: { from: dir < 0 ? "start" : "end" },
+              ease: "none",
+            });
+          },
+        });
+
+      reveal(fra, -20, -6);
+      reveal(fran, 20, 5);
+      reveal(nco, -20, -6);
+    });
+  };
+
   onMount(() => {
     document.fonts.ready.then(async () => {
       const { gsap } = await import("gsap");
       const { SplitText } = await import("gsap/SplitText");
-      gsap.registerPlugin(SplitText);
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(SplitText, ScrollTrigger);
 
-      ctx = gsap.context(() => {
-        gsap.set([fra, fran, nco], { opacity: 1 });
+      animateTitle(gsap, SplitText);
 
-        const reveal = (el: HTMLElement, yPercent: number) =>
-          SplitText.create(el, {
-            type: "chars, words",
-            charsClass: "ht-char",
-            autoSplit: true,
-            // Return the tween so autoSplit reverts it before each re-split.
-            onSplit: (self) =>
-              gsap.from(self.chars, {
-                duration: 0.3,
-                yPercent,
-                scale: 0,
-                stagger: 0.05,
-                ease: "power4.out",
-              }),
-          });
-
-        reveal(fra, -20);
-        reveal(fran, 0);
-        reveal(nco, 20);
-      });
+      // Recalculate trigger positions once fonts/layout have settled.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => ScrollTrigger.refresh()),
+      );
     });
   });
 

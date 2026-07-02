@@ -29,10 +29,6 @@
     },
   };
 
-  const handleScroll = () => {
-    scrollOpacity = Number(1 - scrollY / (viewportHeight / 1.6)).toFixed(3);
-  };
-
   onMount(async () => {
     const { gsap } = await import("gsap");
     if (portraitWrapperEl && portraitEl) {
@@ -56,10 +52,6 @@
         ease: "power4.inOut",
       });
     }
-    handleScroll();
-    if (browser) {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-    }
   });
 
   $effect(() => {
@@ -75,12 +67,6 @@
           : viewportHeight * 0.4 * (4 / 5) + "px";
     }
   });
-
-  onDestroy(() => {
-    if (browser) {
-      window.removeEventListener("scroll", handleScroll);
-    }
-  });
 </script>
 
 <svelte:window
@@ -93,7 +79,7 @@
   data-hero
   class="bg-white fixed h-[100svh] w-full top-0 left-0 text-accent"
 >
-  <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
+  <div class="relative w-full h-full">
     <div
       class="absolute top-1/2 left-0 md:left-2 -translate-y-1/2 pointer-events-none"
     >

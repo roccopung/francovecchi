@@ -112,7 +112,7 @@
           end: "bottom bottom",
           scrub: 1,
         },
-        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 15,
+        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 40,
       });
     });
 
@@ -145,7 +145,7 @@
           end: "bottom bottom",
           scrub: 2,
         },
-        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 15,
+        width: viewportWidth > 768 ? viewportWidth / 2 : viewportWidth - 40,
       });
       _gsap.set([episodeEl, titleEl], { opacity: 1 });
 
@@ -193,7 +193,7 @@
   <div class="wrapper relative w-full h-50 overflow-hidden">
     <div
       bind:this={labelWrapper}
-      class="label absolute z-[11] bottom-0 left-1/2 transform -translate-x-1/2 m-1 bg-white rounded-s border-2 border-black p-1 flex flex-col gap-3 group-hover:bg-accent group-hover:text-white transition-colors transition-fast"
+      class="label absolute z-[11] bottom-0 left-1/2 transform -translate-x-1/2 mb-1 bg-white rounded-s border-2 border-black p-1 flex flex-col gap-3 min-w-[50vw] group-hover:bg-accent group-hover:text-white transition-colors transition-fast"
     >
       <div
         class="typo-xs font-mono uppercase flex gap-1 items-center mx-auto"
@@ -204,7 +204,7 @@
         >
         <span>(Next episode)</span>
       </div>
-      <h1 class="typo-3xl font-slanted label-title pl-1" bind:this={labelTitle}>
+      <h1 class="typo-3xl font-slanted label-title" bind:this={labelTitle}>
         {displayedProject?.title}
       </h1>
     </div>

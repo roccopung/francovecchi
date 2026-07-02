@@ -25,7 +25,7 @@
 <main class="w-full flex flex-col">
   <InfoTitle portrait={infoPage?.portrait} />
   <div class="bg-white h-full w-full mt-[100svh] z-10">
-    <section class="px-1 py-4 flex flex-col gap-3">
+    <section class=" p-1.5 md:p-2 py-4 flex flex-col gap-3">
       {#if infoPage?.intro?.heading}
         <Headline data={infoPage?.intro?.heading} />
       {/if}
@@ -63,7 +63,7 @@
     </section>
     {#if infoPage?.collaborations}
       <section
-        class="border-b-2 border-black p-2 md:pt-3 md:px-1 flex flex-col gap-4 md:gap-2"
+        class="border-b-2 border-black p-2 md:pt-3 md:px-2 flex flex-col gap-4 md:gap-2"
       >
         {#if infoPage?.collaborations?.heading}
           <Headline data={infoPage?.collaborations?.heading} />
@@ -115,7 +115,7 @@
       </div>
     {/if}
 
-    <section class="px-1 pb-4 flex flex-col gap-2 md:grid-2 md:gap-2">
+    <section class="px-1.5 md:px-2 pb-4 flex flex-col gap-2 md:grid-2 md:gap-2">
       <div class="flex flex-col gap-1">
         {#if infoPage?.skillsSection?.heading}
           <Headline data={infoPage?.skillsSection?.heading} />
@@ -139,7 +139,7 @@
   </div>
   {#if infoPage?.reviewsSection}
     <section class="py-2 bg-white">
-      <div class="flex flex-col gap-2 px-1">
+      <div class="flex flex-col gap-2 px-1.5 md:px-2">
         {#if infoPage?.reviewsSection?.heading}
           <Headline data={infoPage?.reviewsSection?.heading} />
         {/if}

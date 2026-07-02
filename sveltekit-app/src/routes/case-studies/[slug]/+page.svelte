@@ -28,17 +28,17 @@
     <div class="h-[100svh] w-full relative">
       <Image image={project?.cover} />
       <div
-        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 m-1 bg-white rounded-s border-2 border-black p-1 flex flex-col gap-3 min-w-[50vw] w-[calc(100vw-1.5rem)] md:w-auto text-center"
+        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-1 bg-white rounded-s border-2 border-black p-1 flex flex-col gap-3 min-w-[50vw] w-[calc(100vw-4rem)] md:w-auto text-center"
       >
         <div class="typo-xs font-mono uppercase">({project?.years})</div>
-        <h1 class="typo-3xl font-slanted pl-1">{project?.title}</h1>
+        <h1 class="typo-3xl font-slanted">{project?.title}</h1>
       </div>
     </div>
   {/key}
   <div class="bg-white">
-    <div class="p-1">
+    <div class="p-1.5 md:p-2">
       <section
-        class="p-1 py-4 rounded-m border-2 border-black bg-white text-center"
+        class="p-1.5 md:p-2 py-4 rounded-m border-2 border-black bg-white text-center"
       >
         <!-- {#if project?.tagline}
           <Headline data={project?.tagline} />
@@ -74,7 +74,7 @@
     {/if}
 
     {#if project?.result}
-      <section class="p-1 pb-0 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
+      <section class="p-1.5 md:p-2 pb-0 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
         <div
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-center justify-center items-center"
         >
@@ -92,7 +92,9 @@
     {/if}
 
     {#if project?.credits}
-      <section class="p-1 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
+      <section
+        class="px-1.5 md:px-2 py-1 bg-white 3xl:max-w-[70vw] 3xl:mx-auto"
+      >
         <div
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 px-1 items-center justify-center text-center"
         >
@@ -111,7 +113,7 @@
       </section>
     {/if}
 
-    <div class="p-1 pt-0 bg-white">
+    <div class="px-1.5 pb-1.5 md:pb-2 md:px-2 bg-white">
       <div
         class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 text-center flex flex-col items-center"
       >
