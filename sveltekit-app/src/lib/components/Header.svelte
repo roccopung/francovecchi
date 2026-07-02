@@ -21,7 +21,7 @@
 <nav
   class="desktop-nav hidden md:grid fixed top-0 left-0 w-full p-1 font-mono uppercase z-30 border-black
   {page?.route?.id !== '/' ? 'bg-white' : ''}
-  {scrollY > 10 ? 'border-b bg-white' : ''}"
+  {scrollY > 10 ? 'border-b-2 bg-white' : ''}"
 >
   <a
     href="/"
@@ -32,7 +32,7 @@
 
   <ul class="gap-0.5 self-end hidden md:flex">
     <li
-      class="bg-dark-gray border border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
+      class="bg-dark-gray border-2 border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
       <a class="w-full h-full py-1 px-3 hidden md:flex" href="/case-studies"
         >Case studies {#if caseStudies > 0}({caseStudies}){/if}</a
@@ -42,18 +42,18 @@
       >
     </li>
     <li
-      class="bg-dark-gray border border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
+      class="bg-dark-gray border-2 border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
-      <a class="w-full h-full py-1 px-3" href="/lookbook">Lookbook</a>
+      <a class="w-full h-full py-1 px-3" href="/gallery">Gallery</a>
     </li>
     <li
-      class="bg-dark-gray border border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
+      class="bg-dark-gray border-2 border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
       <a class="w-full h-full py-1 px-3" href="/info">Info</a>
     </li>
   </ul>
   <a
-    class="py-1 px-3 bg-dark-gray border border-dark-gray text-white rounded-full w-fit h-fit place-self-end hover:bg-white hover:text-black hidden md:block"
+    class="py-1 px-3 bg-dark-gray border-2 border-dark-gray text-white rounded-full w-fit h-fit place-self-end hover:bg-white hover:text-black hidden md:block"
     href="mailto:hello@francovecchi.com">Write!</a
   >
 </nav>
@@ -61,9 +61,9 @@
 <!-- MOBILE NAV -->
 
 <nav
-  class="mobile-nav fixed top-0 left-0 w-full p-1 font-mono z-30 bg-white outline-white outline-1 transition-all duration-300 {menuState.open ===
+  class="mobile-nav fixed top-0 left-0 w-full p-1 font-mono z-30 bg-accent outline-black outline-2 transition-all duration-300 {menuState.open ===
     true || scrollY > 10
-    ? 'outline-black rounded-b-s rounded-b-s open'
+    ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"
 >
   <div class="flex justify-between">
@@ -75,7 +75,7 @@
   </div>
 
   <ul
-    class="menu-dropdown bg-white flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
+    class="menu-dropdown bg-accent flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
     class:open={menuState.open}
     class:h-35={menuState.open}
     class:py-4={menuState.open}
@@ -93,7 +93,7 @@
         class="uppercase transition-opacity transition-fast delay-0 {!menuState.open
           ? 'delay-700 opacity-0'
           : ''}"
-        href="/lookbook">Lookbook</a
+        href="/gallery">Gallery</a
       >
     </li>
     <li>
@@ -107,7 +107,7 @@
     <li>
       <a
         href="mailto:hello@francovecchi.com"
-        class="border-1 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s font-mono hover:bg-black hover:text-white cursor-pointer mt-1 transition-opacity transition-fast delay-0 {!menuState.open
+        class="border-2 border-black rounded-full py-1 px-3 flex items-start gap-1 typo-s bg-white font-mono hover:bg-black hover:text-white cursor-pointer mt-1 transition-opacity transition-fast delay-0 {!menuState.open
           ? 'delay-700 opacity-0'
           : ''}"
       >

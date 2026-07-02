@@ -25,7 +25,7 @@
   );
 </script>
 
-<div class="flex flex-col gap-0.5">
+<div class="flex flex-col gap-0.5 3xl:max-w-[70vw] 3xl:mx-auto">
   {#each orderedComponents as { section, componentPromise } (section._key)}
     {#await componentPromise then Module}
       {@const Component = Module.default}

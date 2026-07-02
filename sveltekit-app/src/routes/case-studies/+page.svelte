@@ -17,12 +17,12 @@
 </script>
 
 <main
-  class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-accent"
+  class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-white"
 >
-  <h1 class="typo-6xl font-slanted uppercase mt-8">Case studies</h1>
+  <h1 class="typo-6xl font-slanted uppercase mt-8 text-accent">Case studies</h1>
   {#if filteredCaseStudies}
     <ul
-      class="flex flex-col gap-0 font-sans typo-xl list-disc p-1 pb-0 bg-white"
+      class="flex flex-col gap-1.5 md:gap-0 font-sans typo-xl list-disc p-1 pb-0 bg-white 3xl:max-w-[70vw]"
     >
       {#each filteredCaseStudies as study, index}
         <ProjectCard

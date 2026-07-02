@@ -91,7 +91,7 @@
 
 <div
   data-hero
-  class="bg-accent fixed h-[100svh] w-full top-0 left-0 text-dark-gray"
+  class="bg-white fixed h-[100svh] w-full top-0 left-0 text-accent"
 >
   <div class="relative w-full h-full" style="opacity: {scrollOpacity}">
     <div
@@ -108,7 +108,7 @@
     {#if portrait}
       <div
         bind:this={portraitWrapperEl}
-        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0 w-0 overflow-hidden border border-black opacity-0 pointer-events-none"
+        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-0 w-0 overflow-hidden border-2 border-black opacity-0 pointer-events-none"
       >
         <div
           bind:this={portraitEl}
@@ -121,17 +121,6 @@
 
     <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
       <img class="h-[1.55lh]" src="/temp/images/level-44.png" alt="" />
-    </div>
-
-    <div class="absolute bottom-0 right-0 p-1 w-fit z-30">
-      <Cta
-        {cta}
-        font="sans"
-        typo="s"
-        uppercase={false}
-        arrow={true}
-        fill="var(--color-accent)"
-      />
     </div>
   </div>
 </div>

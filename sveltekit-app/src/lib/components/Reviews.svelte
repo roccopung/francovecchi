@@ -34,7 +34,7 @@
     <div class="embla__container md:ml-1">
       {#each reviews as review, index}
         <div
-          class="embla__slide border border-black rounded-m p-2 flex flex-col justify-between gap-10"
+          class="embla__slide border-2 border-black rounded-m p-2 flex flex-col justify-between gap-10 bg-white -mr-[1px] -ml-[1px]"
         >
           <div class="typo-s font-sans">
             <PortableText data={review.content} />

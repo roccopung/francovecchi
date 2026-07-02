@@ -14,7 +14,13 @@
 </script>
 
 <div use:inView={(v) => (isVisible = v)}>
-  <Marquee play={isVisible} speed={isVisible ? 30 : 0} gap="0" autoFill>
+  <Marquee
+    play={isVisible}
+    speed={isVisible ? 30 : 0}
+    gap="0"
+    autoFill
+    direction="right"
+  >
     {#each items as item}
       {#if item && item?.cover}
         <div class="image-container aspect-[7/8] h-40 overflow-hidden -mx-5">

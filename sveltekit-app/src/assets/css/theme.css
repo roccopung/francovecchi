@@ -114,4 +114,6 @@
   --radius-s: 1rem;
   --radius-m: 2.4rem;
   --radius-l: 4rem;
+
+  --breakpoint-3xl: 1920px;
 }

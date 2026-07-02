@@ -32,11 +32,11 @@
   {#if variant === "home"}
     <a
       href="/case-studies/{project?.slug?.current}"
-      class="home-variant w-full outline-1 outline-black rounded-s md:rounded-m overflow-hidden -mt-[1px] group pointer-events-none md:pointer-events-auto"
+      class="home-variant w-full border-2 border-black rounded-s md:rounded-m overflow-hidden even:-ml-[2px] -mt-[1px] group pointer-events-none md:pointer-events-auto"
     >
       <div class="overflow-hidden">
         <div
-          class="h-full w-full card-image group-hover:scale-105 transition-fast"
+          class="h-full w-full card-image scale-101 group-hover:scale-105 transition-fast"
         >
           <Image image={project?.cover} />
         </div>
@@ -58,7 +58,7 @@
           </h3>
         </div>
         <div
-          class="self-end py-1 px-3 border-1 border-black rounded-full group-hover:bg-yellow w-fit transition-fast md:hidden pointer-events-auto"
+          class="self-end py-1 px-3 border-2 border-black rounded-full w-fit transition-fast md:hidden pointer-events-auto"
         >
           <div class="w-3"><ArrowRight /></div>
         </div>
@@ -69,8 +69,9 @@
     VARIANT CASE-STUDY
     -->
 
-    <div
-      class="case-studies-variant w-full border-1 outline-black rounded-s md:rounded-m overflow-hidden -mt-[1px] md:min-h-70 transition-fast"
+    <a
+      href="/case-studies/{project?.slug?.current}"
+      class="group case-studies-variant w-full border-2 border-black rounded-s md:rounded-m overflow-hidden even:-mt-[2px] md:min-h-70 transition-fast pointer-events-none md:pointer-events-auto"
       style="opacity: {coverOneVisible && coverTwoVisible ? 1 : 0};"
     >
       <div class="case-studies-content p-1 pt-0 bg-white">
@@ -95,12 +96,11 @@
             <PortableText data={project?.shortSummary} />
           </div>
         </div>
-        <a
-          href="/case-studies/{project?.slug?.current}"
-          class="self-end py-1 px-3 border-1 border-black rounded-full w-fit hover:bg-accent transition-fast"
+        <div
+          class="self-end py-1 px-3 border-2 border-black rounded-full w-fit hover:bg-accent transition-fast pointer-events-auto group-hover:bg-accent"
         >
           <div class="w-3"><ArrowRight /></div>
-        </a>
+        </div>
       </div>
       <div class="grid-2">
         <div class="overflow-hidden">
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </a>
   {/if}
 {/key}
 

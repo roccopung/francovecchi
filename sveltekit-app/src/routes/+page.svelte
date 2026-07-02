@@ -79,14 +79,14 @@
   <HomeTitle />
   <section class="px-1 pb-1 mt-[80svh] bg-white">
     {#if home?.cover}
-      <div class="border-1 border-black rounded-s md:rounded-m overflow-hidden">
+      <div class="border-2 border-black rounded-s md:rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
       </div>
     {/if}
     {#if home?.heading}<Headline data={home?.heading} />{/if}
   </section>
   {#if home?.keywords}
-    <section class="px-1 bg-white">
+    <section class="bg-white">
       <KeywordsMarquee data={home?.keywords} />
     </section>
   {/if}
@@ -100,11 +100,11 @@
     {/if}
     <div class="w-full bg-white p-1">
       <div
-        class="border border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
+        class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
       >
         <div class="py-15 flex flex-col gap-0.5 items-center">
           <button
-            class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border border-black bg-white cursor-pointer hover:bg-black hover:text-white"
+            class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border-2 border-black bg-white cursor-pointer hover:bg-black hover:text-white"
             >Explore the archive</button
           >
         </div>
@@ -115,7 +115,7 @@
     </div>
     <section class="px-1">
       <div
-        class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border border-black rounded-s md:rounded-m"
+        class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border-2 border-black rounded-s md:rounded-m"
       >
         <div class="flex flex-col gap-4 md:block">
           {#if home?.aboutSection?.heading}
@@ -159,16 +159,13 @@
 
       {#if home?.clientsSection && (home?.clientsSection.logos?.length ?? 0) > 0}
         <div class="overflow-hidden w-full">
-          <LogosMarquee data={home?.clientsSection?.logos} />
+          <LogosMarquee direction="right" data={home?.clientsSection?.logos} />
         </div>
       {/if}
 
       {#if home?.clientsSection && (home?.clientsSection.logosTwo?.length ?? 0) > 0}
         <div class="overflow-hidden w-full">
-          <LogosMarquee
-            direction="right"
-            data={home?.clientsSection?.logosTwo}
-          />
+          <LogosMarquee data={home?.clientsSection?.logosTwo} />
         </div>
       {/if}
     </section>

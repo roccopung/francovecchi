@@ -30,7 +30,7 @@
     "var(--color-accent)":
       "bg-accent text-black hover:bg-dark-gray hover:text-accent",
     "var(--color-white)":
-      "bg-white text-black hover:bg-black hover:text-white hover:border-1 hover:border-white",
+      "bg-white text-black hover:bg-black hover:text-white hover:border-2 hover:border-white",
     "var(--color-dark-gray)":
       "bg-dark-gray text-white hover:bg-white hover:text-black",
     "var(--color-black)":
@@ -84,7 +84,7 @@
 
 {#if cta?.ctaType}
   <a
-    class="cta w-fit flex gap-1 items-center rounded-full px-3 py-1 border-black border {colorClass}
+    class="cta w-fit flex gap-1 items-center rounded-full px-3 py-1 border-black border-2 {colorClass}
     {uppercase ? 'uppercase' : ''}
     {font === 'mono' ? 'font-mono' : 'font-sans'}
     {typo === 'xs' ? 'typo-xs' : 'typo-s'}

@@ -20,7 +20,7 @@
 {#if page.route.id !== "/case-studies/[slug]"}
   <footer class="bg-black p-1">
     <div
-      class="bg-white rounded-m border border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
+      class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
     >
       <div class="relative h-full w-full">
         <div
@@ -37,14 +37,14 @@
           </div>
         </div>
         <div
-          class="absolute top-0 left-1/2 h-full border-l border-black border-[0.5px] w-[1px] mx-auto hidden sm:block"
+          class="absolute top-0 left-1/2 h-full bg-black w-[2px] mx-auto hidden sm:block"
         ></div>
         <div class="sm:absolute sm:top-1/2 sm:left-0 w-full central-grid grid">
           <div class="flex flex-col items-center justify-center gap-4">
             <div class="flex flex-col gap-0.5 items-center">
               <div class="font-sans font-bold typo-md">Write</div>
               <a
-                class="typo-xs font-mono uppercase border border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
+                class="typo-xs font-mono uppercase border-2 border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href="mailto:{data?.email}">{data?.email}</a
@@ -53,7 +53,7 @@
             <div class="flex flex-col gap-0.5 items-center">
               <div class="font-sans font-bold typo-md">Call</div>
               <a
-                class="typo-xs font-mono uppercase border border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
+                class="typo-xs font-mono uppercase border-2 border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
                 href="tel:{data?.phone}">Call Franco</a
@@ -67,7 +67,7 @@
             {#if data?.social}
               {#each data.social as social}
                 <a
-                  class="typo-xs font-mono uppercase border border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
+                  class="typo-xs font-mono uppercase border-2 border-black px-3 py-1 rounded-full hover:bg-black hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"
                   href={social.url}>{social.label}</a
@@ -92,15 +92,9 @@
         <div
           class="justify-self-center self-end sm:place-self-end typo-xs flex gap-1 order-1 sm:order-2"
         >
-          <a class="underline underline-offset-4 hover:no-underline" href="#"
-            >Design</a
-          >
-          <a class="underline underline-offset-4 hover:no-underline" href="#"
-            >Code</a
-          >
-          <a class="underline underline-offset-4 hover:no-underline" href="#"
-            >Cookies</a
-          >
+          <a href="#">Design</a>
+          <a href="#">Code</a>
+          <a href="#">Cookies</a>
         </div>
       </div>
     </div>

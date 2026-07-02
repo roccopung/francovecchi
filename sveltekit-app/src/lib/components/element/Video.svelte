@@ -135,13 +135,13 @@
     notooltip
   >
     <div
-      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-1 uppercase"
+      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-2 uppercase"
       slot="play"
     >
       Play
     </div>
     <div
-      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-1 uppercase"
+      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-2 uppercase"
       slot="pause"
     >
       Pause

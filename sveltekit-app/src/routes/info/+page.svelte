@@ -63,7 +63,7 @@
     </section>
     {#if infoPage?.collaborations}
       <section
-        class="rounded-m border border-black p-2 md:pt-3 md:px-1 flex flex-col gap-4 md:gap-2"
+        class="border-b-2 border-black p-2 md:pt-3 md:px-1 flex flex-col gap-4 md:gap-2"
       >
         {#if infoPage?.collaborations?.heading}
           <Headline data={infoPage?.collaborations?.heading} />
@@ -88,7 +88,7 @@
               </div>
             </div>
             <div
-              class="w-full h-[1px] border-l border-black border-[0.5px] mx-auto h left-1/2 md:absolute md:w-[1px] md:h-full"
+              class="bg-black w-full h-[2px] mx-auto h left-1/2 md:absolute md:w-[2px] md:h-full"
             ></div>
             <div>
               <h4 class="typo-md font-sans font-bold pb-1">Agencies</h4>
@@ -107,11 +107,6 @@
             alt=""
           />
         </div>
-      </section>
-    {/if}
-    {#if characters && characters.length > 0}
-      <section class="overflow-hidden">
-        <CharactersMarquee data={characters} />
       </section>
     {/if}
     {#if infoPage?.hobbies}
