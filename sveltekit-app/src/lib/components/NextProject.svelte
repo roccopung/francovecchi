@@ -4,6 +4,7 @@
   import { onMount, onDestroy } from "svelte";
   import { goto, beforeNavigate, afterNavigate } from "$app/navigation";
   import { navigating, page } from "$app/state";
+  import { browser } from "$app/environment";
 
   type Props = {
     next?: {
@@ -178,10 +179,6 @@
     return () => ctx?.revert();
   });
 
-  $effect(() => {
-    console.log(page);
-  });
-
   beforeNavigate(() => {
     if (
       navigating.to &&
@@ -195,7 +192,9 @@
 
   afterNavigate(() => {
     document.body.classList.remove("overflow-hidden");
-    window.scrollTo(0, 0);
+    if (browser) {
+      window.scrollTo(0, 0);
+    }
   });
 </script>
 
