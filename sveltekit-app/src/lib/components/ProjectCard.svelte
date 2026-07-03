@@ -8,6 +8,7 @@
     project: {
       title: string | null;
       slug: Slug | null;
+      isNda?: boolean | null;
       cover: ElementImage | null;
       coverImages: {
         one?: ElementImage;
@@ -31,7 +32,7 @@
 {#key project?.slug?.current}
   <a
     href="/case-studies/{project?.slug?.current}"
-    class="home-variant w-full border-2 border-black rounded-s md:rounded-m overflow-hidden even:-ml-[2px] -mt-[1px] group pointer-events-none md:pointer-events-auto"
+    class="home-variant w-full border-2 border-black rounded-m overflow-hidden even:-ml-[2px] -mt-[1px] group pointer-events-none md:pointer-events-auto"
   >
     <div class="overflow-hidden">
       <div
@@ -50,6 +51,9 @@
               {service?.title}{#if i < project?.services?.length - 1},&nbsp;
               {/if}
             {/each}]
+            {#if project.isNda}
+              [NDA PROTECTED]
+            {/if}
           </div>
         {/if}
         <h3 class="typo-2xl uppercase font-sans font-bold">
@@ -77,16 +81,4 @@
     display: grid;
     grid-template-rows: 1fr auto;
   }
-
-  /*.case-studies-content {
-    display: grid;
-    grid-template-rows: auto 2fr auto;
-  }
-
-  @media (min-width: 768px) {
-    .case-studies-variant {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-    }
-  }*/
 </style>

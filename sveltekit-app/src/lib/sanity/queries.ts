@@ -6,12 +6,11 @@ export const homeQuery = defineQuery(`{
     featuredProjects[]->{
       title,
       slug,
+      isNda,
       cover,
       coverImages,
-      services[]->{
-      title
-      },
-      shortSummary
+      services[]->{ title },
+      "shortSummary": select(isNda == true => null, shortSummary)
     },
     clientsSection {
       ...,
@@ -33,12 +32,35 @@ export const caseStudiesQuery = defineQuery(
   `*[_type == "project"]{
   title,
   slug,
+  isNda,
   cover,
   coverImages,
-  services[]->{
-  title
+  services[]->{ title },
+  "shortSummary": select(isNda == true => null, shortSummary)
+  }`,
+);
+
+export const projectAccessQuery = defineQuery(
+  `*[_type == "project" && defined(slug.current) && slug.current == $slug][0]{
+  title,
+  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{
+    title,
+    slug,
+    isNda,
+    cover
   },
-  shortSummary
+  "projectIndexes": *[_type == "project"] | order(orderRank asc) {
+    slug
+  },
+  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{
+  "orderRank": ^.orderRank,
+    title,
+    slug,
+    isNda,
+    cover
+  },
+  isNda,
+  password
   }`,
 );
 
@@ -47,16 +69,19 @@ export const lookbookQuery = defineQuery(`*[_type == "lookbook"][0]`);
 export const projectQuery = defineQuery(
   `*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {
   ...,
+  "password": null,
   services[]->,
   "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{
   "orderRank": ^.orderRank,
     title,
     slug,
+    isNda,
     cover
   },
   "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{
     title,
     slug,
+    isNda,
     cover
   },
   "projectIndexes": *[_type == "project"] | order(orderRank asc) {

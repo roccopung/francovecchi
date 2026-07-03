@@ -61,7 +61,7 @@
   <HomeTitle />
   <section class="px-2 mt-[80svh] bg-white">
     {#if home?.cover}
-      <div class="border-2 border-black rounded-s md:rounded-m overflow-hidden">
+      <div class="border-2 border-black rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
       </div>
     {/if}
@@ -74,7 +74,7 @@
   {/if}
   <div class="sections flex flex-col gap-2 bg-white pt-1">
     {#if home?.featuredProjects && home?.featuredProjects.length > 0}
-      <section class="px-2 flex flex-col gap-1 md:gap-0 md:grid-2">
+      <section class="px-2 flex flex-col gap-2 md:gap-0 md:grid-2">
         {#each home?.featuredProjects as project}
           <ProjectCard {project} />
         {/each}
@@ -97,7 +97,7 @@
     </div>
     <section class="px-2">
       <div
-        class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border-2 border-black rounded-s md:rounded-m"
+        class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border-2 border-black rounded-m"
       >
         <div class="flex flex-col gap-4 md:block">
           {#if home?.aboutSection?.heading}

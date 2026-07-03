@@ -44,6 +44,28 @@ export const project = defineType({
       type: "boolean",
     }),
     defineField({
+      name: "isNda",
+      title: "NDA / password protected",
+      description:
+        "Protect this project's page behind a password. In listings only the title shows — the cover is replaced by a color block.",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "password",
+      type: "string",
+      description:
+        "Password required to view this project. Stored as plain text — anyone with Studio access can read it.",
+      hidden: ({ parent }) => !parent?.isNda,
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { isNda?: boolean };
+          if (parent?.isNda && !value)
+            return "Password is required for NDA projects";
+          return true;
+        }),
+    }),
+    defineField({
       name: "years",
       type: "string",
     }),

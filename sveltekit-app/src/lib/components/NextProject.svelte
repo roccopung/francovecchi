@@ -11,11 +11,13 @@
       cover: ElementImage | null;
       slug: { current?: string | null } | null;
       title: string | null;
+      isNda?: boolean | null;
     } | null;
     firstProject?: {
       cover: ElementImage | null;
       slug: { current?: string | null } | null;
       title: string | null;
+      isNda?: boolean | null;
     } | null;
     projectIndexes?: any;
   };
@@ -183,9 +185,7 @@
   afterNavigate(() => {
     document.body.classList.remove("overflow-hidden");
     if (browser) {
-      // Brave mobile drops a scrollTo issued while the view-transition overlay
-      // is still settling, leaving the page at the old (bottom) offset. Defer
-      // past the next paint so the reset lands on a stable layout.
+      // raf needed to prevent layout shifts in any browser
       requestAnimationFrame(() =>
         requestAnimationFrame(() => window.scrollTo(0, 0)),
       );
@@ -217,7 +217,7 @@
         <span class="font-medium tabular-nums"
           >{currentIndex > 9 ? currentIndex + 1 : `0${currentIndex + 1}`}</span
         >
-        <span>(Next episode)</span>
+        <span>(Next project)</span>
       </div>
       <h1 class="typo-3xl font-slanted label-title" bind:this={labelTitle}>
         {displayedProject?.title}
