@@ -190,12 +190,12 @@
       navigating.to.route.id === "/case-studies/[slug]"
     ) {
       document.body.classList.add("overflow-hidden");
-      window.scrollTo(0, 0);
     }
   });
 
   afterNavigate(() => {
     document.body.classList.remove("overflow-hidden");
+    window.scrollTo(0, 0);
   });
 </script>
 
