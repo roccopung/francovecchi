@@ -19,7 +19,7 @@
 <main class="links w-full flex flex-col gap-2 items-center bg-white">
   <h1 class="typo-6xl font-slanted uppercase mt-8 text-accent">Case studies</h1>
   {#if filteredCaseStudies}
-    <ul class="px-2 flex flex-col gap-2 md:gap-0 md:grid-2 3xl:max-w-[70vw]">
+    <ul class="px-2 flex flex-col gap-2 md:gap-0 md:grid-2">
       {#each filteredCaseStudies as study, index}
         <ProjectCard
           project={study}

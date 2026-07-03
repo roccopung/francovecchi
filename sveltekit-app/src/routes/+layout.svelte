@@ -51,7 +51,9 @@
 
       <Header {caseStudies} />
       {@render children()}
-      <Footer data={settings} />
+      {#key page.url.pathname}
+        <Footer data={settings} />
+      {/key}
     </QueryLoader>
   </VisualEditing>
 </PreviewMode>

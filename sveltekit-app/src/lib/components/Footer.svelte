@@ -20,6 +20,8 @@
   let line: HTMLDivElement | null = $state(null);
   let pen: HTMLImageElement | null = $state(null);
   let mm: gsap.MatchMedia | undefined;
+  let resizeObserver: ResizeObserver | undefined;
+  let refreshRaf = 0;
   let viewportHeight: number = $state(0);
 
   onMount(async () => {
@@ -62,9 +64,20 @@
         gsap.set([pen, line], { clearProps: "transform,opacity" });
       };
     });
+
+    // To sync scrolltrigger and page dimensions
+    resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(refreshRaf);
+      refreshRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+    resizeObserver.observe(document.body);
   });
 
-  onDestroy(() => mm?.revert());
+  onDestroy(() => {
+    cancelAnimationFrame(refreshRaf);
+    resizeObserver?.disconnect();
+    mm?.revert();
+  });
 </script>
 
 <svelte:window bind:innerHeight={viewportHeight} />
