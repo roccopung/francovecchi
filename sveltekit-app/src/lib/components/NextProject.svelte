@@ -183,7 +183,12 @@
   afterNavigate(() => {
     document.body.classList.remove("overflow-hidden");
     if (browser) {
-      window.scrollTo(0, 0);
+      // Brave mobile drops a scrollTo issued while the view-transition overlay
+      // is still settling, leaving the page at the old (bottom) offset. Defer
+      // past the next paint so the reset lands on a stable layout.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => window.scrollTo(0, 0)),
+      );
     }
   });
 </script>
