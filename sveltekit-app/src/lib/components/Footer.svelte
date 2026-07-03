@@ -1,5 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { onMount, onDestroy } from "svelte";
+
   type Social = {
     label: string;
     url: string;
@@ -15,12 +17,62 @@
   };
 
   let { data }: Props = $props();
+  let line: HTMLDivElement | null = $state(null);
+  let pen: HTMLImageElement | null = $state(null);
+  let mm: gsap.MatchMedia | undefined;
+  let viewportHeight: number = $state(0);
+
+  onMount(async () => {
+    const { gsap } = await import("gsap");
+    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+    gsap.registerPlugin(ScrollTrigger);
+
+    mm = gsap.matchMedia();
+    mm.add("(min-width: 720px)", () => {
+      gsap.set(line, { opacity: 0 });
+
+      gsap.fromTo(
+        pen,
+        { y: () => -(viewportHeight - 80) },
+        {
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".footer",
+            start: "top 80%",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        },
+      );
+
+      gsap.to(line, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".footer",
+          start: "top 80%",
+          end: "bottom bottom",
+          scrub: 2,
+        },
+      });
+
+      // Guarantee the pen/line reset when the query stops matching.
+      return () => {
+        gsap.set([pen, line], { clearProps: "transform,opacity" });
+      };
+    });
+  });
+
+  onDestroy(() => mm?.revert());
 </script>
 
+<svelte:window bind:innerHeight={viewportHeight} />
+
 {#if page.route.id !== "/case-studies/[slug]"}
-  <footer class="bg-black p-2">
+  <footer class="bg-black p-2 footer">
     <div
-      class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4"
+      class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4 overflow-hidden"
     >
       <div class="relative h-full w-full">
         <div
@@ -36,9 +88,12 @@
             You won't regret it
           </div>
         </div>
+
         <div
+          bind:this={line}
           class="absolute top-0 left-1/2 h-full bg-black w-[2px] mx-auto hidden sm:block"
         ></div>
+
         <div class="sm:absolute sm:top-1/2 sm:left-0 w-full central-grid grid">
           <div class="flex flex-col items-center justify-center gap-4">
             <div class="flex flex-col gap-0.5 items-center">
@@ -85,7 +140,8 @@
           Franco Vecchi / All rights reserves
         </div>
         <img
-          class="h-[3lh] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
+          bind:this={pen}
+          class="bg-white h-[3lh] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
           src="/temp/images/pen.png"
           alt=""
         />

@@ -58,9 +58,6 @@
               <div
                 class="flex gap-1 items-center bg-white px-2 py-1 rounded-full border-2 border-black w-fit"
               >
-                <div class="h-[0.3lh] aspect-square">
-                  <Dot />
-                </div>
                 <div>{service.title}</div>
               </div>
             {/each}

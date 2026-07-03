@@ -93,11 +93,11 @@
     target={link.target ?? "_self"}
     rel="noopener noreferrer"
   >
-    {#if arrow}
+    <!-- {#if arrow}
       <span class="arrow hidden h-[1lh] aspect-square md:flex"
         ><ArrowEnter fill={arrowFill} /></span
       >
-    {/if}
+    {/if} -->
     <span>{link?.label}</span>
   </a>
 {/if}
