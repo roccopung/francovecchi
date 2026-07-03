@@ -9,7 +9,7 @@
   let { section }: Props = $props();
 </script>
 
-<section class="px-0.5">
+<section class="p-2">
   <div
     class="rounded-m py-4 border-2 border-black flex flex-col gap-1 w-full px-3"
   >

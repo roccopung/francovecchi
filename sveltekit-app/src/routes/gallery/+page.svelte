@@ -6,6 +6,7 @@
   import StackedGallery from "$lib/components/page-builder/_StackedGallery.svelte";
   import PathCallFranco from "$lib/components/svg/PathCallFranco.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
+  import SeeMore from "$lib/components/SeeMore.svelte";
 
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<LookbookQueryResult>(data));
@@ -21,9 +22,9 @@
 </script>
 
 <main
-  class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-white text-accent"
+  class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-white py-2"
 >
-  <div class="flex flex-col gap-0.5 items-center">
+  <div class="flex flex-col gap-0.5 items-center text-accent">
     <h1 class="typo-6xl font-slanted uppercase mt-8">Gallery</h1>
     <h2 class="typo-xs uppercase font-mono">What my illustrations look like</h2>
   </div>
@@ -32,25 +33,17 @@
       <StackedGallery section={sectionLoaded} />
     </div>
   {/if}
+  {#if lookbook?.stackedGallery?.items && lookbook.stackedGallery.items.length > filteredItems.length}
+    <div class="w-full bg-white">
+      <SeeMore
+        itemsToLoad={lookbook.stackedGallery.items.length > filteredItems.length
+          ? 10
+          : 0}
+        bind:itemsLoaded={itemsToLoad}
+      />
+    </div>
+  {/if}
 </main>
-<div class="w-full bg-white p-1.5 md:p-2">
-  <div
-    class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
-  >
-    <div class="py-15 flex flex-col gap-0.5 items-center">
-      <button
-        onclick={() => (itemsToLoad += 10)}
-        class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border-2 border-black bg-white cursor-pointer hover:bg-black hover:text-white"
-        >See more</button
-      >
-    </div>
-    <div
-      class="absolute left-0 w-[150vw] md:w-[200vw] -translate-y-5 -translate-x-2/5 md:-translate-y-10 pointer-events-none"
-    >
-      <PathCallFranco />
-    </div>
-  </div>
-</div>
 {#if lookbook?.callFranco}
   <CallFranco data={lookbook?.callFranco} />
 {/if}

@@ -17,6 +17,7 @@
   import ShearMarquee from "$lib/components/marquees/ShearMarquee.svelte";
   import KeywordsMarquee from "$lib/components/marquees/KeywordsMarquee.svelte";
   import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
+  import Image from "$lib/components/element/Image.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 
@@ -58,7 +59,7 @@
 
 <main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
-  <section class="px-1.5 md:px-2 pb-1 mt-[80svh] bg-white">
+  <section class="px-2 mt-[80svh] bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-s md:rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
@@ -67,19 +68,19 @@
     {#if home?.heading}<Headline data={home?.heading} />{/if}
   </section>
   {#if home?.keywords}
-    <section class="bg-white">
+    <section class="bg-white border-t-2 border-black">
       <KeywordsMarquee data={home?.keywords} />
     </section>
   {/if}
-  <div class="sections flex flex-col gap-1 bg-white pt-1">
+  <div class="sections flex flex-col gap-2 bg-white pt-1">
     {#if home?.featuredProjects && home?.featuredProjects.length > 0}
-      <section class="px-1.5 md:px-2 flex flex-col gap-1 md:gap-0 md:grid-2">
+      <section class="px-2 flex flex-col gap-1 md:gap-0 md:grid-2">
         {#each home?.featuredProjects as project}
           <ProjectCard {project} />
         {/each}
       </section>
     {/if}
-    <div class="w-full bg-white px-1.5 md:px-2">
+    <div class="w-full bg-white px-2">
       <div
         class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
       >
@@ -94,7 +95,7 @@
         </div>
       </div>
     </div>
-    <section class="px-1.5 md:px-2">
+    <section class="px-2">
       <div
         class="bg-white pt-2 md:pt-8 pb-1 px-1 flex flex-col gap-4 md:grid-2 md:gap-1 border-2 border-black rounded-s md:rounded-m"
       >
@@ -139,16 +140,22 @@
       {/if}
 
       {#if home?.clientsSection && (home?.clientsSection.logos?.length ?? 0) > 0}
-        <div class="overflow-hidden w-full">
-          <LogosMarquee direction="right" data={home?.clientsSection?.logos} />
+        <div class="w-full grid-2 sm:grid-4 gap-2 p-2">
+          {#each home?.clientsSection?.logos as logo}
+            <div
+              class="w-10 h-10 md:w-15 md:h-15 flex items-center justiyf-center place-self-center"
+            >
+              <Image image={logo} fit="contain" />
+            </div>
+          {/each}
         </div>
       {/if}
 
-      {#if home?.clientsSection && (home?.clientsSection.logosTwo?.length ?? 0) > 0}
+      <!-- {#if home?.clientsSection && (home?.clientsSection.logosTwo?.length ?? 0) > 0}
         <div class="overflow-hidden w-full">
           <LogosMarquee data={home?.clientsSection?.logosTwo} />
         </div>
-      {/if}
+      {/if} -->
     </section>
     {#if characters && characters.length > 0}
       <section class="overflow-hidden">

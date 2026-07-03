@@ -77,3 +77,13 @@ footer,
 .trimmed {
   text-box: trim-both cap alphabetic;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  background-color: #efefef;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background: black;
+}

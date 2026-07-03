@@ -121,11 +121,10 @@
 
   {#if posterSrc}
     <media-poster-image
-      class="object-cover overflow-hidden z-10"
+      class="object-cover overflow-hidden"
       slot="poster"
       src={posterSrc}
     ></media-poster-image>
-    <div class="overlay pointer-events-none"></div>
   {/if}
 
   <media-play-button
@@ -135,13 +134,13 @@
     notooltip
   >
     <div
-      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-2 uppercase"
+      class="px-2 py-1 bg-white text-black typo-xs font-mono rounded-full border-2 border-black uppercase hover:bg-black hover:text-white"
       slot="play"
     >
       Play
     </div>
     <div
-      class="px-2 py-1 bg-accent text-black typo-xs font-mono rounded-full border-b border-2 uppercase"
+      class="px-2 py-1 bg-white text-black typo-xs font-mono rounded-full border-2 border-black uppercase hover:bg-black hover:text-white"
       slot="pause"
     >
       Pause

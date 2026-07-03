@@ -2,7 +2,8 @@
   import type { ElementImage } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import { onMount, onDestroy } from "svelte";
-  import { goto } from "$app/navigation";
+  import { goto, beforeNavigate, afterNavigate } from "$app/navigation";
+  import { navigating, page } from "$app/state";
 
   type Props = {
     next?: {
@@ -176,6 +177,25 @@
 
     return () => ctx?.revert();
   });
+
+  $effect(() => {
+    console.log(page);
+  });
+
+  beforeNavigate(() => {
+    if (
+      navigating.to &&
+      navigating.from &&
+      navigating.from.route.id === "/case-studies/[slug]" &&
+      navigating.to.route.id === "/case-studies/[slug]"
+    ) {
+      document.body.classList.add("overflow-hidden");
+    }
+  });
+
+  afterNavigate(() => {
+    document.body.classList.remove("overflow-hidden");
+  });
 </script>
 
 <svelte:window
@@ -193,7 +213,7 @@
   <div class="wrapper relative w-full h-50 overflow-hidden">
     <div
       bind:this={labelWrapper}
-      class="label absolute z-[11] bottom-0 left-1/2 transform -translate-x-1/2 mb-1 bg-white rounded-s border-2 border-black p-1 flex flex-col gap-3 min-w-[50vw] group-hover:bg-accent group-hover:text-white transition-colors transition-fast"
+      class="label absolute z-[11] bottom-0 left-1/2 transform -translate-x-1/2 mb-1 bg-white rounded-m border-2 border-black p-1 flex flex-col gap-3 min-w-[50vw] group-hover:bg-accent group-hover:text-white transition-colors transition-fast"
     >
       <div
         class="typo-xs font-mono uppercase flex gap-1 items-center mx-auto"

@@ -15,13 +15,13 @@
 </script>
 
 {#if section.items}
-  <section class="w-full px-0.5">
-    <div class="flex flex-col gap-0.5 md:grid-12 md:gap-0.5">
+  <section class="w-full px-2">
+    <div class="flex flex-col gap-2 md:grid-12 md:gap-2">
       {#each section.items as item, i}
         {#if item?.columnSpan?.input && item?.image?.asset}
           <div
             class="
-            transition-fast
+            transition-fast rounded-m overflow-hidden border-2
             {imagesVisible.every(Boolean) ? 'opacity-100' : 'opacity-0'}
           {item?.columnSpan?.input == '12'
               ? 'col-span-12'
