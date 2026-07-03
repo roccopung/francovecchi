@@ -72,7 +72,7 @@
 {#if page.route.id !== "/case-studies/[slug]"}
   <footer class="bg-black p-2 footer">
     <div
-      class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-6.5rem)] w-full p-1 flex flex-col justify-between gap-4 overflow-hidden"
+      class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-8.5rem)] w-full p-1 flex flex-col justify-between gap-4 overflow-hidden"
     >
       <div class="relative h-full w-full">
         <div
