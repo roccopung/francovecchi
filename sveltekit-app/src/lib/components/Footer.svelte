@@ -33,7 +33,7 @@
 
       gsap.fromTo(
         pen,
-        { y: () => -(viewportHeight - 80) },
+        { y: () => -viewportHeight - 150 },
         {
           y: 0,
           ease: "none",
