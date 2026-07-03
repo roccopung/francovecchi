@@ -190,6 +190,7 @@
       navigating.to.route.id === "/case-studies/[slug]"
     ) {
       document.body.classList.add("overflow-hidden");
+      window.scrollTo(0, 0);
     }
   });
 
