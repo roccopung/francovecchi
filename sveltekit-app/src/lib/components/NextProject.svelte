@@ -48,18 +48,8 @@
       .timeline({
         defaults: { duration: 0.8, ease: "power4.out" },
         onComplete: () => {
-          if (
-            document.startViewTransition &&
-            typeof document.startViewTransition === "function"
-          ) {
-            // Use view transition
-            document.startViewTransition(() => {
-              goto(`/case-studies/${displayedProject?.slug?.current}`);
-            });
-          } else {
-            // Fallback: direct navigation without view transition
-            goto(`/case-studies/${displayedProject?.slug?.current}`);
-          }
+          // The layout's global onNavigate handles the view transition.
+          goto(`/case-studies/${displayedProject?.slug?.current}`);
         },
       })
       .to(
