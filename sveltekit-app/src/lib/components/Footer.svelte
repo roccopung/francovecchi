@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { onMount, onDestroy } from "svelte";
+  import { browser } from "$app/environment";
 
   type Social = {
     label: string;
@@ -67,6 +68,8 @@
 
     // To sync scrolltrigger and page dimensions
     resizeObserver = new ResizeObserver(() => {
+      if (!browser) return;
+
       cancelAnimationFrame(refreshRaf);
       refreshRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
     });
@@ -74,6 +77,8 @@
   });
 
   onDestroy(() => {
+    if (!browser) return;
+
     cancelAnimationFrame(refreshRaf);
     resizeObserver?.disconnect();
     mm?.revert();
