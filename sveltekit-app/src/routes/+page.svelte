@@ -27,6 +27,8 @@
   let viewportWidth = $state(0);
 
   onMount(() => {
+    if (viewportWidth < 1024) return;
+
     let ctx: gsap.Context | undefined;
 
     (async () => {
@@ -34,9 +36,15 @@
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      // Mobile browsers resize the viewport as the toolbar collapses/expands.
+      // Without this, every one of those resizes forces a full refresh mid-scroll.
+      ScrollTrigger.config({ ignoreMobileResize: true });
+
       ctx = gsap.context(() => {
         const tl = gsap.timeline();
 
+        // `width` (not `scale`) on purpose: shrinking the layout box is what
+        // pulls the content below it upward as you scroll.
         tl.to(".keen-eye", {
           scrollTrigger: {
             trigger: ".keen-eye",
@@ -56,7 +64,7 @@
 
 <SEO data={home?.seo} />
 
-<main class="min-h-[100svh] w-full flex flex-col">
+<main class="min-h-[100vh] w-full flex flex-col">
   <HomeTitle />
   <section class="px-2 mt-[80svh] bg-white">
     {#if home?.cover}
@@ -83,7 +91,8 @@
         class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
       >
         <div class="py-15 flex flex-col gap-0.5 items-center">
-          <a href="/case-studies"
+          <a
+            href="/case-studies"
             class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border-2 border-black bg-white cursor-pointer hover:bg-black hover:text-white"
             >Explore the archive</a
           >
@@ -148,7 +157,6 @@
           {/each}
         </div>
       {/if}
-
     </section>
     {#if characters && characters.length > 0}
       <section class="overflow-hidden">
@@ -160,7 +168,7 @@
     <div
       class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-black"
     >
-      <div class="w-30 md:w-[33vw] keen-eye"><KeenEyeIcon /></div>
+      <div class="w-10 md:w-[33vw] keen-eye"><KeenEyeIcon /></div>
       {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />
