@@ -64,7 +64,8 @@
 
       // Guarantee the pen/line reset when the query stops matching.
       return () => {
-        gsap.set([pen, line], { clearProps: "transform,opacity" });
+        const targets = [pen, line].filter(Boolean);
+        if (targets.length) gsap.set(targets, { clearProps: "transform,opacity" });
       };
     });
 

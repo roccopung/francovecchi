@@ -38,11 +38,16 @@
   let _gsap: any;
   let _SplitText: any;
   let _ScrollTrigger: any;
-  let ctx: gsap.Context | undefined;
-  let mountCtx: gsap.Context | undefined;
-  let goToNextCtx: gsap.Context | undefined;
+  let ctx: gsap.Context | undefined = $state(undefined);
+  let mountCtx: gsap.Context | undefined = $state(undefined);
+  let goToNextCtx: gsap.Context | undefined = $state(undefined);
 
   const goToNextProject = () => {
+    const href = `/case-studies/${displayedProject?.slug?.current}`;
+
+    // GSAP is imported in onMount; an early click navigates without the animation.
+    if (!_gsap) return void goto(href);
+
     mountCtx?.kill();
     ctx?.kill();
 
@@ -51,7 +56,7 @@
         defaults: { duration: 0.8, ease: "power4.out" },
         onComplete: () => {
           // The layout's global onNavigate handles the view transition.
-          goto(`/case-studies/${displayedProject?.slug?.current}`);
+          goto(href);
         },
       })
       .to(
