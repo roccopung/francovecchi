@@ -77,7 +77,7 @@
               <div
                 class="flex gap-1 items-center px-2 py-1 rounded-full bg-black text-white w-fit"
               >
-                <div class="h-[0.5lh]">
+                <div class="h-[0.5lh] aspect-square">
                   <svg height="100%" width="100%" viewBox="0 0 68 68">
                     <circle r="30" cx="34" cy="34" fill="var(--color-white)" />
                   </svg>

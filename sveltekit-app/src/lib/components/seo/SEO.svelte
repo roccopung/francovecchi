@@ -19,7 +19,7 @@
   // Default values
   const defaults = {
     ogType: "website",
-    siteName: "Marco Meloni",
+    siteName: "Franco Vecchi",
   };
 
   // Computed values - all must be available during SSR
