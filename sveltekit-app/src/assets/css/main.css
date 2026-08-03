@@ -8,7 +8,7 @@
 html {
   font-size: 10px;
   font-family: var(--font-body);
-  color: var(--color-brown);
+  color: var(--color-black);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

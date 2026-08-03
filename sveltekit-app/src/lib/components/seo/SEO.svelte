@@ -1,49 +1,42 @@
 <script lang="ts">
-  type Props = {
-    data?: any;
+  import { page } from "$app/state";
+  import type { HomeQueryResult } from "$lib/sanity.types";
+
+  type SeoData = NonNullable<NonNullable<HomeQueryResult["home"]>["seo"]>;
+
+  interface Props {
+    data?: SeoData | null;
     pageTitle?: string;
     noindex?: boolean;
-    pageDescription?: string;
-    isHomepage?: boolean;
-  };
+  }
 
   let {
     data,
     pageTitle,
     noindex = false,
-    pageDescription,
-    isHomepage = false,
-  } = $props();
+  }: Props = $props();
 
   // Default values
   const defaults = {
     ogType: "website",
-    siteName: "Franco Vecchi",
-    image: "",
+    siteName: "Marco Meloni",
   };
 
   // Computed values - all must be available during SSR
-  const title = $derived(
-    isHomepage && data?.title
-      ? `${defaults.siteName} | ${data.title}`
-      : data?.title
-        ? `${data?.title} | ${defaults.siteName}`
-        : pageTitle
-          ? `${pageTitle} | ${defaults.siteName}`
-          : defaults.siteName,
+  let title = $derived(
+    data?.title
+      ? `${data?.title}`
+      : pageTitle
+        ? `${pageTitle}`
+        : defaults.siteName,
   );
-  const description = $derived(
-    pageDescription
-      ? pageDescription
-      : data?.description
-        ? data?.description
-        : null,
-  );
-  const image = $derived(data?.image || null);
-  const ogType = $derived(data?.ogType || defaults.ogType);
-  const twitterCard = $derived(image ? "summary_large_image" : "summary");
-  const siteName = $derived(data?.siteName || defaults.siteName);
-  const canonical = $derived(data?.canonical);
+  let description = $derived(data?.description ? data?.description : null);
+  let image = $derived(data?.image || null);
+  let ogType = defaults.ogType;
+  let twitterCard = $derived(image ? "summary_large_image" : "summary");
+  let siteName = defaults.siteName;
+  // Origin + pathname only, so query strings don't produce duplicate canonicals
+  let canonical = $derived(`${page.url.origin}${page.url.pathname}`);
 </script>
 
 <svelte:head>

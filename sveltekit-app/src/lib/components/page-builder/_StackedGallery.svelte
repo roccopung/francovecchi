@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { StackedGallery } from "$lib/sanity.types";
+  import { clickedImage, modalState } from "$lib/states.svelte";
   import Image from "$lib/components/element/Image.svelte";
 
   type Props = {
@@ -12,6 +13,8 @@
       (item) => !(item?.columnSpan?.input && item?.image?.asset),
     ),
   );
+
+
 </script>
 
 {#if section.items}
@@ -19,7 +22,11 @@
     <div class="flex flex-col gap-2 md:grid-12 md:gap-2">
       {#each section.items as item, i}
         {#if item?.columnSpan?.input && item?.image?.asset}
-          <div
+          <button
+            onclick={() => {
+              clickedImage.key = item._key;
+              modalState.open = true;
+            }}
             class="
             transition-fast rounded-m overflow-hidden border-2
             {imagesVisible.every(Boolean) ? 'opacity-100' : 'opacity-0'}
@@ -32,7 +39,7 @@
                   : 'col-span-12'}"
           >
             <Image image={item.image} bind:visible={imagesVisible[i]} />
-          </div>{/if}
+          </button>{/if}
       {/each}
     </div>
   </section>

@@ -17,9 +17,7 @@
     projectIndexes?: any;
   } = $props();
 
-  $effect(() => {
-    console.log(next, firstProject, projectIndexes, title);
-  });
+
 </script>
 
 <main class="h-[100svh] w-full bg-accent flex items-center justify-center p-2">

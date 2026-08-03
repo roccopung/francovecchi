@@ -7,7 +7,7 @@
     fill?:
       | "var(--color-accent)"
       | "var(--color-white)"
-      | "var(--color-dark-gray)"
+      | "var(--color-black)"
       | "var(--color-black)";
     font?: "mono" | "sans";
     typo?: "xs" | "s";
@@ -31,7 +31,7 @@
       "bg-accent text-black hover:bg-dark-gray hover:text-accent",
     "var(--color-white)":
       "bg-white text-black hover:bg-black hover:text-white hover:border-2 hover:border-white",
-    "var(--color-dark-gray)":
+    "var(--color-black)":
       "bg-dark-gray text-white hover:bg-white hover:text-black",
     "var(--color-black)":
       "bg-black text-white hover:bg-white hover:text-black border-white",
@@ -39,7 +39,7 @@
 
   let colorClass = $derived(fill ? (fillClasses[fill] ?? "") : "");
   let arrowFill = $derived.by(() => {
-    if (fill === "var(--color-dark-gray)") return "var(--color-white)";
+    if (fill === "var(--color-black)") return "var(--color-white)";
     if (fill === "var(--color-black)") return "var(--color-white)";
     if (fill === "var(--color-accent)") return "var(--color-black)";
     if (fill === "var(--color-white)") return "var(--color-black)";

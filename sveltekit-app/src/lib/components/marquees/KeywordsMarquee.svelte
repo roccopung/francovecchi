@@ -1,5 +1,6 @@
 <script lang="ts">
   import { inView } from "$lib/actions/inView";
+  import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import Marquee from "svelte-fast-marquee";
 
   type Props = {
@@ -17,8 +18,9 @@
     direction="left"
     speed={isVisible ? 60 : 0}
   >
-    <div class="flex items-center gap-5 ml-5 typo-3xl font-slanted">
+    <div class="flex items-center gap-2 ml-2 typo-3xl font-slanted">
       {#each data as item}
+        <div class="h-[0.5lh]"><StarIcon fill="var(--color-black)" /></div>
         <div class="trimmed py-3">{item}</div>
       {/each}
     </div>

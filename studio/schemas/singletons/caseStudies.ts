@@ -4,6 +4,12 @@ export const caseStudies = defineType({
   name: "caseStudies",
   title: "Case Studies",
   type: "document",
+  groups: [
+    {
+      name: "seo",
+      title: "SEO",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -17,6 +23,12 @@ export const caseStudies = defineType({
       options: {
         source: "title",
       },
+    }),
+    defineField({
+      name: "seo",
+      title: 'SEO',
+      type: "seo",
+      group: "seo",
     }),
   ],
   preview: {

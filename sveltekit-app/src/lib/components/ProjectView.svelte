@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { ProjectQueryResult, Cta } from "$lib/sanity.types";
+  import { clickedImage, modalState } from "$lib/states.svelte";
   import { useQuery } from "@sanity/sveltekit";
   import Image from "$lib/components/element/Image.svelte";
-  import Headline from "$lib/components/Headline.svelte";
+  import Modal from "$lib/components/Modal.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import Dot from "$lib/components/svg/Dot.svelte";
   import PageBuilder from "$lib/components/PageBuilder.svelte";
@@ -21,7 +22,26 @@
       label: "Write an email",
     },
   }) as Cta;
+
+  let images = $derived(
+    project?.pageBuilder?.sections?.flatMap((section) =>
+      section._type === "stackedGallery"
+        ? (section.items ?? []).flatMap((item) =>
+            item.image ? [{ ...item.image, _key: item._key }] : [],
+          )
+        : [],
+    ) ?? [],
+  );
+
+  let startIndex = $derived(
+    Math.max(
+      0,
+      images.findIndex((image) => image._key === clickedImage.key),
+    ),
+  );
 </script>
+
+<Modal {images} {startIndex} />
 
 <main class="min-h-[100svh] bg-accent w-full">
   {#key project?.slug?.current}
@@ -40,24 +60,28 @@
       <section
         class="p-2 py-4 rounded-m border-2 border-black bg-white text-center"
       >
-        <!-- {#if project?.tagline}
-          <Headline data={project?.tagline} />
-        {/if} -->
         {#if project?.description}
-          <div class="font-sans font-medium typo-l pt-1 md:max-w-3/4 mx-auto">
+          <div
+            class="font-sans font-medium typo-l pt-1 md:max-w-3/4 mx-auto pb-4"
+          >
             <PortableText data={project?.description} />
           </div>
         {/if}
 
         {#if project?.services && project?.services.length > 0}
-          <h4 class="font-bold font-sans typo-md pt-4 pb-0.5">Services</h4>
+          <h4 class="font-bold font-sans typo-md pb-0.5">Services</h4>
           <div
             class="font-sans font-bold typo-md flex gap-0.5 flex-col md:flex-row flex-wrap w-fit mx-auto"
           >
             {#each project?.services as service}
               <div
-                class="flex gap-1 items-center bg-white px-2 py-1 rounded-full border-2 border-black w-fit"
+                class="flex gap-1 items-center px-2 py-1 rounded-full bg-black text-white w-fit"
               >
+                <div class="h-[0.5lh]">
+                  <svg height="100%" width="100%" viewBox="0 0 68 68">
+                    <circle r="30" cx="34" cy="34" fill="var(--color-white)" />
+                  </svg>
+                </div>
                 <div>{service.title}</div>
               </div>
             {/each}
@@ -73,15 +97,15 @@
     {#if project?.result}
       <section class="px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
         <div
-          class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-center justify-center items-center overflow-hidden"
+          class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-left overflow-hidden"
         >
-          <Headline data="The result" />
-          <div class="typo-l font-sans font-medium px-1">
+          <div class="typo-l font-sans font-bold px-1">The result</div>
+          <div class="typo-s font-sans font-medium xl:max-w-1/2 px-1">
             <PortableText data={project?.result?.content} />
           </div>
           {#if project?.result?.media}
             <div class="overflow-hidden w-full mt-1">
-              <Media data={project.result.media} />
+              <Media fit="cover" data={project.result.media} />
             </div>
           {/if}
         </div>
@@ -93,7 +117,7 @@
         <div
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 px-1 items-center justify-center text-center"
         >
-          <Headline data="Credits" />
+          <div class="typo-l font-bold font-sans">Credits</div>
           <div class="typo-s font-sans grid-2 pt-2 w-full">
             {#each project?.credits as credit}
               <div class="flex flex-col">

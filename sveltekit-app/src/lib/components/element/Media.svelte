@@ -2,7 +2,6 @@
   import type { ElementImage, ElementVideo } from "$lib/sanity.types";
   import Image from "$lib/components/element/Image.svelte";
   import Video from "$lib/components/element/Video.svelte";
-  import { page } from "$app/state";
 
   type Props = {
     data: {
@@ -12,6 +11,10 @@
     controls?: boolean;
     muted?: boolean;
     autoplay?: boolean;
+    ratio?: number;
+    playing?: boolean;
+    fit?: string;
+    loop?: boolean;
   };
 
   let {
@@ -19,6 +22,10 @@
     controls = false,
     muted = true,
     autoplay = false,
+    ratio = $bindable(),
+    playing = $bindable(false),
+    fit = "cover",
+    loop = false,
   }: Props = $props();
 
   let video = $derived(data?.video);
@@ -27,11 +34,13 @@
 
 {#if image?.asset || (video?.url && !(image?.asset && video?.url))}
   {#if video && video?.url}
-    <Video {video} {autoplay} {controls} {muted} />
+    <div class="flex items-center">
+      <Video {loop} {video} {autoplay} {muted} bind:ratio bind:playing />
+    </div>
   {:else if image && image?.asset}
-    <div class="flex flex-col items-center justify-center w-full">
+    <div class="flex flex-col items-center justify-center w-full h-full">
       <div class="w-full h-full">
-        <Image {image} fit="cover" />
+        <Image {image} {fit} bind:ratio />
       </div>
     </div>
   {/if}

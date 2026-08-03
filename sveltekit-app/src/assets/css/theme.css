@@ -71,7 +71,7 @@
   --text-2xl: clamp(3rem, 4.167vw, 7.2rem);
   --text-2xl--line-height: 1;
   --text-2xl--letter-spacing: -0.01em;
-  --text-m-2xl: 3rem;
+  --text-m-2xl: clamp(2.5rem, 4.167vw, 3rem);
   --text-m-2xl--line-height: 1;
   --text-m-2xl--letter-spacing: -0.01em;
 
@@ -98,10 +98,10 @@
 
   --color-*: initial;
   --color-white: #fff;
-  --color-black: #000;
+  --color-black: #191919;
   --color-accent: #fc3852;
   --color-yellow: #fff000;
-  --color-dark-gray: #2f2f2f;
+  --color-dark-gray: #000;
   --color-gray: #f8f8f8;
 
   --spacing: 0.8rem;

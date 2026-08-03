@@ -61,7 +61,7 @@
 <!-- MOBILE NAV -->
 
 <nav
-  class="mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono z-30 bg-accent outline-black outline-2 transition-all duration-300 {menuState.open ===
+  class="mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono z-30 bg-white text-black outline-black outline-2 transition-all duration-300 {menuState.open ===
     true || scrollY > 10
     ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"
@@ -75,7 +75,7 @@
   </div>
 
   <ul
-    class="menu-dropdown bg-accent flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
+    class="menu-dropdown bg-white flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
     class:open={menuState.open}
     class:h-35={menuState.open}
     class:py-4={menuState.open}

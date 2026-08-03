@@ -6,6 +6,12 @@ export const lookbook = defineType({
   title: "Look Book",
   type: "document",
   icon: InlineIcon,
+  groups: [
+    {
+      name: "seo",
+      title: "SEO",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -27,6 +33,12 @@ export const lookbook = defineType({
     defineField({
       name: "callFranco",
       type: "callFranco",
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "seo",
     }),
   ],
   preview: {

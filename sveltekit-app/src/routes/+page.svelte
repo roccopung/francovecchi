@@ -6,11 +6,9 @@
   import PortableText from "$lib/components/element/PortableText.svelte";
   import HomeTitle from "$lib/components/sections/HomeTitle.svelte";
   import HoverStarEffect from "$lib/components/HoverStarEffect.svelte";
-  import Headline from "$lib/components/Headline.svelte";
   import Media from "$lib/components/element/Media.svelte";
   import ProjectCard from "$lib/components/ProjectCard.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
-  import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
   import KeenEyeMarquee from "$lib/components/marquees/KeenEyeMarquee.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
   import KeenEyeIcon from "$lib/components/svg/KeenEyeIcon.svelte";
@@ -42,8 +40,7 @@
         tl.to(".keen-eye", {
           scrollTrigger: {
             trigger: ".keen-eye",
-            start: "top 80%",
-            end: "+=100",
+            start: "top bottom",
             scrub: 1,
           },
           width: 120,
@@ -57,6 +54,8 @@
 
 <svelte:window bind:innerWidth={viewportWidth} />
 
+<SEO data={home?.seo} />
+
 <main class="min-h-[100svh] w-full flex flex-col">
   <HomeTitle />
   <section class="px-2 mt-[80svh] bg-white">
@@ -65,7 +64,6 @@
         <Media data={home?.cover} controls={true} muted={false} />
       </div>
     {/if}
-    {#if home?.heading}<Headline data={home?.heading} />{/if}
   </section>
   {#if home?.keywords}
     <section class="bg-white border-t-2 border-black">
@@ -85,9 +83,9 @@
         class="border-2 border-black rounded-m flex flex-col items-center justify-center overflow-hidden relative"
       >
         <div class="py-15 flex flex-col gap-0.5 items-center">
-          <button
+          <a href="/case-studies"
             class="z-10 typo-xs px-3 py-1 font-mono uppercase rounded-full border-2 border-black bg-white cursor-pointer hover:bg-black hover:text-white"
-            >Explore the archive</button
+            >Explore the archive</a
           >
         </div>
         <div class="absolute left-0 pointer-events-none">
@@ -151,11 +149,6 @@
         </div>
       {/if}
 
-      <!-- {#if home?.clientsSection && (home?.clientsSection.logosTwo?.length ?? 0) > 0}
-        <div class="overflow-hidden w-full">
-          <LogosMarquee data={home?.clientsSection?.logosTwo} />
-        </div>
-      {/if} -->
     </section>
     {#if characters && characters.length > 0}
       <section class="overflow-hidden">

@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
+  import Pen from "$lib/components/svg/Pen.svelte";
 
   type Social = {
     label: string;
@@ -19,7 +20,7 @@
 
   let { data }: Props = $props();
   let line: HTMLDivElement | null = $state(null);
-  let pen: HTMLImageElement | null = $state(null);
+  let pen: HTMLDivElement | null = $state(null);
   let mm: gsap.MatchMedia | undefined;
   let resizeObserver: ResizeObserver | undefined;
   let refreshRaf = 0;
@@ -32,7 +33,7 @@
 
     mm = gsap.matchMedia();
     mm.add("(min-width: 720px)", () => {
-      gsap.set(line, { opacity: 0 });
+      gsap.set(line, { opacity: 0, height: 0 });
 
       gsap.fromTo(
         pen,
@@ -52,9 +53,10 @@
 
       gsap.to(line, {
         opacity: 1,
+        height: '65vh',
         scrollTrigger: {
           trigger: ".footer",
-          start: "top 80%",
+          start: "top center",
           end: "bottom bottom",
           scrub: 2,
         },
@@ -87,7 +89,7 @@
 
 <svelte:window bind:innerHeight={viewportHeight} />
 
-{#if page.route.id !== "/case-studies/[slug]"}
+{#if page && page.route.id !== "/case-studies/[slug]"}
   <footer class="bg-black p-2 footer">
     <div
       class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-8.5rem)] w-full p-1 flex flex-col justify-between gap-4 overflow-hidden"
@@ -155,14 +157,15 @@
         <div
           class="typo-xs justify-self-center sm:justify-self-auto self-end order-0"
         >
-          Franco Vecchi / All rights reserves
+          Franco Vecchi / All rights reserved
         </div>
-        <img
+
+        <div
           bind:this={pen}
           class="bg-white h-[3lh] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
-          src="/temp/images/pen.png"
-          alt=""
-        />
+        >
+          <Pen />
+        </div>
         <div
           class="justify-self-center self-end sm:place-self-end typo-xs flex gap-1 order-1 sm:order-2"
         >

@@ -77,7 +77,7 @@
 
 <div
   data-hero
-  class="bg-white fixed h-[100svh] w-full top-0 left-0 text-accent"
+  class="bg-gray fixed h-[100svh] w-full top-0 left-0 text-accent"
 >
   <div class="relative w-full h-full">
     <div
@@ -105,7 +105,7 @@
       </div>
     {/if}
 
-    <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
+    <div class="absolute bottom-0 right-0 p-1 flex gap-2 typo-2xl">
       <img class="h-[1.55lh]" src="/temp/images/level-44.png" alt="" />
     </div>
   </div>

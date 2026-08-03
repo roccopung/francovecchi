@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { CallFranco } from "$lib/sanity.types";
-  import Path from "$lib/components/svg/PathCallFranco.svelte";
+  import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import CTA from "$lib/components/element/Cta.svelte";
 
@@ -17,7 +17,8 @@
   <div
     class="relative flex gap-2 font-slanted justify-center typo-call-franco uppercase max-w-lg mx-auto md:max-w-none"
   >
-    Call Franco
+    <div>Call Franco</div>
+    <div class="h-[0.1lh] translate-y-[0.07lh] ml-0.5"><StarIcon fill="var(--color-white)" /></div>
   </div>
 
   <div

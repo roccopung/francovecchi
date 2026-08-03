@@ -6,6 +6,12 @@ export const home = defineType({
   title: "Home",
   type: "document",
   icon: HomeIcon,
+  groups: [
+    {
+      name: "seo",
+      title: "SEO",
+    },
+  ],
   fields: [
     defineField({
       name: "pushingKeyframes",
@@ -117,6 +123,12 @@ export const home = defineType({
     defineField({
       name: "callFranco",
       type: "callFranco",
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "seo",
     }),
   ],
   preview: {

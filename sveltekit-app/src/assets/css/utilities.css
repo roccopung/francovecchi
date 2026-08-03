@@ -35,7 +35,7 @@
 /* typography */
 
 @utility typo-xs {
-  @apply text-xs;
+  @apply text-xs tracking-wide;
 }
 
 @utility typo-s {

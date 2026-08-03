@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { SearchIcon } from "@sanity/icons";
 
 export const seo = defineType({
   name: "seo",
   title: "Seo",
   type: "object",
+  icon: SearchIcon,
   description:
     "SEO settings for the page, used for Google search and social media",
   fields: [

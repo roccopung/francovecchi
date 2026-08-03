@@ -7,7 +7,7 @@
   import Headline from "$lib/components/Headline.svelte";
   import PortableText from "$lib/components/element/PortableText.svelte";
   import Cta from "$lib/components/element/Cta.svelte";
-  import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
+  import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
   import HobbiesMarquee from "$lib/components/marquees/HobbiesMarquee.svelte";
   import Accordion from "$lib/components/element/Accordion.svelte";
   import Reviews from "$lib/components/Reviews.svelte";
@@ -25,6 +25,11 @@
 <main class="w-full flex flex-col">
   <InfoTitle portrait={infoPage?.portrait} />
   <div class="bg-white h-full w-full mt-[100svh] z-10">
+    {#if infoPage?.hobbies}
+      <div class="w-full overflow-hidden">
+        <HobbiesMarquee data={infoPage?.hobbies} />
+      </div>
+    {/if}
     <section class=" p-2 py-4 flex flex-col gap-3">
       {#if infoPage?.intro?.heading}
         <Headline data={infoPage?.intro?.heading} />
@@ -62,9 +67,7 @@
       />
     </section>
     {#if infoPage?.collaborations}
-      <section
-        class="border-b-2 border-black p-2 md:pt-3 md:px-2 flex flex-col gap-4 md:gap-2"
-      >
+      <section class="p-2 pb-0 md:pt-3 md:px-2 flex flex-col gap-4 md:gap-2">
         {#if infoPage?.collaborations?.heading}
           <Headline data={infoPage?.collaborations?.heading} />
         {/if}
@@ -109,11 +112,8 @@
         </div>
       </section>
     {/if}
-    {#if infoPage?.hobbies}
-      <div class="w-full overflow-hidden">
-        <HobbiesMarquee data={infoPage?.hobbies} />
-      </div>
-    {/if}
+
+    <div class="py-4"><LogosMarquee data={infoPage?.clientsLogos} /></div>
 
     <section class="px-2 pb-4 flex flex-col gap-2 md:grid-2 md:gap-2">
       <div class="flex flex-col gap-1">
@@ -125,7 +125,7 @@
         </div>
       </div>
       {#if infoPage?.skillsSection?.skills}
-        <div class="flex flex-col gap-0">
+        <div class="flex flex-col gap-[2px]">
           {#each infoPage?.skillsSection?.skills as skill, i}
             <Accordion
               data={skill}

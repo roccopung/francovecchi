@@ -15,7 +15,7 @@
 
 <button
   onclick={ontoggle}
-  class="border-2 border-black rounded-m p-2 pt-2 pb-1 bg-white not-first:-mt-[1px] even:-mt-[2px]"
+  class="bg-black text-white rounded-m p-2 pt-2 pb-1"
 >
   <div
     class="flex gap-3 whitespace-nowrap typo-xl font-medium font-sans items-center pb-1"

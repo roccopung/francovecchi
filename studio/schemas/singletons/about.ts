@@ -4,6 +4,12 @@ export const about = defineType({
   name: "about",
   title: "About",
   type: "document",
+  groups: [
+    {
+      name: "seo",
+      title: "SEO",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -49,6 +55,16 @@ export const about = defineType({
       ],
     }),
     defineField({
+      name: "hobbies",
+      type: "array",
+      of: [
+        defineField({
+          name: "hobby",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "collaborations",
       type: "object",
       fields: [
@@ -88,12 +104,12 @@ export const about = defineType({
       ],
     }),
     defineField({
-      name: "hobbies",
+      name: "clientsLogos",
       type: "array",
       of: [
         defineField({
-          name: "hobby",
-          type: "string",
+          name: "logo",
+          type: "image",
         }),
       ],
     }),
@@ -162,6 +178,12 @@ export const about = defineType({
     defineField({
       name: "callFranco",
       type: "callFranco",
+    }),
+    defineField({
+      name: "seo",
+      title: 'SEO',
+      type: "seo",
+      group: "seo",
     }),
   ],
   preview: {

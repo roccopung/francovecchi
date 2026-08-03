@@ -103,12 +103,12 @@ pointer-events-none"
       <h1 class="trimmed text-accent ml-7 md:hidden">Vecchi</h1>
     </div>
 
-    <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
+    <!-- <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
       <div class="uppercase font-slanted flex flex-col gap-1 items-end">
         <div class="trimmed -mr-0.5">Pushing</div>
         <div class="trimmed">keyrames</div>
       </div>
-    </div>
+    </div> -->
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
       <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />

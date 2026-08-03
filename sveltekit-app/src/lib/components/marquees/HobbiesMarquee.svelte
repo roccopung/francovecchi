@@ -10,7 +10,7 @@
 
 <Marquee autoFill speed={20} gap="2rem">
   {#each data as item, index}
-    <div class="trimmed typo-xs font-mono py-2">
+    <div class="trimmed typo-s font-mono py-2">
       <span>Hobby {index + 1}:</span>&nbsp; {item}
     </div>
     •
