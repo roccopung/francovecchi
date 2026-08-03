@@ -5,6 +5,7 @@
   import type { LayoutProps } from "./$types";
   import { page } from "$app/state";
   import { afterNavigate, onNavigate } from "$app/navigation";
+  import { browser } from '$app/environment'
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
@@ -21,6 +22,9 @@
 
   afterNavigate(() => {
     menuState.open = false;
+    if (browser) {
+      window.scrollTo(0, 0);
+    }
   });
 
   onNavigate((navigation) => {
