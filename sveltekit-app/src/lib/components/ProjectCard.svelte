@@ -52,7 +52,7 @@
               {/if}
             {/each}]
             {#if project.isNda}
-              [NDA PROTECTED]
+              <span class="nda-flash">[NDA PROTECTED]</span>
             {/if}
           </div>
         {/if}
@@ -70,6 +70,29 @@
 {/key}
 
 <style>
+  /* Hard on/off blink, not a fade: the keyframes hold each colour for half the
+     cycle and jump. `transparent` rather than a literal white so it keeps
+     matching whatever the card background is. */
+  .nda-flash {
+    animation: nda-flash 0.4s step-end infinite;
+  }
+
+  @keyframes nda-flash {
+    0% {
+      color: var(--color-accent);
+    }
+    50% {
+      color: transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nda-flash {
+      animation: none;
+      color: var(--color-accent);
+    }
+  }
+
   .home-variant {
     display: flex;
     flex-direction: column;

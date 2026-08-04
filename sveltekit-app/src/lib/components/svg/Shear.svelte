@@ -5,5 +5,5 @@
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <path d="M112 0H272L160 292H0L112 0Z" fill="#F8F8F8" />
+  <path d="M112 0H272L160 292H0L112 0Z" fill="var(--color-gray-banner)" />
 </svg>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getImageDimensions } from "@sanity/asset-utils";
   import { urlFor } from "$lib/sanity/image";
+  import { viewport } from "$lib/states.svelte";
 
   interface Props {
     image: any;
@@ -26,10 +27,8 @@
     visible = $bindable(),
   }: Props = $props();
 
-  let innerWidth = $state(1280);
-
   let src = $derived(
-    innerWidth < 768 && image?.mobileImage ? image?.mobileImage : image,
+    viewport.isMobile && image?.mobileImage ? image?.mobileImage : image,
   );
   let hasAsset = $derived(!!src?.asset);
   let dimensions = $derived(
@@ -51,8 +50,6 @@
     }
   });
 </script>
-
-<svelte:window bind:innerWidth />
 
 <svelte:head>
   {#if preload}

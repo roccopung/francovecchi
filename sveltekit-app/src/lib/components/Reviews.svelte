@@ -47,16 +47,16 @@
       {/each}
     </div>
   </div>
-  <div class="embla__arrows w-full flex justify-start gap-1.5 px-1">
+  <div class="embla__arrows w-full flex justify-start px-1">
     <button
-      class="embla__arrow embla__arrow--left hover:opacity-50 rotate-180 w-2 cursor-pointer"
+      class="embla__arrow embla__arrow--left hover:opacity-50 rotate-180 w-10 cursor-pointer p-3"
       onclick={scrollPrev}
       aria-label="Previous slide"
     >
       <ArrowRight />
     </button>
     <button
-      class="embla__arrow embla__arrow--right hover:opacity-50 w-2 cursor-pointer"
+      class="embla__arrow embla__arrow--right hover:opacity-50 w-10 cursor-pointer p-3"
       onclick={scrollNext}
       aria-label="Next slide"
     >
@@ -80,6 +80,7 @@
     transform: translate3d(0, 0, 0);
     flex: 0 0 100%;
     width: 100%;
+    aspect-ratio: 4/5;
   }
 
   @media (min-width: 480px) {
@@ -90,6 +91,7 @@
       flex: 0 0 auto;
       width: 70vw;
       margin-left: -1px;
+      aspect-ratio: 1;
     }
   }
 

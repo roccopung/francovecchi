@@ -15,6 +15,7 @@
   import ShearMarquee from "$lib/components/marquees/ShearMarquee.svelte";
   import KeywordsMarquee from "$lib/components/marquees/KeywordsMarquee.svelte";
   import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
+  import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
   import Image from "$lib/components/element/Image.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
@@ -64,7 +65,7 @@
 
 <SEO data={home?.seo} />
 
-<main class="min-h-[100vh] w-full flex flex-col">
+<main class="min-h-[100vh] w-full flex flex-col bg-white">
   <HomeTitle />
   <section class="px-2 mt-[80svh] bg-white">
     {#if home?.cover}
@@ -156,11 +157,14 @@
             </div>
           {/each}
         </div>
+        <!-- <div class="overflow-hidden">
+          <LogosMarquee data={home?.clientsSection?.logos} direction="left" />
+        </div> -->
       {/if}
     </section>
     {#if characters && characters.length > 0}
       <section class="overflow-hidden">
-        <CharactersMarquee data={characters} />
+        <CharactersMarquee data={characters} paused={true} />
       </section>
     {/if}
   </div>

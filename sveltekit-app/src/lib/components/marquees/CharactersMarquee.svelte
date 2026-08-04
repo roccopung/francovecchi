@@ -5,9 +5,10 @@
 
   type Props = {
     data: any[];
+    paused?: boolean;
   };
 
-  let { data }: Props = $props();
+  let { data, paused }: Props = $props();
   let isVisible = $state(false);
 
   let items = $derived([...data, ...data]);
@@ -15,15 +16,14 @@
 
 <div use:inView={(v) => (isVisible = v)}>
   <Marquee
-    play={isVisible}
-    speed={isVisible ? 30 : 0}
+    play={false}
     gap="0"
     autoFill
     direction="right"
   >
     {#each items as item}
       {#if item && item?.cover}
-        <div class="image-container aspect-[7/8] h-40 overflow-hidden -mx-5">
+        <div class="image-container aspect-[7/8] h-80 overflow-hidden -mx-10 -translate-x-1/2">
           <Image image={item?.cover} />
         </div>
       {/if}

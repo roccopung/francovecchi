@@ -18,7 +18,7 @@
     class="relative flex gap-2 font-slanted justify-center typo-call-franco uppercase max-w-lg mx-auto md:max-w-none"
   >
     <div>Call Franco</div>
-    <div class="h-[0.1lh] translate-y-[0.07lh] ml-0.5 aspect-square">
+    <div class="h-[0.2lh] md:h-[0.1lh] translate-y-[0.07lh] ml-0.5 aspect-square">
       <StarIcon fill="var(--color-white)" />
     </div>
   </div>

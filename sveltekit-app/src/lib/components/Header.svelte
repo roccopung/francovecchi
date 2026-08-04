@@ -26,7 +26,7 @@
   <a
     href="/"
     rel="noreferrer"
-    class="h-full flex transition-fast {scrollY > 10 ? 'w-7' : 'w-7'}"
+    class="h-full flex transition-fast w-14"
     ><Logo /></a
   >
 
@@ -67,7 +67,7 @@
     : ''} md:hidden"
 >
   <div class="flex justify-between">
-    <a href="/" rel="noreferrer" class="h-full flex transition-fast w-8"
+    <a href="/" rel="noreferrer" class="h-full flex transition-fast w-10"
       ><Logo /></a
     >
 

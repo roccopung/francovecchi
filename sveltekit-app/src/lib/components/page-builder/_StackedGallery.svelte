@@ -28,7 +28,7 @@
               modalState.open = true;
             }}
             class="
-            transition-fast rounded-m overflow-hidden border-2
+            transition-fast  overflow-hidden
             {imagesVisible.every(Boolean) ? 'opacity-100' : 'opacity-0'}
           {item?.columnSpan?.input == '12'
               ? 'col-span-12'

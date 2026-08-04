@@ -8,6 +8,8 @@
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
   import SeeMore from "$lib/components/SeeMore.svelte";
 
+  import SEO from "$lib/components/seo/SEO.svelte";
+
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<LookbookQueryResult>(data));
   let lookbook = $derived($query.data);
@@ -20,6 +22,8 @@
     return { items: filteredItems };
   });
 </script>
+
+<SEO data={lookbook?.seo} />
 
 <main
   class="links min-h-[100svh] w-full flex flex-col gap-2 items-center bg-white py-2"

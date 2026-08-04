@@ -22,15 +22,17 @@
   let openIndex = $state<number | null>(null);
 </script>
 
-<main class="w-full flex flex-col">
+<SEO data={infoPage?.seo} />
+
+<main class="w-full flex flex-col bg-white">
   <InfoTitle portrait={infoPage?.portrait} />
-  <div class="bg-white h-full w-full mt-[100svh] z-10">
+  <div class="bg-white h-full w-full mt-[100svh] z-10 pb-2">
     {#if infoPage?.hobbies}
       <div class="w-full overflow-hidden">
         <HobbiesMarquee data={infoPage?.hobbies} />
       </div>
     {/if}
-    <section class=" p-2 py-4 flex flex-col gap-3">
+    <section class="p-2 py-6 flex flex-col gap-3 ">
       {#if infoPage?.intro?.heading}
         <Headline data={infoPage?.intro?.heading} />
       {/if}
@@ -39,7 +41,7 @@
           <PortableText data={infoPage?.intro?.content} />
         </div>
       {/if}
-      <div class="grid-2 gap-2 lg:max-w-3/4">
+      <div class="flex flex-col md:grid-2 gap-2 lg:max-w-3/4">
         {#if infoPage?.intro?.earlyCareer}
           <div>
             <h4 class="typo-md font-sans font-bold pb-1">Early Career</h4>
@@ -67,7 +69,7 @@
       />
     </section>
     {#if infoPage?.collaborations}
-      <section class="p-2 pb-0 md:pt-3 md:px-2 flex flex-col gap-4 md:gap-2">
+      <section class="p-2 md:py-6 md:px-2 flex flex-col gap-4 md:gap-2 border-2 border-black rounded-m m-2" >
         {#if infoPage?.collaborations?.heading}
           <Headline data={infoPage?.collaborations?.heading} />
         {/if}
@@ -85,7 +87,7 @@
               <div class="sm:grid-2 typo-s font-sans gap-x-1">
                 {#if infoPage?.collaborations?.brands}
                   {#each infoPage?.collaborations?.brands as brand}
-                    <div class="typo-s font-sans">{brand}</div>
+                    <div class="typo-s font-sans md:w-25">{brand}</div>
                   {/each}
                 {/if}
               </div>
@@ -105,7 +107,7 @@
             </div>
           </div>
           <img
-            class="object-contain h-15 md:py-2 self-start"
+            class="object-contain h-15 py-2 self-start"
             src="/temp/images/keen-eye-2.png"
             alt=""
           />
@@ -113,9 +115,9 @@
       </section>
     {/if}
 
-    <div class="py-4"><LogosMarquee data={infoPage?.clientsLogos} /></div>
+    <div class="py-6"><LogosMarquee data={infoPage?.clientsLogos} /></div>
 
-    <section class="px-2 pb-4 flex flex-col gap-2 md:grid-2 md:gap-2">
+    <section class="px-2 pb-4 pt-2 flex flex-col gap-2 md:grid-2 md:gap-2">
       <div class="flex flex-col gap-1">
         {#if infoPage?.skillsSection?.heading}
           <Headline data={infoPage?.skillsSection?.heading} />
@@ -138,7 +140,7 @@
     </section>
   </div>
   {#if infoPage?.reviewsSection}
-    <section class="py-2 bg-white">
+    <section class="py-4 bg-white">
       <div class="flex flex-col gap-2 px-2">
         {#if infoPage?.reviewsSection?.heading}
           <Headline data={infoPage?.reviewsSection?.heading} />

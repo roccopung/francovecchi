@@ -74,18 +74,19 @@
       </div>
     </div>
 
-    <div
-      class="fixed bottom-2 left-1/2 -translate-x-1/2 flex justify-center gap-1.5"
-    >
+
+
+
+    <div class="embla__arrows fixed bottom-1 left-1/2 -translate-x-1/2 flex justify-center">
       <button
-        class="rotate-180 w-2 hover:opacity-50 cursor-pointer"
+        class="embla__arrow embla__arrow--left hover:opacity-50 rotate-180 w-10 cursor-pointer p-3"
         onclick={scrollPrev}
         aria-label="Previous slide"
       >
         <ArrowRight />
       </button>
       <button
-        class="w-2 hover:opacity-50 cursor-pointer"
+        class="embla__arrow embla__arrow--right hover:opacity-50 w-10 cursor-pointer p-3"
         onclick={scrollNext}
         aria-label="Next slide"
       >

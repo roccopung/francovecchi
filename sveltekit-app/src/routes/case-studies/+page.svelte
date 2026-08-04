@@ -4,10 +4,13 @@
   import { useQuery } from "@sanity/sveltekit";
   import ProjectCard from "$lib/components/ProjectCard.svelte";
   import SeeMore from "$lib/components/SeeMore.svelte";
+  import SEO from "$lib/components/seo/SEO.svelte";
 
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<CaseStudiesQueryResult>(data));
-  let caseStudies = $derived($query.data);
+  let datas = $derived($query.data);
+  let caseStudiesPage = $derived($query.data?.caseStudiesPage);
+  let caseStudies = $derived($query.data?.projects);
   let initialProjectsNumber = $state(10);
   let itemsToLoad = $derived(5);
   let filteredCaseStudies = $derived.by(() => {
@@ -15,6 +18,8 @@
     else return caseStudies.slice(0, itemsToLoad);
   });
 </script>
+
+<SEO data={caseStudiesPage?.seo} />
 
 <main class="links w-full flex flex-col gap-2 items-center bg-white pb-2">
   <h1 class="typo-6xl font-slanted uppercase mt-8 text-accent">Case studies</h1>

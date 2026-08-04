@@ -77,7 +77,7 @@
 
 <div
   data-hero
-  class="bg-gray fixed h-[100svh] w-full top-0 left-0 text-accent"
+  class="bg-white fixed h-[100svh] w-full top-0 left-0 text-accent"
 >
   <div class="relative w-full h-full">
     <div

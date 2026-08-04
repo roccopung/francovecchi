@@ -97,7 +97,7 @@
     >
       <div class="relative h-full w-full">
         <div
-          class="flex justify-between typo-2xl font-slanted uppercase w-full pb-4 md:pb-0 px-1 text-dark-gray"
+          class="flex flex-col text-center md:flex-row md:text-auto md:justify-between typo-2xl font-slanted uppercase w-full pb-4 md:pb-0 px-1 text-dark-gray"
         >
           <div
             class="order-1 justify-self-center sm:justify-self-auto sm:order-0"
@@ -163,7 +163,7 @@
 
         <div
           bind:this={pen}
-          class="bg-white h-[3lh] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
+          class="bg-white h-[14rem] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
         >
           <Pen />
         </div>

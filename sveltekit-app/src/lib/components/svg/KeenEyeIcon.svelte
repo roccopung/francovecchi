@@ -6,7 +6,7 @@
   xmlns="http://www.w3.org/2000/svg"
 >
   <g clip-path="url(#clip0_4515_4418)">
-    <path d="M191.93 2.00977H2.00977V277.01H191.93V2.00977Z" fill="#fff" />
+    <path d="M191.93 2.00977H2.00977V277.01H191.93V2.00977Z" fill="var(--color-white)" />
     <path
       d="M191.93 2.00977H2.00977V277.01H191.93V2.00977Z"
       stroke="#F7F7F7"

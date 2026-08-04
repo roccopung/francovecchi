@@ -12,18 +12,12 @@
 </script>
 
 <div use:inView={(v) => (isVisible = v)}>
-  <Marquee
-    play={isVisible}
-    speed={isVisible ? 40 : 0}
-    gap="0"
-    autoFill
-    {direction}
-  >
+  <Marquee play={isVisible} speed={40} gap="0" autoFill {direction}>
     <div class="flex items-center gap-5 ml-5 md:gap-20 md:ml-20">
-      {#each data as item}
-        {#if item && item?.asset}
-          <div class="w-12 md:h-10 mix-blend-multiply">
-            <Image image={item} fit="contain" />
+      {#each data ?? [] as item (item._key)}
+        {#if item?.asset}
+          <div class="w-12 md:h-10">
+            <Image image={item} fit="contain" lazy />
           </div>
         {/if}
       {/each}

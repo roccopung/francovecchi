@@ -13,7 +13,7 @@
 
 <div use:inView={(v) => (isVisible = v)}>
   <Marquee
-    play={isVisible}
+    play={false}
     speed={30}
     gap="3rem"
     autoFill

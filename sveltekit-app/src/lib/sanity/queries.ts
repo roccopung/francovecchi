@@ -1,4 +1,5 @@
 import { defineQuery } from "@sanity/sveltekit";
+import { seo } from "./fragments/seo";
 
 export const homeQuery = defineQuery(`{
   "home": *[_type == "home"][0] {
@@ -15,21 +16,31 @@ export const homeQuery = defineQuery(`{
     clientsSection {
       ...,
       logos[]{
+      ...,
       asset->
       }
-    }
+    },
+    ${seo}
   },
   "characters": *[_type == "character"]
 }
 `);
 
 export const infoQuery = defineQuery(`{
-  "info": *[_type == "about"][0],
+  "info": *[_type == "about"][0] {
+  ...,
+  ${seo}
+  },
   "characters": *[_type == "character"]
   }`);
 
 export const caseStudiesQuery = defineQuery(
-  `*[_type == "project"]{
+  `
+  {"caseStudiesPage": *[_type == "caseStudies"][0] {
+  ...,
+  ${seo}
+  },
+  "projects": *[_type == "project"]{
   title,
   slug,
   isNda,
@@ -37,7 +48,7 @@ export const caseStudiesQuery = defineQuery(
   coverImages,
   services[]->{ title },
   "shortSummary": select(isNda == true => null, shortSummary)
-  }`,
+  }}`,
 );
 
 export const projectAccessQuery = defineQuery(
@@ -86,7 +97,8 @@ export const projectQuery = defineQuery(
   },
   "projectIndexes": *[_type == "project"] | order(orderRank asc) {
     slug
-  }
+  },
+  ${seo}
   }`,
 );
 
