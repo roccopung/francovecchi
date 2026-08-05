@@ -146,22 +146,14 @@
           <PortableText data={home?.clientsSection?.subtitle} />
         </div>
       {/if}
-
-      {#if home?.clientsSection && (home?.clientsSection.logos?.length ?? 0) > 0}
-        <div class="w-full grid-2 sm:grid-4 gap-2 p-2">
-          {#each home?.clientsSection?.logos as logo}
-            <div
-              class="w-10 h-10 md:w-15 md:h-15 flex items-center justiyf-center place-self-center"
-            >
-              <Image image={logo} fit="contain" />
-            </div>
-          {/each}
-        </div>
-        <!-- <div class="overflow-hidden">
-          <LogosMarquee data={home?.clientsSection?.logos} direction="left" />
-        </div> -->
-      {/if}
     </section>
+
+    {#if home?.clientsSection}
+      <section class="overflow-hidden">
+        <LogosMarquee data={home?.clientsSection?.logos} direction="left" />
+        <LogosMarquee data={home?.clientsSection?.logosTwo} direction="right" />
+      </section>
+    {/if}
     {#if characters && characters.length > 0}
       <section class="overflow-hidden">
         <CharactersMarquee data={characters} paused={true} />

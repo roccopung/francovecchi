@@ -15,7 +15,7 @@ class ModalState {
 }
 
 // One matchMedia listener for the whole app, instead of one `svelte:window`
-// binding per component instance (marquees mount dozens of <Image>).
+// binding per component instance.
 class Viewport {
   #query = typeof window !== 'undefined'
     ? window.matchMedia('(max-width: 767px)')

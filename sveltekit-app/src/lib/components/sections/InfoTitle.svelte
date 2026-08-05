@@ -7,6 +7,7 @@
   import Cta from "$lib/components/element/Cta.svelte";
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
+  import { viewport } from "$lib/states.svelte";
 
   type Props = {
     portrait?: ElementImage;
@@ -17,7 +18,6 @@
   let portraitWrapperElResized: boolean = $state(false);
   let portraitEl: HTMLElement | undefined = $state();
   let viewportHeight: number = $state(0);
-  let viewportWidth: number = $state(0);
   let scrollOpacity = $state(1);
   let scrollY = $state(0);
 
@@ -33,12 +33,10 @@
     const { gsap } = await import("gsap");
     if (portraitWrapperEl && portraitEl) {
       gsap.to(portraitWrapperEl, {
-        height:
-          viewportWidth > 768 ? viewportHeight * 0.5 : viewportHeight * 0.4,
-        width:
-          viewportWidth > 768
-            ? viewportHeight * 0.5 * (4 / 5)
-            : viewportHeight * 0.4 * (4 / 5),
+        height: viewport.isMobile ? viewportHeight * 0.4 : viewportHeight * 0.5,
+        width: viewport.isMobile
+          ? viewportHeight * 0.4 * (4 / 5)
+          : viewportHeight * 0.5 * (4 / 5),
         duration: 0.8,
         ease: "power4.inOut",
         onComplete: () => {
@@ -57,23 +55,17 @@
   $effect(() => {
     portraitWrapperEl;
     if (portraitWrapperElResized && portraitWrapperEl) {
-      portraitWrapperEl.style.height =
-        viewportWidth > 768
-          ? viewportHeight * 0.5 + "px"
-          : viewportHeight * 0.4 + "px";
-      portraitWrapperEl.style.width =
-        viewportWidth > 768
-          ? viewportHeight * 0.5 * (4 / 5) + "px"
-          : viewportHeight * 0.4 * (4 / 5) + "px";
+      portraitWrapperEl.style.height = viewport.isMobile
+        ? viewportHeight * 0.4 + "px"
+        : viewportHeight * 0.5 + "px";
+      portraitWrapperEl.style.width = viewport.isMobile
+        ? viewportHeight * 0.4 * (4 / 5) + "px"
+        : viewportHeight * 0.5 * (4 / 5) + "px";
     }
   });
 </script>
 
-<svelte:window
-  bind:innerHeight={viewportHeight}
-  bind:innerWidth={viewportWidth}
-  bind:scrollY
-/>
+<svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
 
 <div
   data-hero

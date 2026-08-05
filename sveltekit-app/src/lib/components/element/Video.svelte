@@ -3,6 +3,7 @@
   import { getImageDimensions } from "@sanity/asset-utils";
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
+  import { viewport } from "$lib/states.svelte";
 
   let {
     video,
@@ -12,8 +13,6 @@
     autoplay = true,
     ratio = null,
   } = $props();
-
-  let viewportWidth = $state(768);
 
   let isAutoplay = $derived(
     video?.autoplay === true || autoplay === true ? true : false,
@@ -44,7 +43,7 @@
   });
 
   let posterAsset = $derived(
-    viewportWidth < 768 && video?.poster?.mobileImage
+    viewport.isMobile && video?.poster?.mobileImage
       ? video?.poster?.mobileImage.asset
       : video?.poster?.asset,
   );
@@ -81,8 +80,6 @@
     }
   });
 </script>
-
-<svelte:window bind:innerWidth={viewportWidth} />
 
 <media-controller
   bind:this={controller}

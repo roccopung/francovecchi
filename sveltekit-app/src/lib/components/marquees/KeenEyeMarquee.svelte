@@ -2,6 +2,7 @@
   import Marquee from "svelte-fast-marquee";
   import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import { inView } from "$lib/actions/inView";
+  import { viewport } from "$lib/states.svelte";
 
   type Props = {
     data?: string;
@@ -13,7 +14,7 @@
 
 <div use:inView={(v) => (isVisible = v)}>
   <Marquee
-    play={false}
+    play={viewport.isMobile && isVisible}
     speed={30}
     gap="3rem"
     autoFill
