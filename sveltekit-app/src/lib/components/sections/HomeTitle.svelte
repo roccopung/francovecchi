@@ -1,10 +1,12 @@
 <script lang="ts">
   //@ts-nocheck
   import Cta from "$lib/components/element/Cta.svelte";
+  import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import { onMount, onDestroy } from "svelte";
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
+  let star: HTMLElement;
   let ctx: gsap.Context | undefined;
   let scrollY = $state(0);
   let viewportHeight = $state(0);
@@ -25,10 +27,10 @@
     SplitText: typeof import("gsap/SplitText"),
   ) => {
     ctx = gsap.context(() => {
-      gsap.set([franco, vecchi], { opacity: 1 });
+      gsap.set([franco, vecchi, star], { opacity: 1 });
 
       // `dir`: -1 slides the word off to the left, +1 off to the right.
-      const reveal = (el: HTMLElement, yPercent: number, dir: number) =>
+      const reveal = (el: HTMLElement, dir: number) =>
         SplitText.create(el, {
           type: "chars, words",
           charsClass: "ht-char",
@@ -37,7 +39,6 @@
             // One-time entrance reveal on mount.
             gsap.from(self.chars, {
               duration: 0.3,
-              yPercent,
               scale: 0,
               stagger: 0.05,
               ease: "power4.out",
@@ -55,8 +56,28 @@
           },
         });
 
-      reveal(franco, -20, -6);
-      reveal(vecchi, 20, 5);
+      const francoDir = -6;
+      reveal(franco, francoDir);
+      reveal(vecchi, 5);
+
+      // The star lives outside the split text, so it needs its own tweens to
+      // enter after the last char and travel off-screen with "Franco". Its
+      // trigger is `franco` so start/end match the word's own ScrollTrigger.
+      gsap.from(star, {
+        duration: 0.3,
+        scale: 0,
+        delay: 0.3,
+        ease: "power4.out",
+      });
+      gsap.to(star, {
+        scrollTrigger: {
+          trigger: franco,
+          start: 0,
+          scrub: 0.5,
+        },
+        x: () => francoDir * window.innerWidth,
+        ease: "none",
+      });
     });
   };
 
@@ -87,8 +108,16 @@
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
 pointer-events-none"
     >
-      <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
-      <h1 bind:this={vecchi} class="trimmed ml-7 opacity-0 text-accent">Vecchi</h1>
+      <div class="flex gap-1 whitespace-nowrap">
+        <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
+        <span
+          bind:this={star}
+          class="h-[0.2lh] md:h-[0.1lh] opacity-0 md:ml-2"
+        >
+          <StarIcon fill="var(--color-accent)" />
+        </span>
+      </div>
+      <h1 bind:this={vecchi} class="trimmed ml-7 opacity-0 text-accent whitespace-nowrap">Vecchi</h1>
     </div>
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
