@@ -33,9 +33,20 @@
       document.startViewTransition(async () => {
         resolve();
         await navigation.complete;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => window.scrollTo(0, 0)),
+        );
       });
     });
   });
+
+  // afterNavigate(() => {
+  //   document.body.classList.remove("overflow-hidden");
+  //   if (browser) {
+  //     // raf needed to prevent layout shifts in any browser
+
+  //   }
+  // });
 </script>
 
 <PreviewMode enabled={previewEnabled}>

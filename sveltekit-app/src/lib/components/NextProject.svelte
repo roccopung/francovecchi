@@ -187,15 +187,7 @@
     }
   });
 
-  afterNavigate(() => {
-    document.body.classList.remove("overflow-hidden");
-    if (browser) {
-      // raf needed to prevent layout shifts in any browser
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => window.scrollTo(0, 0)),
-      );
-    }
-  });
+
 </script>
 
 <svelte:window
