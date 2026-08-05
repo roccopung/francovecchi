@@ -87,28 +87,9 @@
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
 pointer-events-none"
     >
-      <h1
-        bind:this={franco}
-        class="trimmed hidden md:block opacity-0 text-accent"
-      >
-        Franco
-      </h1>
-      <h1
-        bind:this={vecchi}
-        class="trimmed ml-7 hidden md:block opacity-0 text-accent"
-      >
-        Vecchi
-      </h1>
-      <h1 class="trimmed text-accent md:hidden">Franco</h1>
-      <h1 class="trimmed text-accent ml-7 md:hidden">Vecchi</h1>
+      <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
+      <h1 bind:this={vecchi} class="trimmed ml-7 opacity-0 text-accent">Vecchi</h1>
     </div>
-
-    <!-- <div class="absolute bottom-0 left-0 p-1 flex gap-2 typo-2xl">
-      <div class="uppercase font-slanted flex flex-col gap-1 items-end">
-        <div class="trimmed -mr-0.5">Pushing</div>
-        <div class="trimmed">keyrames</div>
-      </div>
-    </div> -->
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
       <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />
