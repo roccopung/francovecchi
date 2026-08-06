@@ -32,7 +32,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     mm = gsap.matchMedia();
-    mm.add("(min-width: 720px)", () => {
+    mm.add("(min-width: 768px)", () => {
       gsap.set(line, { opacity: 0, height: 0 });
 
       gsap.fromTo(
@@ -101,15 +101,15 @@
     >
       <div class="relative h-full w-full">
         <div
-          class="flex flex-col text-center md:flex-row md:text-auto md:justify-between typo-2xl font-slanted uppercase w-full pb-4 md:pb-0 px-1 text-dark-gray"
+          class="flex flex-col text-center sm:flex-row md:text-auto sm:justify-between typo-2xl font-slanted uppercase w-full pb-4 md:pb-0 px-1 text-dark-gray"
         >
           <div
-            class="order-1 justify-self-center sm:justify-self-auto sm:order-0"
+            class="order-1 justify-self-center md:justify-self-auto md:order-0"
           >
             Work with me
           </div>
 
-          <div class="justify-self-center sm:justify-self-end order-2">
+          <div class="justify-self-center md:justify-self-end order-2">
             You won't regret it
           </div>
         </div>
