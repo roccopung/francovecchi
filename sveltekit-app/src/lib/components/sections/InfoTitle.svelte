@@ -90,7 +90,7 @@
       >
         <div
           bind:this={portraitEl}
-          class="absolute h-[40vh] md:h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
+          class="absolute h-[43vh] md:h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
         >
           <Image image={portrait} fit="cover" />
         </div>

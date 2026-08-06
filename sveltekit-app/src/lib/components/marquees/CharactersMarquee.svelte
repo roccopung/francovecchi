@@ -23,7 +23,7 @@
   >
     {#each items as item}
       {#if item && item?.cover}
-        <div class="image-container aspect-[7/8] h-20 md:h-80 overflow-hidden -mx-3 md:-mx-10 -translate-x-1/2">
+        <div class="image-container aspect-[7/8] h-30 md:h-80 overflow-hidden -mx-4 md:-mx-10 -translate-x-1/2">
           <Image image={item?.cover} />
         </div>
       {/if}

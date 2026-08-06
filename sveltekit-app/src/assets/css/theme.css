@@ -61,10 +61,10 @@
   --text-m-l: 2.2rem;
   --text-m-l--line-height: 1.2;
 
-  --text-xl: clamp(2.8rem, 2.315vw, 4rem);
+  --text-xl: clamp(2.6rem, 2.315vw, 4rem);
   --text-xl--line-height: 1;
   --text-xl--letter-spacing: 0.02em;
-  --text-m-xl: 2.8rem;
+  --text-m-xl: 2.6rem;
   --text-m-xl--line-height: 1;
   --text-m-xl--letter-spacing: 0.02em;
 

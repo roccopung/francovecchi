@@ -18,7 +18,7 @@
   class="bg-black text-white rounded-m p-2 pt-2 pb-1"
 >
   <div
-    class="flex gap-3 whitespace-nowrap typo-xl font-medium font-sans items-center pb-1"
+    class="flex gap-1 md:gap-3 whitespace-nowrap typo-xl font-medium font-sans items-center pb-1"
   >
     <div>{open ? "-" : "+"}</div>
     <div>{data.title}</div>

@@ -18,7 +18,6 @@
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<InfoQueryResult>(data));
   let infoPage = $derived($query.data?.info);
-  let characters = $derived($query.data?.characters);
   let openIndex = $state<number | null>(null);
 </script>
 
@@ -28,7 +27,7 @@
   <InfoTitle portrait={infoPage?.portrait} />
   <div class="bg-white h-full w-full mt-[100svh] z-10 pb-2">
     {#if infoPage?.hobbies}
-      <div class="w-full overflow-hidden">
+      <div class="w-full overflow-hidden border-t">
         <HobbiesMarquee data={infoPage?.hobbies} />
       </div>
     {/if}
@@ -41,7 +40,7 @@
           <PortableText data={infoPage?.intro?.content} />
         </div>
       {/if}
-      <div class="flex flex-col md:grid-2 gap-2 lg:max-w-3/4">
+      <div class="flex flex-col gap-2 md:grid-2 md:gap-2 lg:max-w-3/4">
         {#if infoPage?.intro?.earlyCareer}
           <div>
             <h4 class="typo-md font-sans font-bold pb-1">Early Career</h4>
@@ -69,7 +68,7 @@
       />
     </section>
     {#if infoPage?.collaborations}
-      <section class="p-2 md:py-6 md:px-2 flex flex-col gap-4 md:gap-2 border-2 border-black rounded-m m-2" >
+      <section class="p-2 flex flex-col gap-4 md:gap-2 border-2 border-black rounded-m m-2" >
         {#if infoPage?.collaborations?.heading}
           <Headline data={infoPage?.collaborations?.heading} />
         {/if}
@@ -80,7 +79,7 @@
         {/if}
         <div class="flex flex-col md:flex-row md:justify-between">
           <div
-            class="relative flex flex-col gap-3 mb-4 md:grid-2 md:gap-3 md:my-2"
+            class="relative flex flex-col gap-3 mb-4 md:grid-2 md:gap-3 md:my-0"
           >
             <div>
               <h4 class="typo-md font-sans font-bold pb-1">Brands</h4>
@@ -107,7 +106,7 @@
             </div>
           </div>
           <img
-            class="object-contain h-15 py-2 self-start"
+            class="object-contain h-15 md:h-25 pt-2 self-start md:self-end"
             src="/temp/images/keen-eye-2.png"
             alt=""
           />

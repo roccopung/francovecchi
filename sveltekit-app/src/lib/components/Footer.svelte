@@ -163,7 +163,7 @@
 
         <div
           bind:this={pen}
-          class="bg-white h-[14rem] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
+          class="bg-white h-[7rem] sm:h-[14rem] aspect-auto p-0.5 self-center place-self-center sm:place-self-end order-2 sm:order-1"
         >
           <Pen />
         </div>

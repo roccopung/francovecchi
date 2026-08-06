@@ -135,7 +135,7 @@
         </div>
       </div>
     </section>
-    <section class="text-center py-4 md:py-1 flex flex-col items-center w-full">
+    <section class="text-center py-4 flex flex-col items-center w-full">
       <h3 class="typo-xl font-sans font-medium">
         {home?.clientsSection?.title}
       </h3>
@@ -149,7 +149,7 @@
     </section>
 
     {#if home?.clientsSection}
-      <section class="overflow-hidden">
+      <section class="overflow-hidden pb-4">
         <LogosMarquee data={home?.clientsSection?.logos} direction="left" />
         <LogosMarquee data={home?.clientsSection?.logosTwo} direction="right" />
       </section>

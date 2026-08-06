@@ -64,19 +64,21 @@
       // enter after the last char and travel off-screen with "Franco". Its
       // trigger is `franco` so start/end match the word's own ScrollTrigger.
       gsap.from(star, {
-        duration: 0.3,
+        duration: 0.2,
         scale: 0,
-        delay: 0.3,
+        delay: 0,
+        opacity: 1,
         ease: "power4.out",
       });
       gsap.to(star, {
         scrollTrigger: {
           trigger: franco,
           start: 0,
+          end: "+=10",
           scrub: 0.5,
         },
-        x: () => francoDir * window.innerWidth,
-        ease: "none",
+        opacity: 0,
+        ease: "power4.out",
       });
     });
   };
@@ -110,14 +112,16 @@ pointer-events-none"
     >
       <div class="flex gap-1 whitespace-nowrap">
         <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
-        <span
-          bind:this={star}
-          class="h-[0.2lh] md:h-[0.1lh] opacity-0 md:ml-2"
-        >
+        <span bind:this={star} class="h-[0.2lh] md:h-[0.1lh] opacity-0 md:ml-2">
           <StarIcon fill="var(--color-accent)" />
         </span>
       </div>
-      <h1 bind:this={vecchi} class="trimmed ml-7 opacity-0 text-accent whitespace-nowrap">Vecchi</h1>
+      <h1
+        bind:this={vecchi}
+        class="trimmed ml-7 opacity-0 text-accent whitespace-nowrap"
+      >
+        Vecchi
+      </h1>
     </div>
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">

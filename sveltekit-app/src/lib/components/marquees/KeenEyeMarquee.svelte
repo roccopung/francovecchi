@@ -14,7 +14,7 @@
 
 <div use:inView={(v) => (isVisible = v)}>
   <Marquee
-    play={viewport.isMobile && isVisible}
+    play={isVisible}
     speed={30}
     gap="3rem"
     autoFill
