@@ -23,7 +23,7 @@
   let pen: HTMLDivElement | null = $state(null);
   let mm: gsap.MatchMedia | undefined;
   let resizeObserver: ResizeObserver | undefined;
-  let refreshRaf = 0;
+  let refreshTimer = 0;
   let viewportHeight: number = $state(0);
 
   onMount(async () => {
@@ -69,12 +69,16 @@
       };
     });
 
-    // To sync scrolltrigger and page dimensions
+    // To sync scrolltrigger and page dimensions.
+    // Trailing debounce, not rAF: the homepage scrubs `.keen-eye`'s width (and
+    // therefore the document height) on every scroll frame, so refreshing on the
+    // next frame would restart the footer's scrub tweens before they can advance.
+    // Waiting for the size to settle means one refresh after scrolling/loading stops.
     resizeObserver = new ResizeObserver(() => {
       if (!browser) return;
 
-      cancelAnimationFrame(refreshRaf);
-      refreshRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+      window.clearTimeout(refreshTimer);
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
     });
     resizeObserver.observe(document.body);
   });
@@ -82,7 +86,7 @@
   onDestroy(() => {
     if (!browser) return;
 
-    cancelAnimationFrame(refreshRaf);
+    window.clearTimeout(refreshTimer);
     resizeObserver?.disconnect();
     mm?.revert();
   });
