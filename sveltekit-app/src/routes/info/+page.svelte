@@ -27,7 +27,7 @@
   <InfoTitle portrait={infoPage?.portrait} />
   <div class="bg-white h-full w-full mt-[100svh] z-10 pb-2">
     {#if infoPage?.hobbies}
-      <div class="w-full overflow-hidden border-t">
+      <div class="w-full overflow-hidden border-t-2">
         <HobbiesMarquee data={infoPage?.hobbies} />
       </div>
     {/if}
