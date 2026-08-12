@@ -41,12 +41,32 @@ export const about = defineType({
           type: "blockContent",
         }),
         defineField({
-          name: "earlyCareer",
-          type: "blockContent",
+          name: "textOne",
+          type: "object",
+          fields: [
+            defineField({
+              name: "heading",
+              type: "string",
+            }),
+            defineField({
+              name: "content",
+              type: "blockContent",
+            }),
+          ],
         }),
         defineField({
-          name: "workExperience",
-          type: "blockContent",
+          name: "textTwo",
+          type: "object",
+          fields: [
+            defineField({
+              name: "heading",
+              type: "string",
+            }),
+            defineField({
+              name: "content",
+              type: "blockContent",
+            }),
+          ],
         }),
         defineField({
           name: "cta",

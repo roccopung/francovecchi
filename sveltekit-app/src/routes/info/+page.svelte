@@ -41,19 +41,19 @@
         </div>
       {/if}
       <div class="flex flex-col gap-2 md:grid-2 md:gap-2 lg:max-w-3/4">
-        {#if infoPage?.intro?.earlyCareer}
+        {#if infoPage?.intro?.textOne}
           <div>
-            <h4 class="typo-md font-sans font-bold pb-1">Early Career</h4>
+            <h4 class="typo-md font-sans font-bold pb-1">{infoPage?.intro?.textOne?.heading}</h4>
             <div class="typo-s font-sans">
-              <PortableText data={infoPage?.intro?.earlyCareer} />
+              <PortableText data={infoPage?.intro?.textOne?.content} />
             </div>
           </div>
         {/if}
-        {#if infoPage?.intro?.workExperience}
+        {#if infoPage?.intro?.textTwo}
           <div>
-            <h4 class="typo-md font-sans font-bold pb-1">Early Career</h4>
+            <h4 class="typo-md font-sans font-bold pb-1">{infoPage?.intro?.textTwo?.heading}</h4>
             <div class="typo-s font-sans">
-              <PortableText data={infoPage?.intro?.workExperience} />
+              <PortableText data={infoPage?.intro?.textTwo?.content} />
             </div>
           </div>
         {/if}
