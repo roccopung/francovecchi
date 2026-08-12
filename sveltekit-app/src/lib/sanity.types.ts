@@ -313,8 +313,14 @@ export type About = {
   intro?: {
     heading?: BlockContent;
     content?: BlockContent;
-    earlyCareer?: BlockContent;
-    workExperience?: BlockContent;
+    textOne?: {
+      heading?: string;
+      content?: BlockContent;
+    };
+    textTwo?: {
+      heading?: string;
+      content?: BlockContent;
+    };
     cta?: Cta;
   };
   hobbies?: Array<string>;
@@ -632,7 +638,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: homeQuery
-// Query: {  "home": *[_type == "home"][0] {    ...,    featuredProjects[]->{      title,      slug,      isNda,      cover,      coverImages,      services[]->{ title },      "shortSummary": select(isNda == true => null, shortSummary)    },    clientsSection {      ...,      logos[]{      asset->      }    }  },  "characters": *[_type == "character"]}
+// Query: {  "home": *[_type == "home"][0] {    ...,    featuredProjects[]->{      title,      slug,      isNda,      cover,      coverImages,      services[]->{ title },      "shortSummary": select(isNda == true => null, shortSummary)    },    clientsSection {      ...,      logos[]{      ...,      asset->      }    },      seo {  ...,  "image": image.asset->url,  }  },  "characters": *[_type == "character"]}
 export type HomeQueryResult = {
   home: {
     _id: string;
@@ -698,6 +704,11 @@ export type HomeQueryResult = {
           metadata?: SanityImageMetadata;
           source?: SanityAssetSourceData;
         } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "logo";
+        _key: string;
       }> | null;
       logosTwo?: Array<{
         asset?: SanityImageAssetReference;
@@ -719,7 +730,12 @@ export type HomeQueryResult = {
       cta?: Cta;
     };
     callFranco?: CallFranco;
-    seo?: Seo;
+    seo: {
+      _type: "seo";
+      title?: string;
+      description?: string;
+      image: string | null;
+    } | null;
   } | null;
   characters: Array<{
     _id: string;
@@ -734,7 +750,7 @@ export type HomeQueryResult = {
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: infoQuery
-// Query: {  "info": *[_type == "about"][0],  "characters": *[_type == "character"]  }
+// Query: {  "info": *[_type == "about"][0] {  ...,    seo {  ...,  "image": image.asset->url,  }  },  "characters": *[_type == "character"]  }
 export type InfoQueryResult = {
   info: {
     _id: string;
@@ -748,8 +764,14 @@ export type InfoQueryResult = {
     intro?: {
       heading?: BlockContent;
       content?: BlockContent;
-      earlyCareer?: BlockContent;
-      workExperience?: BlockContent;
+      textOne?: {
+        heading?: string;
+        content?: BlockContent;
+      };
+      textTwo?: {
+        heading?: string;
+        content?: BlockContent;
+      };
       cta?: Cta;
     };
     hobbies?: Array<string>;
@@ -793,7 +815,12 @@ export type InfoQueryResult = {
       }>;
     };
     callFranco?: CallFranco;
-    seo?: Seo;
+    seo: {
+      _type: "seo";
+      title?: string;
+      description?: string;
+      image: string | null;
+    } | null;
   } | null;
   characters: Array<{
     _id: string;
@@ -808,21 +835,38 @@ export type InfoQueryResult = {
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: caseStudiesQuery
-// Query: *[_type == "project"]{  title,  slug,  isNda,  cover,  coverImages,  services[]->{ title },  "shortSummary": select(isNda == true => null, shortSummary)  }
-export type CaseStudiesQueryResult = Array<{
-  title: string | null;
-  slug: Slug | null;
-  isNda: boolean | null;
-  cover: ElementImage | null;
-  coverImages: {
-    one?: ElementImage;
-    two?: ElementImage;
+// Query: {"caseStudiesPage": *[_type == "caseStudies"][0] {  ...,    seo {  ...,  "image": image.asset->url,  }  },  "projects": *[_type == "project"]{  title,  slug,  isNda,  cover,  coverImages,  services[]->{ title },  "shortSummary": select(isNda == true => null, shortSummary)  }}
+export type CaseStudiesQueryResult = {
+  caseStudiesPage: {
+    _id: string;
+    _type: "caseStudies";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    slug?: Slug;
+    seo: {
+      _type: "seo";
+      title?: string;
+      description?: string;
+      image: string | null;
+    } | null;
   } | null;
-  services: Array<{
+  projects: Array<{
     title: string | null;
-  }> | null;
-  shortSummary: BlockContent | null;
-}>;
+    slug: Slug | null;
+    isNda: boolean | null;
+    cover: ElementImage | null;
+    coverImages: {
+      one?: ElementImage;
+      two?: ElementImage;
+    } | null;
+    services: Array<{
+      title: string | null;
+    }> | null;
+    shortSummary: BlockContent | null;
+  }>;
+};
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: projectAccessQuery
@@ -867,7 +911,7 @@ export type LookbookQueryResult = {
 
 // Source: ../sveltekit-app/src/lib/sanity/queries.ts
 // Variable: projectQuery
-// Query: *[_type == "project" && defined(slug.current) && slug.current == $slug][0] {  ...,  "password": null,  services[]->,  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{  "orderRank": ^.orderRank,    title,    slug,    isNda,    cover  },  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{    title,    slug,    isNda,    cover  },  "projectIndexes": *[_type == "project"] | order(orderRank asc) {    slug  }  }
+// Query: *[_type == "project" && defined(slug.current) && slug.current == $slug][0] {  ...,  "password": null,  services[]->,  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{  "orderRank": ^.orderRank,    title,    slug,    isNda,    cover  },  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{    title,    slug,    isNda,    cover  },  "projectIndexes": *[_type == "project"] | order(orderRank asc) {    slug  },    seo {  ...,  "image": image.asset->url,  }  }
 export type ProjectQueryResult = {
   _id: string;
   _type: "project";
@@ -911,7 +955,12 @@ export type ProjectQueryResult = {
     _type: "credit";
     _key: string;
   }>;
-  seo?: Seo;
+  seo: {
+    _type: "seo";
+    title?: string;
+    description?: string;
+    image: string | null;
+  } | null;
   next: {
     orderRank: string | null;
     title: string | null;
@@ -967,12 +1016,12 @@ export type LayoutQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n  "home": *[_type == "home"][0] {\n    ...,\n    featuredProjects[]->{\n      title,\n      slug,\n      isNda,\n      cover,\n      coverImages,\n      services[]->{ title },\n      "shortSummary": select(isNda == true => null, shortSummary)\n    },\n    clientsSection {\n      ...,\n      logos[]{\n      asset->\n      }\n    }\n  },\n  "characters": *[_type == "character"]\n}\n': HomeQueryResult;
-    '{\n  "info": *[_type == "about"][0],\n  "characters": *[_type == "character"]\n  }': InfoQueryResult;
-    '*[_type == "project"]{\n  title,\n  slug,\n  isNda,\n  cover,\n  coverImages,\n  services[]->{ title },\n  "shortSummary": select(isNda == true => null, shortSummary)\n  }': CaseStudiesQueryResult;
+    '{\n  "home": *[_type == "home"][0] {\n    ...,\n    featuredProjects[]->{\n      title,\n      slug,\n      isNda,\n      cover,\n      coverImages,\n      services[]->{ title },\n      "shortSummary": select(isNda == true => null, shortSummary)\n    },\n    clientsSection {\n      ...,\n      logos[]{\n      ...,\n      asset->\n      }\n    },\n    \n  seo {\n  ...,\n  "image": image.asset->url,\n  }\n\n  },\n  "characters": *[_type == "character"]\n}\n': HomeQueryResult;
+    '{\n  "info": *[_type == "about"][0] {\n  ...,\n  \n  seo {\n  ...,\n  "image": image.asset->url,\n  }\n\n  },\n  "characters": *[_type == "character"]\n  }': InfoQueryResult;
+    '\n  {"caseStudiesPage": *[_type == "caseStudies"][0] {\n  ...,\n  \n  seo {\n  ...,\n  "image": image.asset->url,\n  }\n\n  },\n  "projects": *[_type == "project"]{\n  title,\n  slug,\n  isNda,\n  cover,\n  coverImages,\n  services[]->{ title },\n  "shortSummary": select(isNda == true => null, shortSummary)\n  }}': CaseStudiesQueryResult;
     '*[_type == "project" && defined(slug.current) && slug.current == $slug][0]{\n  title,\n  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  "projectIndexes": *[_type == "project"] | order(orderRank asc) {\n    slug\n  },\n  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{\n  "orderRank": ^.orderRank,\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  isNda,\n  password\n  }': ProjectAccessQueryResult;
     '*[_type == "lookbook"][0]': LookbookQueryResult;
-    '*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {\n  ...,\n  "password": null,\n  services[]->,\n  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{\n  "orderRank": ^.orderRank,\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  "projectIndexes": *[_type == "project"] | order(orderRank asc) {\n    slug\n  }\n  }': ProjectQueryResult;
+    '*[_type == "project" && defined(slug.current) && slug.current == $slug][0] {\n  ...,\n  "password": null,\n  services[]->,\n  "next": *[_type == "project" && defined(slug.current) && orderRank > ^.orderRank] | order(orderRank asc)[0]{\n  "orderRank": ^.orderRank,\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  "firstProject": *[_type == "project" && defined(slug.current)]| order(orderRank asc)[0]{\n    title,\n    slug,\n    isNda,\n    cover\n  },\n  "projectIndexes": *[_type == "project"] | order(orderRank asc) {\n    slug\n  },\n  \n  seo {\n  ...,\n  "image": image.asset->url,\n  }\n\n  }': ProjectQueryResult;
     '{\n  "settings": *[_type == "settings"][0],\n  "caseStudies": *[_type == "project"]{\n  slug\n  }\n}': LayoutQueryResult;
   }
 }
