@@ -3,29 +3,29 @@ import { client } from "$lib/sanity/client";
 import groq from "groq";
 
 // Configuration
-const BASE_URL = "https://";
-const STATIC_ROUTES = ["/", "/about"];
+const BASE_URL = "https://francovecchi.com";
+const STATIC_ROUTES = ["/", "/info", "/gallery", "/case-studies"];
 
 // Dynamic route queries - simplified to get only slug and lastmod data
-// const DYNAMIC_ROUTES_QUERIES = {
-// 	work: groq`*[_type == "project" && defined(slug.current)] {
-//     "slug": slug.current,
-//     "lastmod": _updatedAt,
-//     "title": title
-//   }`
-// };
+const DYNAMIC_ROUTES_QUERIES = {
+	'case-studies': groq`*[_type == "project" && defined(slug.current)] {
+    "slug": slug.current,
+    "lastmod": _updatedAt,
+    "title": title
+  }`
+};
 
 export async function GET() {
   try {
     // Fetch all dynamic route data in parallel
-    // const dynamicDataPromises = Object.entries(DYNAMIC_ROUTES_QUERIES).map(
-    // 	async ([routeType, query]) => {
-    // 		const data = await client.fetch(query);
-    // 		return { routeType, data };
-    // 	}
-    // );
+    const dynamicDataPromises = Object.entries(DYNAMIC_ROUTES_QUERIES).map(
+    	async ([routeType, query]) => {
+    		const data = await client.fetch(query);
+    		return { routeType, data };
+    	}
+    );
 
-    // const dynamicResults = await Promise.all(dynamicDataPromises);
+    const dynamicResults = await Promise.all(dynamicDataPromises);
 
     // Build URL entries
     const urlEntries = [
@@ -33,9 +33,9 @@ export async function GET() {
       ...STATIC_ROUTES.map((route) => generateUrlXml(route)),
 
       // Dynamic routes
-      // ...dynamicResults.flatMap(({ routeType, data }) =>
-      // 	data.map((item) => generateUrlXml(`/${routeType}/${item.slug}`, item.lastmod))
-      // )
+      ...dynamicResults.flatMap(({ routeType, data }) =>
+      	data.map((item) => generateUrlXml(`/${routeType}/${item.slug}`, item.lastmod))
+      )
     ];
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
