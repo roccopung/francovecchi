@@ -39,11 +39,6 @@ export const project = defineType({
       },
     }),
     defineField({
-      name: "isHighlighted",
-      description: "Is this project highlighted in the Case Studies page?",
-      type: "boolean",
-    }),
-    defineField({
       name: "isNda",
       title: "NDA / password protected",
       description:
@@ -70,37 +65,9 @@ export const project = defineType({
       type: "string",
     }),
     defineField({
-      name: "coverImages",
-      type: "object",
-      description: "Displayed in the Thumbnail Overview only",
-      group: "overview-thumbnail",
-      fields: [
-        defineField({
-          name: "one",
-          type: "elementImage",
-        }),
-        defineField({
-          name: "two",
-          type: "elementImage",
-        }),
-      ],
-    }),
-    defineField({
-      name: "shortSummary",
-      description: "Displayed in the Thumbnail Overview only",
-      type: "blockContent",
-      group: "overview-thumbnail",
-    }),
-    defineField({
       name: "cover",
       type: "elementImage",
       description: "Displayed in the Project page",
-    }),
-    defineField({
-      name: "tagline",
-      title: "Tagline",
-      description: "Displayed in the Project page",
-      type: "blockContent",
     }),
     defineField({
       name: "description",
@@ -112,14 +79,6 @@ export const project = defineType({
       type: "array",
       group: "overview-thumbnail",
       of: [{ type: "reference", to: [{ type: "service" }] }],
-    }),
-    defineField({
-      name: "problem",
-      type: "blockContent",
-    }),
-    defineField({
-      name: "solution",
-      type: "blockContent",
     }),
     defineField({
       name: "pageBuilder",

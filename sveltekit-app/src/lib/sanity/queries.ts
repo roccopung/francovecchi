@@ -9,9 +9,7 @@ export const homeQuery = defineQuery(`{
       slug,
       isNda,
       cover,
-      coverImages,
       services[]->{ title },
-      "shortSummary": select(isNda == true => null, shortSummary)
     },
     clientsSection {
       ...,
@@ -45,9 +43,7 @@ export const caseStudiesQuery = defineQuery(
   slug,
   isNda,
   cover,
-  coverImages,
   services[]->{ title },
-  "shortSummary": select(isNda == true => null, shortSummary)
   }}`,
 );
 
