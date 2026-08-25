@@ -12,7 +12,7 @@
   let caseStudiesPage = $derived($query.data?.caseStudiesPage);
   let caseStudies = $derived($query.data?.projects);
   let initialProjectsNumber = $state(10);
-  let itemsToLoad = $derived(5);
+  let itemsToLoad = $derived(6);
   let filteredCaseStudies = $derived.by(() => {
     if (!caseStudies) return [];
     else return caseStudies.slice(0, itemsToLoad);
