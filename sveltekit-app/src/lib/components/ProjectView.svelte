@@ -10,6 +10,8 @@
   import Media from "$lib/components/element/Media.svelte";
   import CtaEl from "$lib/components/element/Cta.svelte";
   import NextProject from "$lib/components/NextProject.svelte";
+  import SEO from "$lib/components/seo/SEO.svelte";
+
   import { page } from "$app/state";
 
   let { data }: any = $props();
@@ -40,6 +42,8 @@
     ),
   );
 </script>
+
+<SEO data={project?.seo} />
 
 <Modal {images} {startIndex} />
 

@@ -9,5 +9,5 @@ export const PAGE_REFERENCES = [
 export const IMAGES_COL_SPAN = [
   { value: "12", title: "Full Width" },
   { value: "6", title: "1/2 Width" },
-  { value: "4", title: "1/4 Width" },
+  { value: "4", title: "1/3 Width" },
 ];

@@ -5,6 +5,7 @@
   let { data, form }: any = $props();
 </script>
 
+
 {#if data.locked}
   <NdaGate
     next={data.next}
