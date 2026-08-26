@@ -50,7 +50,7 @@
   let srcset = $derived(
     hasAsset
       ? srcsetWidths
-          .map((w) => `${urlFor(src).width(w).url()}&auto=format ${w}w`)
+          .map((w) => `${urlFor(src).width(w).url()} ${w}w`)
           .join(", ")
       : "",
   );
@@ -58,7 +58,7 @@
     hasAsset
       ? urlFor(src)
           .width(width || dimensions.width)
-          .url() + "&auto=format"
+          .url()
       : "",
   );
   let hotspot = $derived(src?.hotspot || { x: 0.5, y: 0.5 });
