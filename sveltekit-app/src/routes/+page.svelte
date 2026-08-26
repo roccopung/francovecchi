@@ -16,7 +16,6 @@
   import KeywordsMarquee from "$lib/components/marquees/KeywordsMarquee.svelte";
   import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
   import LogosMarquee from "$lib/components/marquees/LogosMarquee.svelte";
-  import Image from "$lib/components/element/Image.svelte";
 
   import SEO from "$lib/components/seo/SEO.svelte";
 

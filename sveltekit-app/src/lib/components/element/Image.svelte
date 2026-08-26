@@ -3,7 +3,8 @@
   import { urlFor } from "$lib/sanity/image";
   import { viewport } from "$lib/states.svelte";
 
-  const SRCSET_WIDTHS = [480, 768, 1080, 1440, 1920];
+  const SRCSET_WIDTHS = [480, 768, 1080, 1440, 1920, 2560];
+  const MAX_SRCSET_WIDTH = 2560;
 
   interface Props {
     image: any;
@@ -39,14 +40,10 @@
     hasAsset ? getImageDimensions(src) : { width: 0, height: 0 },
   );
   let aspectRatio = $derived(dimensions?.width / dimensions?.height);
-  let srcsetWidths = $derived(
-    Array.from(
-      new Set([
-        ...SRCSET_WIDTHS.filter((w) => w < dimensions.width),
-        dimensions.width,
-      ]),
-    ),
-  );
+  let srcsetWidths = $derived.by(() => {
+    const max = Math.min(MAX_SRCSET_WIDTH, dimensions.width);
+    return [...SRCSET_WIDTHS.filter((w) => w < max), max];
+  });
   let srcset = $derived(
     hasAsset
       ? srcsetWidths
