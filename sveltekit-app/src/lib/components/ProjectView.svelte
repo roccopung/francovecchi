@@ -100,9 +100,9 @@
     {/if}
 
     {#if project?.result}
-      <section class="px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto">
+      <section class="px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto w-full">
         <div
-          class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-left overflow-hidden"
+          class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-left overflow-hidden w-full"
         >
           <div class="typo-l font-sans font-bold px-1">The result</div>
           <div class="typo-s font-sans font-medium xl:max-w-1/2 px-1">
