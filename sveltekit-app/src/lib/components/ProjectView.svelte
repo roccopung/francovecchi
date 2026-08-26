@@ -41,6 +41,7 @@
       images.findIndex((image) => image._key === clickedImage.key),
     ),
   );
+
 </script>
 
 <SEO data={project?.seo} />

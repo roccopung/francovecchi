@@ -3,6 +3,8 @@
   import { urlFor } from "$lib/sanity/image";
   import { viewport } from "$lib/states.svelte";
 
+  const SRCSET_WIDTHS = [480, 768, 1080, 1440, 1920];
+
   interface Props {
     image: any;
     fit?: string;
@@ -11,6 +13,7 @@
     preload?: boolean;
     height?: string;
     width?: number;
+    sizes?: string;
     ratio?: number;
     visible?: boolean;
   }
@@ -23,6 +26,7 @@
     preload = false,
     height = "auto",
     width,
+    sizes = "100vw",
     ratio = $bindable(),
     visible = $bindable(),
   }: Props = $props();
@@ -35,6 +39,21 @@
     hasAsset ? getImageDimensions(src) : { width: 0, height: 0 },
   );
   let aspectRatio = $derived(dimensions?.width / dimensions?.height);
+  let srcsetWidths = $derived(
+    Array.from(
+      new Set([
+        ...SRCSET_WIDTHS.filter((w) => w < dimensions.width),
+        dimensions.width,
+      ]),
+    ),
+  );
+  let srcset = $derived(
+    hasAsset
+      ? srcsetWidths
+          .map((w) => `${urlFor(src).width(w).url()}&webp=format ${w}w`)
+          .join(", ")
+      : "",
+  );
   let imageUrl = $derived(
     hasAsset
       ? urlFor(src)
@@ -53,7 +72,7 @@
 
 <svelte:head>
   {#if preload}
-    <link rel="preload" as="image" href={imageUrl} />
+    <link rel="preload" as="image" href={imageUrl} imagesrcset={srcset} imagesizes={sizes} />
   {/if}
 </svelte:head>
 
@@ -66,14 +85,14 @@
 	{height === 'full' ? 'h-full' : 'h-auto'}"
     loading={lazy ? "lazy" : "eager"}
     fetchpriority={lazy ? "low" : "high"}
-    data-sizes="auto"
-    width={dimensions.width}
-    height={dimensions.height}
+    width={width || dimensions.width}
+    height={(width || dimensions.width) / aspectRatio}
     style="aspect-ratio: {aspectRatio}; object-position: {hotspot.x *
       100}% {hotspot.y * 100}%;
 "
     alt={src.alt || alt}
-    src={imageUrl}
+    {srcset}
+    {sizes}
     onload={() => (visible = true)}
   />
 {/if}
