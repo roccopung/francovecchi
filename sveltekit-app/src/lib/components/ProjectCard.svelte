@@ -32,7 +32,7 @@
 {#key project?.slug?.current}
   <a
     href="/case-studies/{project?.slug?.current}"
-    class="home-variant w-full border-2 border-black rounded-m overflow-hidden even:-ml-[2px] -mt-[1px] group pointer-events-none md:pointer-events-auto"
+    class="home-variant w-full border-2 border-black rounded-m overflow-hidden even:-ml-[2px] -my-[1px] group pointer-events-none md:pointer-events-auto"
   >
     <div class="overflow-hidden">
       <div

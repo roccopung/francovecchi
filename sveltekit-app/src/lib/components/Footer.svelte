@@ -53,7 +53,7 @@
 
       gsap.to(line, {
         opacity: 1,
-        height: '65vh',
+        height: '80vh',
         scrollTrigger: {
           trigger: ".footer",
           start: "top center",
