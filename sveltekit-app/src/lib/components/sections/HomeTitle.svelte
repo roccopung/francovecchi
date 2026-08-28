@@ -112,7 +112,7 @@ pointer-events-none"
     >
       <div class="flex gap-1 whitespace-nowrap">
         <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
-        <span bind:this={star} class="h-[0.2lh] md:h-[0.1lh] opacity-0 md:ml-[0.1lh]">
+        <span bind:this={star} class="h-[0.2lh] md:h-[0.15lh] opacity-0 md:ml-[0.1lh] aspect-square">
           <StarIcon fill="var(--color-accent)" />
         </span>
       </div>

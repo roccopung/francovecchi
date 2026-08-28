@@ -31,7 +31,7 @@
   <div class="flex flex-col gap-0.5 items-center text-accent">
     <div class="typo-6xl font-slanted uppercase mt-8 text-accent flex gap-1">
       <h1>Gallery</h1>
-      <span class="h-[0.2lh] md:h-[0.1lh] md:ml-[0.2lh]">
+      <span class="h-[0.2lh] md:h-[0.15lh] md:ml-[0.2lh]">
         <StarIcon fill="var(--color-accent)" />
       </span>
     </div>
