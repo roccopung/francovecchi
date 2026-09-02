@@ -38,7 +38,7 @@ export const caseStudiesQuery = defineQuery(
   ...,
   ${seo}
   },
-  "projects": *[_type == "project"]{
+  "projects": *[_type == "project"] | order(orderRank asc) {
   title,
   slug,
   isNda,
