@@ -49,7 +49,7 @@
           scrollTrigger: {
             trigger: ".keen-eye",
             start: "top bottom",
-            scrub: 1,
+            scrub: 0.5,
           },
           width: 120,
         });
@@ -65,7 +65,7 @@
 <SEO data={home?.seo} />
 
 <main class="min-h-[100vh] w-full flex flex-col bg-white">
-  <HomeTitle />
+  <HomeTitle illustration={home?.illustration} />
   <section class="px-2 mt-[80svh] bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-m overflow-hidden">
@@ -130,7 +130,7 @@
           {/if}
         </div>
         <div class="h-20 md:place-self-end">
-          <img class="h-full" src="/temp/images/fire.png" alt="fire" />
+          <img class="h-full" src={home?.aboutSection?.illustration} alt="fire" />
         </div>
       </div>
     </section>
@@ -163,7 +163,7 @@
     <div
       class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-black"
     >
-      <div class="w-10 md:w-[33vw] keen-eye"><KeenEyeIcon /></div>
+      <div class="w-10 md:w-[22vw] keen-eye"><KeenEyeIcon /></div>
       {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />

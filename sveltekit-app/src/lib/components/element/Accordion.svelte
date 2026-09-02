@@ -15,10 +15,10 @@
 
 <button
   onclick={ontoggle}
-  class="bg-black text-white rounded-m p-2 pt-2 pb-1"
+  class="bg-black text-white rounded-m p-1.5 pt-1.5 pb-0.5"
 >
   <div
-    class="flex gap-1 md:gap-3 whitespace-nowrap typo-xl font-medium font-sans items-center pb-1"
+    class="flex gap-1 md:gap-3 whitespace-nowrap typo-l font-medium font-sans items-center pb-1"
   >
     <div>{open ? "-" : "+"}</div>
     <div>{data.title}</div>
@@ -27,7 +27,7 @@
     class="font-sans typo-s h-auto max-h-0 overflow-hidden text-left transition-medium content"
     style="max-height: {open ? contentHeight : '0'}px;"
   >
-    <div bind:clientHeight={contentHeight}>
+    <div class="pb-1.5" bind:clientHeight={contentHeight}>
       <PortableText data={data.content} />
     </div>
   </div>

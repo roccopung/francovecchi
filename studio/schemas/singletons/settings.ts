@@ -18,14 +18,14 @@ export const settings = defineType({
     defineField({
       name: "animationTop",
       type: "file",
-      description: "Add a Lottie .json file",
+      description: "Add a svg file",
       group: "footer",
       fieldset: "footer",
     }),
     defineField({
       name: "animationBottom",
       type: "file",
-      description: "Add a Lottie .json file",
+      description: "Add a svg file",
       group: "footer",
       fieldset: "footer",
     }),

@@ -4,6 +4,7 @@ import { seo } from "./fragments/seo";
 export const homeQuery = defineQuery(`{
   "home": *[_type == "home"][0] {
     ...,
+    "illustration": illustration.asset->url,
     featuredProjects[]->{
       title,
       slug,
@@ -18,6 +19,10 @@ export const homeQuery = defineQuery(`{
       asset->
       }
     },
+    aboutSection {
+    ...,
+    "illustration": illustration.asset->url,
+    },
     ${seo}
   },
   "characters": *[_type == "character"]
@@ -27,6 +32,7 @@ export const homeQuery = defineQuery(`{
 export const infoQuery = defineQuery(`{
   "info": *[_type == "about"][0] {
   ...,
+  "illustration": illustration.asset->url,
   ${seo}
   },
   "characters": *[_type == "character"]

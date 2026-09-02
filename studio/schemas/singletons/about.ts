@@ -25,6 +25,11 @@ export const about = defineType({
       },
     }),
     defineField({
+      name: "illustration",
+      type: "file",
+      description: "Add an .svg file",
+    }),
+    defineField({
       name: "portrait",
       type: "elementImage",
     }),
@@ -117,8 +122,8 @@ export const about = defineType({
           ],
         }),
         defineField({
-          name: "animation",
-          description: "Add a Lottie .json file",
+          name: "illustration",
+          description: "Add a svg file",
           type: "file",
         }),
       ],

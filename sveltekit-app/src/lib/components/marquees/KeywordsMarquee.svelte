@@ -20,7 +20,7 @@
   >
     <div class="flex items-center gap-2 ml-2 typo-3xl font-slanted">
       {#each data as item}
-        <div class="h-[0.5lh] aspect-square"><StarIcon fill="var(--color-black)" /></div>
+        <div class="h-[0.4lh] aspect-square"><StarIcon fill="var(--color-black)" /></div>
         <div class="trimmed py-3">{item}</div>
       {/each}
     </div>

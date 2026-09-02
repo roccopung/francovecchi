@@ -67,7 +67,7 @@
   onDestroy(() => ctx?.revert());
 </script>
 
-<div class="title typo-6xl font-slanted uppercase flex flex-col gap-2 trimmed">
+<div class="title pt-6 md:pt-0 typo-francotitle font-slanted uppercase flex flex-col gap-2 trimmed">
   <div bind:this={fra} class="trimmed opacity-0">Fra</div>
   <div bind:this={fran} class="trimmed ml-2 md:ml-7 opacity-0">Fran</div>
   <div bind:this={nco} class="trimmed ml-4 md:ml-20 opacity-0">Nco</div>

@@ -25,7 +25,7 @@
 <main class="links w-full flex flex-col gap-2 items-center bg-white pb-2">
   <div class="typo-6xl font-slanted uppercase mt-8 text-accent flex gap-1">
     <h1>Case studies</h1>
-    <span class="h-[0.2lh] md:h-[0.15lh] md:ml-[0.1lh]">
+    <span class="h-[0.2lh] md:h-[0.15lh] md:ml-[0.1lh] aspect-square">
       <StarIcon fill="var(--color-accent)" />
     </span>
   </div>

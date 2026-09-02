@@ -74,6 +74,11 @@
   @apply text-m-call-franco md:text-call-franco;
 }
 
+@utility typo-francotitle {
+  @apply text-francotitle md:text-6xl;
+}
+
+
 /* transitions */
 
 @utility transition-fast {

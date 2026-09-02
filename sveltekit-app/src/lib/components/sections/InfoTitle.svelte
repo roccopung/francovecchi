@@ -11,9 +11,10 @@
 
   type Props = {
     portrait?: ElementImage;
+    illustration?: string;
   };
 
-  let { portrait }: Props = $props();
+  let { portrait, illustration }: Props = $props();
   let portraitWrapperEl: HTMLElement | undefined = $state();
   let portraitWrapperElResized: boolean = $state(false);
   let portraitEl: HTMLElement | undefined = $state();
@@ -98,7 +99,7 @@
     {/if}
 
     <div class="absolute bottom-0 right-0 p-1 flex gap-2 typo-2xl">
-      <img class="h-[1.55lh]" src="/temp/images/level-44.png" alt="" />
+      <img class="h-[1.55lh]" src={illustration} alt="" />
     </div>
   </div>
 </div>

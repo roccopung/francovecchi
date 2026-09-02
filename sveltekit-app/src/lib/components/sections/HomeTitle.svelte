@@ -4,6 +4,8 @@
   import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import { onMount, onDestroy } from "svelte";
 
+  let { illustration } = $props();
+
   let franco: HTMLElement;
   let vecchi: HTMLElement;
   let star: HTMLElement;
@@ -107,12 +109,15 @@
 <div data-hero class="bg-white fixed h-[80svh] w-full top-0 left-0 p-1">
   <div class="relative w-full h-full">
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-6xl font-slanted uppercase flex flex-col gap-2 pointer-events-none
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title pt-6 md:pt-0 typo-francotitle font-slanted uppercase flex flex-col gap-2 pointer-events-none
 pointer-events-none"
     >
       <div class="flex gap-1 whitespace-nowrap">
         <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
-        <span bind:this={star} class="h-[0.2lh] md:h-[0.15lh] opacity-0 md:ml-[0.1lh] aspect-square">
+        <span
+          bind:this={star}
+          class="h-[0.2lh] md:h-[0.15lh] opacity-0 ml-[0.1lh] aspect-square"
+        >
           <StarIcon fill="var(--color-accent)" />
         </span>
       </div>
@@ -125,7 +130,7 @@ pointer-events-none"
     </div>
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
-      <img class="h-[1.55lh]" src="/temp/images/pushing-keyframes.png" alt="" />
+      <img class="h-[4lh] md:h-[1.55lh]" src={illustration} alt="" />
     </div>
   </div>
 </div>

@@ -102,14 +102,14 @@
     {#if project?.result}
       <section class="px-2 bg-white 3xl:max-w-[70vw] 3xl:mx-auto w-full">
         <div
-          class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 text-left overflow-hidden w-full"
+          class="border-2 border-black rounded-m flex flex-col gap-1 pt-4 text-left overflow-hidden w-full"
         >
-          <div class="typo-l font-sans font-bold px-1">The result</div>
-          <div class="typo-s font-sans font-medium xl:max-w-1/2 px-1">
+          <div class="typo-l font-sans font-bold px-3">The result</div>
+          <div class="typo-s font-sans font-medium xl:max-w-1/2 px-3 pb-4">
             <PortableText data={project?.result?.content} />
           </div>
           {#if project?.result?.media}
-            <div class="overflow-hidden w-full mt-1">
+            <div class="overflow-hidden w-full">
               <Media fit="cover" data={project.result.media} />
             </div>
           {/if}
@@ -123,7 +123,7 @@
           class="border-2 border-black rounded-m flex flex-col gap-1 pt-3 pb-4 px-1 items-center justify-center text-center"
         >
           <div class="typo-l font-bold font-sans">Credits</div>
-          <div class="typo-s font-sans grid-2 pt-2 w-full">
+          <div class="typo-s font-sans grid-2 gap-2 pt-2 w-full">
             {#each project?.credits as credit}
               <div class="flex flex-col">
                 <div class="typo-s font-sans font-bold uppercase">

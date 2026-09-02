@@ -14,8 +14,8 @@ export const home = defineType({
   ],
   fields: [
     defineField({
-      name: "pushingKeyframes",
-      description: "Add a Lottie .json file",
+      name: "illustration",
+      description: "Add a .svg file",
       type: "file",
     }),
     defineField({
@@ -57,8 +57,8 @@ export const home = defineType({
           type: "cta",
         }),
         defineField({
-          name: "animation",
-          description: "Add a Lottie .json file",
+          name: "illustration",
+          description: "Add a svg file",
           type: "file",
         }),
       ],
@@ -102,8 +102,8 @@ export const home = defineType({
       type: "object",
       fields: [
         defineField({
-          name: "animation",
-          description: "Add a Lottie .json file",
+          name: "illustration",
+          description: "Add a svg file",
           type: "file",
         }),
         defineField({

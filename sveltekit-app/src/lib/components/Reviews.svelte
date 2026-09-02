@@ -47,7 +47,7 @@
       {/each}
     </div>
   </div>
-  <div class="embla__arrows w-full flex justify-start px-1">
+  <div class="embla__arrows w-full flex justify-center md:justify-start px-1">
     <button
       class="embla__arrow embla__arrow--left hover:opacity-50 rotate-180 w-10 cursor-pointer p-3"
       onclick={scrollPrev}
