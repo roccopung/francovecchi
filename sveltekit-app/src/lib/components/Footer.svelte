@@ -33,17 +33,16 @@
 
     mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
-      gsap.set(line, { opacity: 0, height: 0 });
 
       gsap.fromTo(
         pen,
-        { y: () => -viewportHeight - 150 },
+        { y: () => -viewportHeight - 100 },
         {
           y: 0,
           ease: "none",
           scrollTrigger: {
             trigger: ".footer",
-            start: "top 80%",
+            start: "top center",
             end: "bottom bottom",
             scrub: 1,
             invalidateOnRefresh: true,
@@ -51,21 +50,27 @@
         },
       );
 
-      gsap.to(line, {
-        opacity: 1,
-        height: '80vh',
-        scrollTrigger: {
-          trigger: ".footer",
-          start: "top center",
-          end: "bottom bottom",
-          scrub: 2,
+      gsap.fromTo(
+        line,
+        { y: () => -viewportHeight - 100 },
+        {
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".footer",
+            start: "top center",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
         },
-      });
+      );
 
       // Guarantee the pen/line reset when the query stops matching.
       return () => {
         const targets = [pen, line].filter(Boolean);
-        if (targets.length) gsap.set(targets, { clearProps: "transform,opacity" });
+        if (targets.length)
+          gsap.set(targets, { clearProps: "transform,opacity" });
       };
     });
 
@@ -116,7 +121,8 @@
 
         <div
           bind:this={line}
-          class="absolute top-0 left-1/2 h-full bg-black w-[2px] mx-auto hidden sm:block"
+          class="absolute top-0 left-1/2 -translate-x-1/2 bg-black w-[2px] mx-auto hidden sm:block"
+          style="height: {viewportHeight - 250}px"
         ></div>
 
         <div class="sm:absolute sm:top-1/2 sm:left-0 w-full central-grid grid">

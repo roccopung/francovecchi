@@ -113,8 +113,8 @@
           </div>
           <img
             class="object-contain h-15 md:h-25 pt-2 self-start md:self-end"
-            src="/temp/images/keen-eye-2.png"
-            alt=""
+            src={infoPage?.collaborations?.illustration}
+            alt="keen-eye illustration"
           />
         </div>
       </section>

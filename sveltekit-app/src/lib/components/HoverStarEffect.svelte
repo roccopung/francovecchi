@@ -125,38 +125,6 @@
 
 <svelte:window bind:scrollY bind:innerHeight={viewportHeight} />
 
-<div
-  class="panel absolute top-6 right-2 z-0 bg-black/20 p-1 flex flex-col gap-1 typo-base font-mono"
->
-  <label class="flex gap-2"
-    >POOL <input type="number" min="1" bind:value={POOL} /></label
-  >
-  <label class="flex gap-2"
-    >SIZE_VW <input type="number" step="0.01" bind:value={SIZE_VW} /></label
-  >
-  <label class="flex gap-2">MAX <input type="number" bind:value={MAX} /></label>
-  <label class="flex gap-2">K <input type="number" bind:value={K} /></label>
-  <label class="flex gap-2"
-    >SPEED_REF <input type="number" bind:value={SPEED_REF} /></label
-  >
-  <label class="flex gap-2"
-    >SPACING <input type="number" bind:value={SPACING} /></label
-  >
-  <label class="flex gap-2"
-    >GROW <input type="number" step="0.01" bind:value={GROW} /></label
-  >
-  <label class="flex gap-2"
-    ><span>LIFETIME</span>
-    <input type="number" step="0.01" bind:value={LIFETIME} /></label
-  >
-  <label class="flex gap-2"
-    >TILT <input type="number" bind:value={TILT} /></label
-  >
-  <label class="flex gap-2"
-    >SMOOTH <input type="number" step="0.01" bind:value={SMOOTH} /></label
-  >
-</div>
-
 {#if scrollY < viewportHeight * 0.15}
   <div
     bind:this={starLayer}

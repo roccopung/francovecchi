@@ -11,7 +11,6 @@
   import Cta from "$lib/components/element/Cta.svelte";
   import KeenEyeMarquee from "$lib/components/marquees/KeenEyeMarquee.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
-  import KeenEyeIcon from "$lib/components/svg/KeenEyeIcon.svelte";
   import ShearMarquee from "$lib/components/marquees/ShearMarquee.svelte";
   import KeywordsMarquee from "$lib/components/marquees/KeywordsMarquee.svelte";
   import CharactersMarquee from "$lib/components/marquees/CharactersMarquee.svelte";
@@ -66,7 +65,7 @@
 
 <main class="min-h-[100vh] w-full flex flex-col bg-white">
   <HomeTitle illustration={home?.illustration} />
-  <section class="px-2 mt-[80svh] bg-white">
+  <section class="px-2 mt-[100vh] md:mt-[80vh] bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
@@ -163,7 +162,7 @@
     <div
       class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-black"
     >
-      <div class="w-10 md:w-[22vw] keen-eye"><KeenEyeIcon /></div>
+      <div class="w-10 md:w-[22vw] keen-eye"><img class="w-full h-full" src={home?.endingBlock?.illustration} alt="keen-eye illustration"></div>
       {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />

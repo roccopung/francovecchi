@@ -27,7 +27,7 @@
     preload = false,
     height = "auto",
     width,
-    sizes = "100vw",
+    sizes = "(max-width: 380px) 768, (max-width: 767px) 1080, 200vw",
     ratio = $bindable(),
     visible = $bindable(),
   }: Props = $props();

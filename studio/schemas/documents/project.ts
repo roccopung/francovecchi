@@ -75,6 +75,22 @@ export const project = defineType({
       type: "blockContent",
     }),
     defineField({
+      name: "collaboration",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          type: "string",
+          placeholder: "In collaboration with",
+          initialValue: "In collaboration with",
+        }),
+        defineField({
+          name: "description",
+          type: "blockContent",
+        }),
+      ],
+    }),
+    defineField({
       name: "services",
       type: "array",
       group: "overview-thumbnail",

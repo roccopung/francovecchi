@@ -106,7 +106,7 @@
 
 <svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
 
-<div data-hero class="bg-white fixed h-[80svh] w-full top-0 left-0 p-1">
+<div data-hero class="bg-white fixed h-[100vh] md:h-[80vh] w-full top-0 left-0 p-1">
   <div class="relative w-full h-full">
     <div
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title pt-6 md:pt-0 typo-francotitle font-slanted uppercase flex flex-col gap-2 pointer-events-none
@@ -130,7 +130,7 @@ pointer-events-none"
     </div>
 
     <div class="absolute bottom-0 right-0 p-1 w-fit z-30 typo-2xl">
-      <img class="h-[4lh] md:h-[1.55lh]" src={illustration} alt="" />
+      <img class="h-[3lh] md:h-[1.55lh]" src={illustration} alt="" />
     </div>
   </div>
 </div>

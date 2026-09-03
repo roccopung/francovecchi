@@ -41,7 +41,6 @@
       images.findIndex((image) => image._key === clickedImage.key),
     ),
   );
-
 </script>
 
 <SEO data={project?.seo} />
@@ -73,21 +72,36 @@
           </div>
         {/if}
 
-        {#if project?.services && project?.services.length > 0}
-          <h4 class="font-bold font-sans typo-md pb-0.5">Services</h4>
+        {#if project?.collaboration}
           <div
-            class="font-sans font-bold typo-md flex gap-0.5 flex-col md:flex-row flex-wrap w-fit mx-auto"
+            class="font-sans font-medium typo-l pt-1 md:max-w-3/4 mx-auto pb-4"
+          >
+            <h4 class="font-bold font-sans typo-md pb-1">
+              {project?.collaboration?.title}
+            </h4>
+            <div
+              class="font-sans font-medium typo-l"
+            >
+              <PortableText data={project?.collaboration?.description} />
+            </div>
+          </div>
+        {/if}
+
+        {#if project?.services && project?.services.length > 0}
+          <h4 class="font-bold font-sans typo-md pb-1">Services</h4>
+          <div
+            class="font-sans font-bold font-sans text-[2rem] flex gap-0.5 flex-col md:flex-row flex-wrap w-fit mx-auto"
           >
             {#each project?.services as service}
               <div
-                class="flex gap-1 items-center px-2 py-1 rounded-full bg-black text-white w-fit"
+                class="flex gap-1 items-center px-1.5 py-0.5 rounded-full bg-black text-white w-fit"
               >
                 <div class="h-[0.5lh] aspect-square">
                   <svg height="100%" width="100%" viewBox="0 0 68 68">
                     <circle r="30" cx="34" cy="34" fill="var(--color-white)" />
                   </svg>
                 </div>
-                <div>{service.title}</div>
+                <div class="text-left leading-3">{service.title}</div>
               </div>
             {/each}
           </div>

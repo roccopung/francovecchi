@@ -23,6 +23,10 @@ export const homeQuery = defineQuery(`{
     ...,
     "illustration": illustration.asset->url,
     },
+    endingBlock {
+    ...,
+    "illustration": illustration.asset->url,
+    },
     ${seo}
   },
   "characters": *[_type == "character"]
@@ -33,6 +37,10 @@ export const infoQuery = defineQuery(`{
   "info": *[_type == "about"][0] {
   ...,
   "illustration": illustration.asset->url,
+  collaborations {
+  ...,
+  "illustration": illustration.asset->url,
+  },
   ${seo}
   },
   "characters": *[_type == "character"]
