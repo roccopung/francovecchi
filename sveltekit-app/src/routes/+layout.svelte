@@ -10,7 +10,7 @@
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
-  import { menuState } from "$lib/states.svelte";
+  import { menuState, scroll, isScrollContainerRoute } from "$lib/states.svelte";
 
   const { children, data }: LayoutProps = $props();
 
@@ -20,11 +20,20 @@
   let settings: any = $derived(layout?.settings);
   let caseStudies: number = $derived(layout?.caseStudies?.length ?? 0);
 
+  // Home and info scroll inside `.scroll-container`; every other route keeps
+  // document scroll, so the wrapper stays a plain div there.
+  let isScroller = $derived(isScrollContainerRoute(page.route.id));
+  let scrollEl: HTMLElement | undefined = $state();
+
+  const resetScroll = () => {
+    scrollEl?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+    scroll.y = 0;
+  };
+
   afterNavigate(() => {
     menuState.open = false;
-    if (browser) {
-      window.scrollTo(0, 0);
-    }
+    if (browser) resetScroll();
   });
 
   onNavigate((navigation) => {
@@ -33,21 +42,14 @@
       document.startViewTransition(async () => {
         resolve();
         await navigation.complete;
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => window.scrollTo(0, 0)),
-        );
+        requestAnimationFrame(() => requestAnimationFrame(resetScroll));
       });
     });
   });
-
-  // afterNavigate(() => {
-  //   document.body.classList.remove("overflow-hidden");
-  //   if (browser) {
-  //     // raf needed to prevent layout shifts in any browser
-
-  //   }
-  // });
 </script>
+
+<!-- One-way on purpose: `bind:scrollY` also writes back via window.scrollTo. -->
+<svelte:window onscroll={() => (scroll.y = window.scrollY)} />
 
 <PreviewMode enabled={previewEnabled}>
   <VisualEditing enabled={previewEnabled}>
@@ -65,10 +67,19 @@
       {/if}
 
       <Header {caseStudies} />
-      {@render children()}
-      {#key page.url.pathname}
-        <Footer data={settings} />
-      {/key}
+      <div
+        bind:this={scrollEl}
+        class="scroll-container"
+        class:is-scroller={isScroller}
+        onscroll={(e) => (scroll.y = e.currentTarget.scrollTop)}
+      >
+        <div class="scroll-content">
+          {@render children()}
+          {#key page.url.pathname}
+            <Footer data={settings} />
+          {/key}
+        </div>
+      </div>
     </QueryLoader>
   </VisualEditing>
 </PreviewMode>

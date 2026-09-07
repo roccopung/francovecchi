@@ -10,11 +10,7 @@
   let vecchi: HTMLElement;
   let star: HTMLElement;
   let ctx: gsap.Context | undefined;
-  let scrollY = $state(0);
   let viewportHeight = $state(0);
-  let scrollOpacity = $derived(
-    Math.max(0, 1 - scrollY / (viewportHeight / 1.6)),
-  );
 
   let cta = {
     ctaType: "linkEmail",
@@ -48,6 +44,7 @@
 
             return gsap.to(self.words, {
               scrollTrigger: {
+                scroller: ".scroll-container",
                 start: 0,
                 scrub: 0.5,
               },
@@ -75,6 +72,7 @@
       gsap.to(star, {
         scrollTrigger: {
           trigger: franco,
+          scroller: ".scroll-container",
           start: 0,
           end: "+=10",
           scrub: 0.5,
@@ -104,7 +102,7 @@
   onDestroy(() => ctx?.revert());
 </script>
 
-<svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
+<svelte:window bind:innerHeight={viewportHeight} />
 
 <div data-hero class="bg-white fixed h-[100svh] md:h-[80vh] w-full top-0 left-0 p-1">
   <div class="relative w-full h-full">

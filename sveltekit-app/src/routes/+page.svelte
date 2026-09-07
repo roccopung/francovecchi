@@ -47,6 +47,7 @@
         tl.to(".keen-eye", {
           scrollTrigger: {
             trigger: ".keen-eye",
+            scroller: ".scroll-container",
             start: "top bottom",
             scrub: 0.5,
           },
@@ -65,7 +66,7 @@
 
 <main class="min-h-[100vh] w-full flex flex-col bg-white">
   <HomeTitle illustration={home?.illustration} />
-  <section class="px-2 mt-[100vh] md:mt-[80vh] bg-white">
+  <section class="px-2 mt-[100svh] md:mt-[80vh] bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />

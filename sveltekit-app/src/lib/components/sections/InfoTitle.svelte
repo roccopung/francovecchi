@@ -19,8 +19,6 @@
   let portraitWrapperElResized: boolean = $state(false);
   let portraitEl: HTMLElement | undefined = $state();
   let viewportHeight: number = $state(0);
-  let scrollOpacity = $state(1);
-  let scrollY = $state(0);
 
   let cta = {
     ctaType: "linkEmail",
@@ -66,7 +64,7 @@
   });
 </script>
 
-<svelte:window bind:innerHeight={viewportHeight} bind:scrollY />
+<svelte:window bind:innerHeight={viewportHeight} />
 
 <div
   data-hero

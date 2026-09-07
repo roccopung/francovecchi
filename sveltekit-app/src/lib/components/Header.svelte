@@ -2,7 +2,7 @@
   import Logo from "$lib/components/svg/Logo.svelte";
   import MenuButton from "$lib/components/MenuButton.svelte";
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
-  import { menuState } from "$lib/states.svelte";
+  import { menuState, scroll } from "$lib/states.svelte";
   import { page } from "$app/state";
 
   type Props = {
@@ -10,27 +10,23 @@
   };
 
   let { caseStudies }: Props = $props();
-
-  let scrollY = $state(0);
 </script>
-
-<svelte:window bind:scrollY />
 
 <!-- DESKTOP NAV -->
 
 <nav
-  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full px-2 py-1 font-mono uppercase z-30 border-black
+  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full px-2 py-1 font-mono uppercase z-30 border-black pointer-events-none
   {page?.route?.id !== '/' ? 'bg-white' : ''}
-  {scrollY > 10 ? 'border-b-2 bg-white' : ''}"
+  {scroll.y > 10 ? 'border-b-2 bg-white' : ''}"
 >
   <a
     href="/"
     rel="noreferrer"
-    class="h-full flex transition-fast w-14"
+    class="h-full flex transition-fast w-14 pointer-events-auto"
     ><Logo /></a
   >
 
-  <ul class="gap-0.5 self-end hidden md:flex">
+  <ul class="gap-0.5 self-end hidden md:flex pointer-events-auto">
     <li
       class="bg-dark-gray border-2 border-dark-gray text-white rounded-full flex items-center hover:bg-white hover:text-black hover:border-black"
     >
@@ -53,7 +49,7 @@
     </li>
   </ul>
   <a
-    class="py-1 px-3 bg-dark-gray border-2 border-dark-gray text-white rounded-full w-fit h-fit place-self-end hover:bg-white hover:text-black hidden md:block"
+    class="py-1 px-3 bg-dark-gray border-2 border-dark-gray text-white rounded-full w-fit h-fit place-self-end hover:bg-white hover:text-black hidden md:block pointer-events-auto"
     href="mailto:hello@francovecchi.com">Write!</a
   >
 </nav>
@@ -61,21 +57,24 @@
 <!-- MOBILE NAV -->
 
 <nav
-  class="mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono z-30 bg-white text-black outline-black outline-2 transition-all duration-300 {menuState.open ===
-    true || scrollY > 10
+  class="mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono z-30 bg-white text-black outline-black outline-2 transition-all duration-300 pointer-events-none {menuState.open ===
+    true || scroll.y > 10
     ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"
 >
   <div class="flex justify-between">
-    <a href="/" rel="noreferrer" class="h-full flex transition-fast w-10"
+    <a
+      href="/"
+      rel="noreferrer"
+      class="h-full flex transition-fast w-10 pointer-events-auto"
       ><Logo /></a
     >
 
-    <MenuButton />
+    <div class="pointer-events-auto"><MenuButton /></div>
   </div>
 
   <ul
-    class="menu-dropdown bg-white flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted"
+    class="menu-dropdown bg-white flex flex-col gap-2 items-center text-center w-full h-0 overflow-hidden typo-3xl font-slanted pointer-events-auto"
     class:open={menuState.open}
     class:h-35={menuState.open}
     class:py-4={menuState.open}

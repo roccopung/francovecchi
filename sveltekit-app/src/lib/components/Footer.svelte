@@ -3,6 +3,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import Pen from "$lib/components/svg/Pen.svelte";
+  import { isScrollContainerRoute } from "$lib/states.svelte";
 
   type Social = {
     label: string;
@@ -31,6 +32,12 @@
     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
 
+    // Home and info scroll inside `.scroll-container`; everywhere else the
+    // document scrolls and ScrollTrigger's default scroller is correct.
+    const scroller = isScrollContainerRoute(page.route.id)
+      ? ".scroll-container"
+      : undefined;
+
     mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
 
@@ -42,6 +49,7 @@
           ease: "none",
           scrollTrigger: {
             trigger: ".footer",
+            scroller,
             start: "top center",
             end: "bottom bottom",
             scrub: 0.5,
@@ -58,6 +66,7 @@
           ease: "none",
           scrollTrigger: {
             trigger: ".footer",
+            scroller,
             start: "top center",
             end: "bottom bottom",
             scrub: 0.5,
@@ -85,7 +94,11 @@
       window.clearTimeout(refreshTimer);
       refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
     });
-    resizeObserver.observe(document.body);
+    // `.scroll-content` grows on every route; on container routes `body` is a
+    // fixed 100svh and would never fire.
+    resizeObserver.observe(
+      document.querySelector(".scroll-content") ?? document.body,
+    );
   });
 
   onDestroy(() => {
@@ -100,7 +113,7 @@
 <svelte:window bind:innerHeight={viewportHeight} />
 
 {#if page && page.route.id !== "/case-studies/[slug]"}
-  <footer class="bg-black p-2 footer">
+  <footer class="bg-black p-1 footer">
     <div
       class="bg-white rounded-m border-2 border-black h-full sm:h-[calc(100svh-8.5rem)] w-full p-1 flex flex-col justify-between gap-4 overflow-hidden"
     >

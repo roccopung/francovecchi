@@ -30,6 +30,22 @@ footer,
   position: relative;
 }
 
+/* Home and info scroll inside this element instead of the document: element
+   scroll never moves the mobile browser toolbar, so the viewport stops
+   resizing mid-gesture. Other routes leave the wrapper as a plain div. */
+.scroll-container.is-scroller {
+  height: 100svh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+/* A fixed element's scroll chain is the viewport, which no longer scrolls on
+   those routes, so a full-bleed fixed hero silently swallows wheel/touch. */
+[data-hero] {
+  pointer-events: none;
+}
+
 /* STANDARD PREVIEW-SANITY STYLING */
 
 .preview-toggle {
