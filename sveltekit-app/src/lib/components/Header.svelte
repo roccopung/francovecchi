@@ -62,7 +62,7 @@
     ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"
 >
-  <div class="flex justify-between">
+  <div class="flex justify-between items-center">
     <a
       href="/"
       rel="noreferrer"

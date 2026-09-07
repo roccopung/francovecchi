@@ -37,7 +37,6 @@
 
   afterNavigate(() => {
     menuState.open = false;
-    // if (browser) requestAnimationFrame(() => resetScroll());
   });
 
   onNavigate((navigation) => {
