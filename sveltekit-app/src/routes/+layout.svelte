@@ -5,12 +5,16 @@
   import type { LayoutProps } from "./$types";
   import { page } from "$app/state";
   import { afterNavigate, onNavigate } from "$app/navigation";
-  import { browser } from '$app/environment'
+  import { browser } from "$app/environment";
   import { resolve } from "$app/paths";
   import { client } from "$lib/sanity/client";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
-  import { menuState, scroll, isScrollContainerRoute } from "$lib/states.svelte";
+  import {
+    menuState,
+    scroll,
+    isScrollContainerRoute,
+  } from "$lib/states.svelte";
 
   const { children, data }: LayoutProps = $props();
 
@@ -33,7 +37,7 @@
 
   afterNavigate(() => {
     menuState.open = false;
-    if (browser) resetScroll();
+    if (browser) requestAnimationFrame(() => resetScroll());
   });
 
   onNavigate((navigation) => {
