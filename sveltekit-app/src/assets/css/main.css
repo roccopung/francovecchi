@@ -38,6 +38,14 @@ footer,
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: none;
+
+}
+
+.hide-scrollbar {
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
 }
 
 /* A fixed element's scroll chain is the viewport, which no longer scrolls on

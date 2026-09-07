@@ -50,6 +50,12 @@
       });
     });
   });
+
+  $effect(() => {
+    if(page.route.id === "/" || page.route.id === "/info") {
+      document.body.classList.add("hide-scrollbar");
+    }
+  });
 </script>
 
 <!-- One-way on purpose: `bind:scrollY` also writes back via window.scrollTo. -->
