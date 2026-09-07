@@ -37,18 +37,19 @@
 
   afterNavigate(() => {
     menuState.open = false;
-    if (browser) requestAnimationFrame(() => resetScroll());
+    // if (browser) requestAnimationFrame(() => resetScroll());
   });
 
   onNavigate((navigation) => {
     if (!document.startViewTransition) return;
-    // return new Promise((resolve) => {
-    //   document.startViewTransition(async () => {
-    //     resolve();
-    //     await navigation.complete;
-    //     requestAnimationFrame(() => requestAnimationFrame(resetScroll));
-    //   });
-    // });
+    return new Promise((resolve) => {
+      document.startViewTransition(async () => {
+        resolve();
+        resetScroll()
+        await navigation.complete;
+        requestAnimationFrame(() => requestAnimationFrame(resetScroll));
+      });
+    });
   });
 </script>
 
