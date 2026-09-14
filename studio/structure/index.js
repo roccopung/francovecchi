@@ -29,11 +29,11 @@ export const structure = (S, context) =>
                     .documentId("about"),
                 ),
               S.documentTypeListItem("lookbook")
-                .title("Look Book")
+                .title("Gallery")
                 .child(
                   S.document()
                     .schemaType("lookbook")
-                    .title("Look Book")
+                    .title("Gallery")
                     .documentId("lookbook"),
                 ),
               S.documentTypeListItem("caseStudies")

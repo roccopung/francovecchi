@@ -3,7 +3,7 @@ import { InlineIcon } from "@sanity/icons";
 
 export const lookbook = defineType({
   name: "lookbook",
-  title: "Look Book",
+  title: "Gallery",
   type: "document",
   icon: InlineIcon,
   groups: [
@@ -48,7 +48,7 @@ export const lookbook = defineType({
   preview: {
     prepare() {
       return {
-        title: "Look Book",
+        title: "Gallery",
       };
     },
   },
