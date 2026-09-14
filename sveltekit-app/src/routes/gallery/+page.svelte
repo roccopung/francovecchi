@@ -51,7 +51,7 @@
     <div class="w-full bg-white">
       <SeeMore
         itemsToLoad={lookbook.stackedGallery.items.length > filteredItems.length
-          ? 10
+          ? 8
           : 0}
         bind:itemsLoaded={itemsToLoad}
       />
