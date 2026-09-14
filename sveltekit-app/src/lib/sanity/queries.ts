@@ -29,7 +29,7 @@ export const homeQuery = defineQuery(`{
     },
     ${seo}
   },
-  "characters": *[_type == "character"]
+  "characters": *[_type == "character"] | order(orderRank asc)
 }
 `);
 

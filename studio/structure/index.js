@@ -1,5 +1,5 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
-import { DashboardIcon } from "@sanity/icons";
+import { DashboardIcon, FaceHappyIcon } from "@sanity/icons";
 
 export const structure = (S, context) =>
   S.list()
@@ -49,7 +49,16 @@ export const structure = (S, context) =>
 
       S.divider(),
 
-      S.documentTypeListItem("character").title("Characters"),
+
+      orderableDocumentListDeskItem({
+        type: "character",
+        title: "Characters",
+        icon: FaceHappyIcon,
+        S,
+        context,
+      }),
+
+
       orderableDocumentListDeskItem({
         type: "project",
         title: "Projects",
