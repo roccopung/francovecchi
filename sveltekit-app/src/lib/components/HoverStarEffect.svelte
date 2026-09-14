@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import HoverStar from "$lib/components/svg/HoverStar.svelte";
-  import { scroll } from "$lib/states.svelte";
 
   // GSAP is browser-only; load it on mount so it never runs during SSR.
   let gsap: any = $state();
@@ -21,6 +20,7 @@
   let stars: HTMLDivElement[] = $state([]);
   let starLayer: HTMLDivElement | undefined = $state(undefined);
   let viewportHeight = $state(0);
+  let scrollY = $state(0);
 
   let pointer = { x: 0, y: 0 };
   let lastSpawn = { x: 0, y: 0 };
@@ -123,9 +123,12 @@
   });
 </script>
 
-<svelte:window bind:innerHeight={viewportHeight} />
+<svelte:window
+  bind:innerHeight={viewportHeight}
+  onscroll={() => (scrollY = window.scrollY)}
+/>
 
-{#if scroll.y < viewportHeight * 0.15}
+{#if scrollY < viewportHeight * 0.15}
   <div
     bind:this={starLayer}
     class="star-layer hidden md:block"

@@ -4,6 +4,7 @@
   import type { PageData } from "./$types";
   import { useQuery } from "@sanity/sveltekit";
   import StackedGallery from "$lib/components/page-builder/_StackedGallery.svelte";
+  import PortableText from "$lib/components/element/PortableText.svelte";
   import PathCallFranco from "$lib/components/svg/PathCallFranco.svelte";
   import CallFranco from "$lib/components/sections/CallFranco.svelte";
   import SeeMore from "$lib/components/SeeMore.svelte";
@@ -13,7 +14,7 @@
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<LookbookQueryResult>(data));
   let lookbook = $derived($query.data);
-  let itemsToLoad = $state(3);
+  let itemsToLoad = $state(8);
   let filteredItems = $derived.by(() => {
     if (!lookbook?.stackedGallery?.items) return [];
     else return lookbook.stackedGallery.items.slice(0, itemsToLoad);
@@ -35,7 +36,11 @@
         <StarIcon fill="var(--color-accent)" />
       </span>
     </div>
-    <h2 class="typo-xs uppercase font-mono">What my illustrations look like</h2>
+    {#if lookbook?.subtitle}
+    <div class="typo-xs uppercase font-mono">
+      <PortableText data={lookbook?.subtitle} />
+    </div>
+    {/if}
   </div>
   {#if lookbook?.stackedGallery || sectionLoaded}
     <div class="bg-white pt-0.5 h-full 3xl:max-w-[70vw]">

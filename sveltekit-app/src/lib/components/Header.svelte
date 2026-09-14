@@ -2,7 +2,7 @@
   import Logo from "$lib/components/svg/Logo.svelte";
   import MenuButton from "$lib/components/MenuButton.svelte";
   import ArrowEnter from "$lib/components/svg/ArrowEnter.svelte";
-  import { menuState, scroll } from "$lib/states.svelte";
+  import { menuState } from "$lib/states.svelte";
   import { page } from "$app/state";
 
   type Props = {
@@ -10,20 +10,20 @@
   };
 
   let { caseStudies }: Props = $props();
+  let scrollY: number = $state(0);
 </script>
 
-<!-- DESKTOP NAV -->
+<svelte:window onscroll={() => (scrollY = window.scrollY)} />
 
 <nav
-  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full px-2 py-1 font-mono uppercase z-30 border-black pointer-events-none
+  class="desktop-nav hidden md:grid fixed top-0 left-0 w-full px-2 py-1 font-mono uppercase z-99 border-black pointer-events-none
   {page?.route?.id !== '/' ? 'bg-white' : ''}
-  {scroll.y > 10 ? 'border-b-2 bg-white' : ''}"
+  {scrollY > 10 ? 'border-b-2 bg-white' : ''}"
 >
   <a
     href="/"
     rel="noreferrer"
-    class="h-full flex transition-fast w-14 pointer-events-auto"
-    ><Logo /></a
+    class="h-full flex transition-fast w-14 pointer-events-auto"><Logo /></a
   >
 
   <ul class="gap-0.5 self-end hidden md:flex pointer-events-auto">
@@ -57,8 +57,8 @@
 <!-- MOBILE NAV -->
 
 <nav
-  class="mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono z-30 bg-white text-black outline-black outline-2 transition-all duration-300 pointer-events-none {menuState.open ===
-    true || scroll.y > 10
+  class="z-99 mobile-nav fixed top-0 left-0 w-full px-2 py-1 font-mono bg-white text-black outline-black outline-2 transition-all duration-300 pointer-events-none {menuState.open ===
+    true || scrollY > 10
     ? ' rounded-b-s rounded-b-s open'
     : ''} md:hidden"
 >
@@ -66,8 +66,7 @@
     <a
       href="/"
       rel="noreferrer"
-      class="h-full flex transition-fast w-10 pointer-events-auto"
-      ><Logo /></a
+      class="h-full flex transition-fast w-10 pointer-events-auto"><Logo /></a
     >
 
     <div class="pointer-events-auto"><MenuButton /></div>

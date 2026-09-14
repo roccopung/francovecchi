@@ -32,7 +32,6 @@
 
             return gsap.to(self.words, {
               scrollTrigger: {
-                scroller: ".scroll-container",
                 start: 0,
                 scrub: 0.5,
               },

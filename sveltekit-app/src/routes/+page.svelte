@@ -21,8 +21,8 @@
   let { data }: { data: PageData } = $props();
   let query = $derived(useQuery<HomeQueryResult>(data));
   let home = $derived($query.data?.home);
-  let characters = $derived(data.featuredCharacters ?? []);
-  let characterRefs: HTMLElement[] = $state([]);
+  let characters = $derived(data.characters ?? []);
+  let isHomeTitleLoaded = $state(false);
   let viewportWidth = $state(0);
 
   onMount(() => {
@@ -35,23 +35,20 @@
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
-      // Mobile browsers resize the viewport as the toolbar collapses/expands.
-      // Without this, every one of those resizes forces a full refresh mid-scroll.
       ScrollTrigger.config({ ignoreMobileResize: true });
 
       ctx = gsap.context(() => {
-        const tl = gsap.timeline();
-
-        // `width` (not `scale`) on purpose: shrinking the layout box is what
-        // pulls the content below it upward as you scroll.
-        tl.to(".keen-eye", {
+        gsap.to(".keen-eye", {
+          scale: (i, target) => 120 / target.offsetWidth,
+          transformOrigin: "bottom center",
+          ease: "none",
           scrollTrigger: {
             trigger: ".keen-eye",
-            scroller: ".scroll-container",
             start: "top bottom",
-            scrub: 0.5,
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
           },
-          width: 120,
         });
       });
     })();
@@ -64,9 +61,17 @@
 
 <SEO data={home?.seo} />
 
-<main class="min-h-[100vh] w-full flex flex-col bg-white">
-  <HomeTitle illustration={home?.illustration} />
-  <section class="px-2 mt-[100svh] md:mt-[80vh] bg-white">
+<main
+  class="min-h-[100vh] w-full flex flex-col bg-white opacity-0 {isHomeTitleLoaded ===
+  true
+    ? 'opacity-100'
+    : ''}"
+>
+  <HomeTitle
+    bind:isLoaded={isHomeTitleLoaded}
+    illustration={home?.illustration}
+  />
+  <section class="px-2 bg-white">
     {#if home?.cover}
       <div class="border-2 border-black rounded-m overflow-hidden">
         <Media data={home?.cover} controls={true} muted={false} />
@@ -130,7 +135,11 @@
           {/if}
         </div>
         <div class="h-20 md:place-self-end">
-          <img class="h-full" src={home?.aboutSection?.illustration} alt="fire" />
+          <img
+            class="h-full"
+            src={home?.aboutSection?.illustration}
+            alt="fire"
+          />
         </div>
       </div>
     </section>
@@ -163,7 +172,13 @@
     <div
       class="pt-6 md:py-12 w-full overflow-hidden flex flex-col items-center bg-black"
     >
-      <div class="w-10 md:w-[22vw] keen-eye"><img class="w-full h-full" src={home?.endingBlock?.illustration} alt="keen-eye illustration"></div>
+      <div class="w-10 md:w-[22vw] keen-eye">
+        <img
+          class="w-full h-full"
+          src={home?.endingBlock?.illustration}
+          alt="keen-eye illustration"
+        />
+      </div>
       {#if home?.endingBlock?.title}
         <div class="w-full overflow-hidden">
           <KeenEyeMarquee data={home?.endingBlock?.title} />

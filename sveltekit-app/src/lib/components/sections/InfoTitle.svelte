@@ -12,13 +12,16 @@
   type Props = {
     portrait?: ElementImage;
     illustration?: string;
+    isLoaded?: boolean;
   };
 
-  let { portrait, illustration }: Props = $props();
+  let { portrait, illustration, isLoaded = $bindable(false) }: Props = $props();
   let portraitWrapperEl: HTMLElement | undefined = $state();
   let portraitWrapperElResized: boolean = $state(false);
   let portraitEl: HTMLElement | undefined = $state();
   let viewportHeight: number = $state(0);
+  let viewportWidth: number = $state(0);
+  let titleHeight = $state(0);
 
   let cta = {
     ctaType: "linkEmail",
@@ -32,9 +35,11 @@
     const { gsap } = await import("gsap");
     if (portraitWrapperEl && portraitEl) {
       gsap.to(portraitWrapperEl, {
-        height: viewport.isMobile ? viewportHeight * 0.4 : viewportHeight * 0.5,
+        height: viewport.isMobile
+          ? viewportWidth * 0.6 * (5 / 4)
+          : viewportHeight * 0.5,
         width: viewport.isMobile
-          ? viewportHeight * 0.4 * (4 / 5)
+          ? viewportWidth * 0.6
           : viewportHeight * 0.5 * (4 / 5),
         duration: 0.8,
         ease: "power4.inOut",
@@ -55,29 +60,37 @@
     portraitWrapperEl;
     if (portraitWrapperElResized && portraitWrapperEl) {
       portraitWrapperEl.style.height = viewport.isMobile
-        ? viewportHeight * 0.4 + "px"
+        ? viewportWidth * 0.6 * (5 / 4) + "px"
         : viewportHeight * 0.5 + "px";
       portraitWrapperEl.style.width = viewport.isMobile
-        ? viewportHeight * 0.4 * (4 / 5) + "px"
+        ? viewportWidth * 0.6 + "px"
         : viewportHeight * 0.5 * (4 / 5) + "px";
     }
   });
+
+  onMount(() => {
+    isLoaded = true;
+  });
 </script>
 
-<svelte:window bind:innerHeight={viewportHeight} />
+<svelte:window
+  bind:innerHeight={viewportHeight}
+  bind:innerWidth={viewportWidth}
+/>
 
-<div
-  data-hero
-  class="bg-white fixed h-[100svh] w-full top-0 left-0 text-accent"
->
-  <div class="relative w-full h-full">
+<div data-hero class="bg-white w-full h-full text-accent pt-6 md:pt-0">
+  <div
+    class="relative w-full h-full overflow-hidden"
+    style="height: {titleHeight}px"
+  >
     <div
-      class="absolute top-1/2 left-0 md:left-2 -translate-y-1/2 pointer-events-none"
+      class="absolute top-1/2 left-0 md:left-2 -translate-y-1/2 pointer-events-none pt-4 pb-10 md:pt-12"
+      bind:clientHeight={titleHeight}
     >
       <InfoTitleAnimation />
     </div>
     <div
-      class="absolute top-1/2 right-0 md:right-1 -translate-y-1/2 pointer-events-none"
+      class="absolute top-1/2 right-0 md:right-1 -translate-y-1/2 pointer-events-none pt-4 pb-10 md:pt-12"
     >
       <InfoTitleAnimation />
     </div>
@@ -89,15 +102,17 @@
       >
         <div
           bind:this={portraitEl}
-          class="absolute h-[43vh] md:h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
+          class="absolute w-[60vw] md:w-auto md:h-[50vh] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 aspect-[4/5]"
         >
           <Image image={portrait} fit="cover" />
         </div>
       </div>
     {/if}
 
-    <div class="absolute bottom-0 right-0 p-1 flex gap-2 typo-2xl">
-      <img class="h-[1.55lh]" src={illustration} alt="" />
-    </div>
+    {#if illustration}
+      <div class="absolute bottom-0 right-0 p-1 flex gap-2 typo-2xl">
+        <img class="h-[1.55lh]" src={illustration} alt="" />
+      </div>
+    {/if}
   </div>
 </div>

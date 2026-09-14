@@ -19,13 +19,14 @@
   let query = $derived(useQuery<InfoQueryResult>(data));
   let infoPage = $derived($query.data?.info);
   let openIndex = $state<number | null>(null);
+  let isInfoTitleLoaded = $state(false);
 </script>
 
 <SEO data={infoPage?.seo} />
 
-<main class="w-full flex flex-col bg-white">
-  <InfoTitle illustration={infoPage?.illustration} portrait={infoPage?.portrait} />
-  <div class="bg-white h-full w-full mt-[100svh] z-10 pb-2">
+<main class="w-full flex flex-col bg-white opacity-0 {isInfoTitleLoaded === true ? 'opacity-100' : ''}">
+  <InfoTitle bind:isLoaded={isInfoTitleLoaded} illustration={infoPage?.illustration} portrait={infoPage?.portrait} />
+  <div class="bg-white h-full w-full z-10 pb-2">
     {#if infoPage?.hobbies}
       <div class="w-full overflow-hidden border-t-2">
         <HobbiesMarquee data={infoPage?.hobbies} />

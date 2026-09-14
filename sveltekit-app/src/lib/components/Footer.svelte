@@ -3,7 +3,6 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import Pen from "$lib/components/svg/Pen.svelte";
-  import { isScrollContainerRoute } from "$lib/states.svelte";
 
   type Social = {
     label: string;
@@ -32,12 +31,6 @@
     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
 
-    // Home and info scroll inside `.scroll-container`; everywhere else the
-    // document scrolls and ScrollTrigger's default scroller is correct.
-    const scroller = isScrollContainerRoute(page.route.id)
-      ? ".scroll-container"
-      : undefined;
-
     mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
 
@@ -49,8 +42,7 @@
           ease: "none",
           scrollTrigger: {
             trigger: ".footer",
-            scroller,
-            start: "top center",
+            start: "top 80%",
             end: "bottom bottom",
             scrub: 0.5,
             invalidateOnRefresh: true,
@@ -66,8 +58,7 @@
           ease: "none",
           scrollTrigger: {
             trigger: ".footer",
-            scroller,
-            start: "top center",
+            start: "top 80%",
             end: "bottom bottom",
             scrub: 0.5,
             invalidateOnRefresh: true,
@@ -83,22 +74,16 @@
       };
     });
 
-    // To sync scrolltrigger and page dimensions.
-    // Trailing debounce, not rAF: the homepage scrubs `.keen-eye`'s width (and
-    // therefore the document height) on every scroll frame, so refreshing on the
-    // next frame would restart the footer's scrub tweens before they can advance.
-    // Waiting for the size to settle means one refresh after scrolling/loading stops.
+    // Keep the footer's start/end in sync with the page height, which settles
+    // late as images, fonts and marquees load in. Trailing debounce rather than
+    // rAF so a burst of layout changes costs one refresh, not one per frame.
     resizeObserver = new ResizeObserver(() => {
       if (!browser) return;
 
       window.clearTimeout(refreshTimer);
       refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
     });
-    // `.scroll-content` grows on every route; on container routes `body` is a
-    // fixed 100svh and would never fire.
-    resizeObserver.observe(
-      document.querySelector(".scroll-content") ?? document.body,
-    );
+    resizeObserver.observe(document.body);
   });
 
   onDestroy(() => {

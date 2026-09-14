@@ -12,8 +12,7 @@
   let datas = $derived($query.data);
   let caseStudiesPage = $derived($query.data?.caseStudiesPage);
   let caseStudies = $derived($query.data?.projects);
-  let initialProjectsNumber = $state(10);
-  let itemsToLoad = $derived(6);
+  let itemsToLoad = $derived(8);
   let filteredCaseStudies = $derived.by(() => {
     if (!caseStudies) return [];
     else return caseStudies.slice(0, itemsToLoad);
@@ -43,11 +42,8 @@
   {/if}
 </main>
 
-{#if filteredCaseStudies.length && filteredCaseStudies.length < caseStudies.length}
+{#if filteredCaseStudies && caseStudies && filteredCaseStudies.length < caseStudies.length}
   <div class="pb-2">
-    <SeeMore
-      itemsToLoad={initialProjectsNumber}
-      bind:itemsLoaded={itemsToLoad}
-    />
+    <SeeMore {itemsToLoad} bind:itemsLoaded={itemsToLoad} />
   </div>
 {/if}

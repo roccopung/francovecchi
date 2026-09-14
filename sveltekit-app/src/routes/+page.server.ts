@@ -7,13 +7,10 @@ export const load: PageServerLoad = async ({ locals: { sanity } }) => {
   const initial = await loadQuery<HomeQueryResult>(homeQuery);
 
   const characters = initial.data?.characters ?? [];
-  const featuredCharacters = [...characters]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
 
   return {
     query: homeQuery,
     options: { initial },
-    featuredCharacters,
+    characters
   };
 };

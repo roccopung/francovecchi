@@ -11,7 +11,6 @@
   let { data, paused }: Props = $props();
   let isVisible = $state(false);
 
-  let items = $derived([...data, ...data]);
 </script>
 
 <div use:inView={(v) => (isVisible = v)}>
@@ -21,7 +20,7 @@
     autoFill
     direction="right"
   >
-    {#each items as item}
+    {#each data as item}
       {#if item && item?.cover}
         <div class="image-container aspect-[7/8] h-30 md:h-80 overflow-hidden -mx-4 md:-mx-10 -translate-x-1/2">
           <Image image={item?.cover} />

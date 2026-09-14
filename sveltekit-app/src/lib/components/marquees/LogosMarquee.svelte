@@ -16,7 +16,7 @@
     <div class="flex items-center gap-5 ml-5 md:gap-20 md:ml-20 my-1">
       {#each data ?? [] as item (item._key)}
         {#if item?.asset}
-          <div class="w-8 md:w-12 md:h-10">
+          <div class="w-8 h-5 md:w-12 md:h-10">
             <Image image={item} fit="contain" lazy />
           </div>
         {/if}

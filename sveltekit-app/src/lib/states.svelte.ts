@@ -43,17 +43,3 @@ export const menuState = new MenuState();
 export const modalState = new ModalState();
 export const clickedImage = new ClickedImage();
 export const viewport = new Viewport();
-
-// On these routes the app scrolls inside `.scroll-container`, not the document:
-// element scroll never collapses/expands the mobile browser toolbar, which was
-// resizing the viewport mid-gesture and fighting the fixed `100svh` heroes.
-export const isScrollContainerRoute = (routeId: string | null | undefined) =>
-  routeId === "/" || routeId === "/info";
-
-// Scroll offset of whichever scroller is active (window or `.scroll-container`),
-// written by +layout.svelte. `window.scrollY` is always 0 on container routes.
-class Scroll {
-  y = $state(0);
-}
-
-export const scroll = new Scroll();

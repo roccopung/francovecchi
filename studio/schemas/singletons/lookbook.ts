@@ -19,6 +19,10 @@ export const lookbook = defineType({
       readOnly: true,
     }),
     defineField({
+      name: "subtitle",
+      type: "blockContent",
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       readOnly: true,

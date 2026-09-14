@@ -4,13 +4,14 @@
   import StarIcon from "$lib/components/svg/StarIcon.svelte";
   import { onMount, onDestroy } from "svelte";
 
-  let { illustration } = $props();
+  let { illustration, isLoaded = $bindable(false) } = $props();
 
   let franco: HTMLElement;
   let vecchi: HTMLElement;
   let star: HTMLElement;
   let ctx: gsap.Context | undefined;
   let viewportHeight = $state(0);
+  let titleHeight = $state(0);
 
   let cta = {
     ctaType: "linkEmail",
@@ -44,7 +45,6 @@
 
             return gsap.to(self.words, {
               scrollTrigger: {
-                scroller: ".scroll-container",
                 start: 0,
                 scrub: 0.5,
               },
@@ -72,7 +72,6 @@
       gsap.to(star, {
         scrollTrigger: {
           trigger: franco,
-          scroller: ".scroll-container",
           start: 0,
           end: "+=10",
           scrub: 0.5,
@@ -84,6 +83,7 @@
   };
 
   onMount(() => {
+    isLoaded = true;
     document.fonts.ready.then(async () => {
       const { gsap } = await import("gsap");
       const { SplitText } = await import("gsap/SplitText");
@@ -104,11 +104,15 @@
 
 <svelte:window bind:innerHeight={viewportHeight} />
 
-<div data-hero class="bg-white fixed h-[100svh] md:h-[80vh] w-full top-0 left-0 p-1">
-  <div class="relative w-full h-full">
+<div data-hero class="bg-white w-full h-full">
+  <div
+    class="relative w-full h-full flex items-center flex-col overflow-hidden"
+    style="height: {titleHeight}px"
+  >
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title pt-6 md:pt-0 typo-francotitle font-slanted uppercase flex flex-col gap-2 pointer-events-none
-pointer-events-none"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 title typo-francotitle font-slanted uppercase flex flex-col gap-2 pointer-events-none
+pointer-events-none pt-20 pb-16 md:py-20"
+      bind:clientHeight={titleHeight}
     >
       <div class="flex gap-1 whitespace-nowrap">
         <h1 bind:this={franco} class="trimmed opacity-0 text-accent">Franco</h1>
@@ -132,19 +136,3 @@ pointer-events-none"
     </div>
   </div>
 </div>
-
-<style>
-  /* Safari clips the ink of slanted glyphs at the edge of their inline-block
-     box. Padding gives the overhang room; the equal negative margin keeps
-     layout (advance width + line box) unchanged. */
-  :global(.ht-char) {
-    padding: 0.15em 0.2em;
-    margin: -0.15em -0.2em;
-  }
-
-  :global(a:hover) {
-    & svg.arrow-enter path {
-      fill: var(--color-accent);
-    }
-  }
-</style>
