@@ -48,7 +48,7 @@
 <svelte:window {onkeydown} />
 
 {#if modalState.open}
-  <div class="fixed right-1 top-2 z-55">
+  <div class="fixed right-1 top-10 z-55">
     <button
       class="typo-xl font-slanted px-1 hover:opacity-50 cursor-pointer"
       onclick={close}
@@ -67,7 +67,7 @@
     >
       <div class="embla__container items-center">
         {#each images as image, i (image?._key ?? i)}
-          <div class="embla__slide flex items-center justify-center p-2 md:p-10">
+          <div class="embla__slide flex items-center justify-center max-[321px]:px-3 p-2 md:p-10">
             <Image {image} fit="contain" />
           </div>
         {/each}
