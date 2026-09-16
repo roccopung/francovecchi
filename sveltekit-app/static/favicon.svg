@@ -1,15 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="442" height="442" viewBox="0 0 442 442" fill="none"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><g clip-path="url(#clip0_4687_3818)">
-<rect width="442" height="442" fill="white"></rect>
-<path d="M425.26 130H17.2343V334H425.26V130Z" stroke="#2F2F2F" stroke-width="3.96" stroke-linejoin="bevel"></path>
-<path d="M221.26 329.289C331.33 329.289 420.549 240.07 420.549 130H21.9707C21.9707 240.07 111.19 329.289 221.26 329.289Z" stroke="#2F2F2F" stroke-width="0.68" stroke-miterlimit="10"></path>
-<path d="M420.549 130C420.549 240.07 331.33 329.289 221.26 329.289C111.19 329.289 21.9707 240.07 21.9707 130H17.26V334H425.286V130H420.575H420.549Z" fill="#2F2F2F"></path>
-<path d="M116.544 184.34C116.544 243.339 164.372 291.166 223.371 291.166C266.436 291.166 303.555 265.657 320.441 228.924L220.344 194.147L328.936 167.994C326.825 154.3 322.089 141.455 315.319 130H131.397C121.95 145.934 116.519 164.493 116.519 184.34" fill="#2F2F2F"></path>
-<rect y="334" width="442" height="160" fill="#2F2F2F"></rect>
-<rect y="113" width="17" height="330" fill="#2F2F2F"></rect>
-<rect x="425" y="113" width="17" height="330" fill="#2F2F2F"></rect>
-<rect y="-13" width="442" height="143" fill="#2F2F2F"></rect>
-</g><defs>
-<clipPath id="clip0_4687_3818">
-<rect width="442" height="442" fill="white"></rect>
-</clipPath>
-</defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" data-name="Layer 2" viewBox="0 0 216 216" width="216" height="216"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #191919;
+        stroke-linejoin: bevel;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #191919;
+      }
+
+      .cls-3 {
+        fill: #f7f7f7;
+      }
+    </style>
+  </defs><g id="ICONS">
+    <rect class="cls-2" width="216" height="216"></rect>
+    <g>
+      <path class="cls-3" d="M108,163.69c53.95,0,97.69-43.74,97.69-97.69H10.31c0,53.95,43.74,97.69,97.69,97.69Z"></path>
+      <path class="cls-2" d="M205.69,66c0,53.95-43.74,97.69-97.69,97.69S10.31,119.95,10.31,66h-2.31v100h200v-100h-2.31Z"></path>
+      <path class="cls-2" d="M56.67,92.64c0,28.92,23.44,52.36,52.36,52.36,21.12,0,39.3-12.51,47.58-30.51l-41.22-17.05,45.38-12.82c-1.03-6.72-3.35-13-6.68-18.62H63.96c-4.62,7.81-7.29,16.91-7.29,26.64Z"></path>
+      <rect class="cls-1" x="8" y="66" width="200" height="100"></rect>
+    </g>
+  </g></svg>
