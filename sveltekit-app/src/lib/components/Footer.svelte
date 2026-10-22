@@ -33,7 +33,6 @@
 
     mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
-
       gsap.fromTo(
         pen,
         { y: () => -viewportHeight - 100 },
@@ -178,9 +177,18 @@
         <div
           class="justify-self-center self-end sm:place-self-end typo-xs flex gap-1 order-1 sm:order-2"
         >
-          <a href="#">Design</a>
-          <a href="#">Code</a>
-          <a href="#">Cookies</a>
+          <a
+            href="https://danielemorgantidesign.com/"
+            target="_blank"
+            rel="noopener noreferrer">Design</a
+          >
+          <a
+            href="https://roccopunghellini.com"
+            target="_blank"
+            rel="noopener noreferrer">Code</a
+          >
+          <a href="https://www.iubenda.com/privacy-policy/46680239/cookie-policy" target="_blank" rel="noopener noreferrer">Cookies</a>
+          <a href="https://www.iubenda.com/privacy-policy/46680239" target="_blank" rel="noopener noreferrer">Privacy</a>
         </div>
       </div>
     </div>

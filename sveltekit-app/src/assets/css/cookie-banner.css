@@ -12,7 +12,7 @@
 #silktide-wrapper {
   --focus: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent;
   --boxShadow: -0 0 0 0px transparent, 0px 0px 0 0px transparent;
-  --fontFamily: Courier, Times, Helvetica Neue, Arial, sans-serif;
+  --fontFamily: var(--font-sans), Times, Helvetica Neue, Arial, sans-serif;
   --primaryColor: var(--color-black);
   --backgroundColor: #eee;
   --textColor: var(--color-black);
@@ -106,7 +106,8 @@
 #silktide-banner {
   font-family: var(--fontFamily);
   color: var(--textColor);
-  background-color: #eee;
+  background-color: var(--backgroundColor);
+  font-weight: bold;
   box-sizing: border-box;
   padding: 1rem;
   padding-inline: 2rem;
